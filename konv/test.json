@@ -1,0 +1,6 @@
+[
+  {
+    "grant_type": "client_credentials",
+    "audience": "https:\/\/api.dintero.com\/v1\/accounts\/T11112542"
+  }
+]

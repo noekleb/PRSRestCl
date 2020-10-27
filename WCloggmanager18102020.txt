@@ -1,0 +1,24 @@
+[20/10/18@18:00:03.085+0200] P-036000 T-036004 1 4GL -- Logging level set to = 2
+[20/10/18@18:00:03.086+0200] P-036000 T-036004 1 4GL -- No entry types are activated
+[20/10/18@18:00:03.086+0200] P-036000 T-036004 1 4GL -- Logging level set to = 4
+[20/10/18@18:33:19.936+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@18:33:19.936+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2320, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/18@18:42:56.021+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@18:42:56.021+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2407, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/18@18:44:30.781+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@18:44:30.781+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2491, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/18@18:47:52.711+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@18:47:52.711+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2575, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/18@18:55:41.323+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@18:55:41.323+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2659, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/18@18:55:47.194+0200] P-036000 T-036004 1 4GL -- Entry 2 is outside the range of list . (560)
+[20/10/18@18:55:47.195+0200] P-036000 T-036004 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/18@18:55:47.195+0200] P-036000 T-036004 1 4GL -- --> getTransaction testDinTero.w at line 1331  (winsrc\testDinTero.r)
+[20/10/18@18:55:47.195+0200] P-036000 T-036004 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 790  (winsrc\testDinTero.r)
+[20/10/18@18:55:47.195+0200] P-036000 T-036004 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/18@18:57:35.408+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@18:57:35.408+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2743, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/18@19:29:03.563+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@19:29:03.563+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2286, Name: ?, Instantiating Procedure: linkRutinebeskrivelse.w
+[20/10/18@19:29:03.578+0200] P-036000 T-036004 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/18@19:29:03.578+0200] P-036000 T-036004 1 4GL ----------     Window handle: 2827, Name: ?, Instantiating Procedure: testDinTero.w

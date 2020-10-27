@@ -1,0 +1,9 @@
+{"ttConfig": [
+  {
+    "cHost": "INFOPOS02",
+    "cPort": "3190",
+    "cAppServer": "asPRS",
+    "iButNr": "6",
+    "iKasseNr": "1"
+  }
+]}

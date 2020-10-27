@@ -1,0 +1,57 @@
+=====================================================
+PROGRESS stack trace as of Thu Oct  8 12:37:44 2020
+=====================================================
+
+Progress OpenEdge Release 11.7 build 1388 on WINNT 
+
+Startup parameters:
+-pf C:\WebClient7_11\startup.pf,-cpinternal iso8859-1,-cpstream iso8859-1,(end .pf),-ininame ini\PRSRestWebCl.ini,-pf ini\start.pf,-d dmy,-e 255,-l 500,-D 150,-c 40,-E,-T c:\tmp,-h 10,-inp 10000,-s 1000,-L 24576,-nb 255,-mmax 8000,-nolkctr,-cpinternal iso8859-1,-cpstream iso8859-1,-cpcoll Norwegian,(end .pf),-p winsrc\startPRS.p,-debugalert,-assemblies C:\NSoft\JukeBox\assemblies
+
+Exception code: C0000005 ACCESS_VIOLATION
+Fault address:  79C8E890 01:0047D890 C:\WebClient7_11\bin\prowc.dll
+
+Registers:
+EAX:125DC818
+EBX:00000001
+ECX:00B3F6D0
+EDX:00000000
+ESI:12327428
+EDI:00000000
+CS:EIP:0023:79C8E890
+SS:ESP:002B:00B3F6A4  EBP:79F3DDD0
+DS:002B  ES:002B  FS:0053  GS:002B
+Flags:00210206
+
+
+Debugging dll: C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+Symbol Path:
+ C:\WebClient7_11\bin;C:\WebClient7_11\pdbfiles
+
+
+Call Stack:
+Address   Frame
+79C8E890  00B3F6A0  Progress::ClrBridge::rnProFromClr::runEventDispatcher+5510
+79CC151D  00B3F6C8  ksasWriteFile+157FD
+79CBE6FD  00B3F6D8  ksasWriteFile+129DD
+79C8B8F7  00B3F6E4  Progress::ClrBridge::rnProFromClr::runEventDispatcher+2577
+79C8A93A  00B3F7E4  Progress::ClrBridge::rnProFromClr::runEventDispatcher+15BA
+798DB659  00B3F7F8  dbut_utSetNumFiles+16B89
+79AD0A9D  00B3F80C  dbut_firstByte+AC01D
+798DB3CD  00B3F818  dbut_utSetNumFiles+168FD
+7987CDD4  00B3F904  0001:0006BDD4 C:\WebClient7_11\bin\prowc.dll
+76D0120E  00CC0000  CreateSemaphoreExW+5E
+0100DCA8  00CC0004  0000:00000000 
+FFEEFFEE  0100DCA8  0000:00000000 
+
+
+** ABL Stack Trace **
+
+
+** Persistent procedures/Classes **
+
+** PROPATH **
+.,wrk,winsrc,C:\NSoft\jukebox\oo,C:\NSoft\jukebox\img,C:\NSoft\jukebox\server,C:\NSoft\jukebox\lib,C:\NSoft\jukebox\obj,C:\NSoft\jukebox\winsrc,C:\NSoft\jukebox\winsrc\admin,C:\NSoft\jukebox\tools,C:\WebClient7_11\gui\adecomm.pl,C:\WebClient7_11\gui\adecomp.pl,C:\WebClient7_11\gui\adedesk.pl,C:\WebClient7_11\gui\adedict.pl,C:\WebClient7_11\gui\adeedit.pl,C:\WebClient7_11\gui\adeicon.pl,C:\WebClient7_11\gui\aderes.pl,C:\WebClient7_11\gui\adeshar.pl,C:\WebClient7_11\gui\adeuib.pl,C:\WebClient7_11\gui\adeweb.pl,C:\WebClient7_11\gui\adexml.pl,C:\WebClient7_11\gui\dataadmin.pl,C:\WebClient7_11\gui\prodict.pl,C:\WebClient7_11\gui\protools.pl,C:\WebClient7_11,C:\WebClient7_11\bin,C:\WebClient7_11\gui,C:\WebClient7_11\gui\OpenEdge.Core.pl,C:\WebClient7_11\gui\netlib\OpenEdge.Net.pl
+
+** Databases (logical/type/physical) **
+
+** End of Protrace **

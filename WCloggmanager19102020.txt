@@ -1,0 +1,60 @@
+[20/10/19@08:15:39.837+0200] P-051240 T-038612 1 4GL -- Logging level set to = 2
+[20/10/19@08:15:39.837+0200] P-051240 T-038612 1 4GL -- No entry types are activated
+[20/10/19@08:15:39.837+0200] P-051240 T-038612 1 4GL -- Logging level set to = 4
+[20/10/19@13:32:35.477+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@13:32:35.477+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2320, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@13:33:28.345+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@13:33:28.345+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2405, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@14:26:15.217+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@14:26:15.217+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2496, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@14:27:17.738+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@14:27:17.738+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2587, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@14:27:25.850+0200] P-051240 T-038612 1 4GL -- Error parsing JSON: unexpected token: bracket. (15360)
+[20/10/19@14:27:25.850+0200] P-051240 T-038612 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/19@14:27:25.850+0200] P-051240 T-038612 1 4GL -- --> getGetSessionDetails testDinTero.w at line 1350  (winsrc\testDinTero.r)
+[20/10/19@14:27:25.850+0200] P-051240 T-038612 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 831  (winsrc\testDinTero.r)
+[20/10/19@14:27:25.850+0200] P-051240 T-038612 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/19@14:30:41.352+0200] P-051240 T-038612 1 4GL -- Error parsing JSON: unexpected token: bracket. (15360)
+[20/10/19@14:30:41.352+0200] P-051240 T-038612 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/19@14:30:41.352+0200] P-051240 T-038612 1 4GL -- --> getGetSessionDetails testDinTero.w at line 1350  (winsrc\testDinTero.r)
+[20/10/19@14:30:41.352+0200] P-051240 T-038612 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 831  (winsrc\testDinTero.r)
+[20/10/19@14:30:41.352+0200] P-051240 T-038612 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/19@14:36:37.313+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@14:36:37.313+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2681, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@14:36:50.728+0200] P-051240 T-038612 1 4GL -- Error parsing JSON: unexpected token: bracket. (15360)
+[20/10/19@14:36:50.728+0200] P-051240 T-038612 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/19@14:36:50.728+0200] P-051240 T-038612 1 4GL -- --> getGetSessionDetails testDinTero.w at line 1350  (winsrc\testDinTero.r)
+[20/10/19@14:36:50.728+0200] P-051240 T-038612 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 831  (winsrc\testDinTero.r)
+[20/10/19@14:36:50.728+0200] P-051240 T-038612 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/19@15:07:48.032+0200] P-051240 T-038612 1 4GL -- Error parsing JSON: unexpected token: bracket. (15360)
+[20/10/19@15:07:48.032+0200] P-051240 T-038612 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/19@15:07:48.032+0200] P-051240 T-038612 1 4GL -- --> getGetSessionDetails testDinTero.w at line 1350  (winsrc\testDinTero.r)
+[20/10/19@15:07:48.032+0200] P-051240 T-038612 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 831  (winsrc\testDinTero.r)
+[20/10/19@15:07:48.032+0200] P-051240 T-038612 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/19@15:10:19.827+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@15:10:19.827+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2775, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@15:12:53.199+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@15:12:53.199+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2869, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@15:26:54.423+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/19@15:26:54.423+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2963, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/19@15:30:59.627+0200] P-051240 T-038612 1 4GL -- Error parsing JSON: unexpected token: bracket. (15360)
+[20/10/19@15:30:59.627+0200] P-051240 T-038612 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/19@15:30:59.627+0200] P-051240 T-038612 1 4GL -- --> getGetSessionDetails testDinTero.w at line 1350  (winsrc\testDinTero.r)
+[20/10/19@15:30:59.627+0200] P-051240 T-038612 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 831  (winsrc\testDinTero.r)
+[20/10/19@15:30:59.627+0200] P-051240 T-038612 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/20@14:17:21.358+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.359+0200] P-051240 T-038612 1 4GL ----------     Window handle: 2286, Name: ?, Instantiating Procedure: linkRutinebeskrivelse.w
+[20/10/20@14:17:21.372+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.372+0200] P-051240 T-038612 1 4GL ----------     Window handle: 3058, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/20@14:17:21.492+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.492+0200] P-051240 T-038612 1 4GL ----------     Window handle: 3145, Name: ?, Instantiating Procedure: BrowserGantOrdrestatus.w
+[20/10/20@14:17:21.689+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.689+0200] P-051240 T-038612 1 4GL ----------     Window handle: 3371, Name: ?, Instantiating Procedure: ArtikkelButStr.w
+[20/10/20@14:17:21.716+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.716+0200] P-051240 T-038612 1 4GL ----------     Window handle: 3518, Name: ?, Instantiating Procedure: ArtikkelStrekkode.w
+[20/10/20@14:17:21.727+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.727+0200] P-051240 T-038612 1 4GL ----------     Window handle: 3590, Name: ?, Instantiating Procedure: ArtikkelPris.w
+[20/10/20@14:17:21.728+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.728+0200] P-051240 T-038612 1 4GL ----------     Window handle: 3649, Name: ?, Instantiating Procedure: Varetransaksjoner.w
+[20/10/20@14:17:21.747+0200] P-051240 T-038612 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/20@14:17:21.747+0200] P-051240 T-038612 1 4GL ----------     Window handle: 3229, Name: ?, Instantiating Procedure: LagerListeModButStr.w

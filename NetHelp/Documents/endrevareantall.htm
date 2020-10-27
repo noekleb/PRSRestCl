@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Endre vare/antall</title>
+<meta charset="utf-8" />
+<script src="../js/nethelp.redirector.js" type="text/javascript"></script>
+<link rel="prev" href="kundeservice.htm" /><link rel="next" href="retteprisfeilprisfraphx.htm" />
+<meta name="Generator" content="MadCap Doc-To-Help v.2014.2.0.943" />
+</head>
+<body data-c1-topic-id="1d9983df-6966-4786-a413-4cb1dd98f2a4">
+<h3>Endre vare/antall</h3>
+<p class="MsoBodyText">For å åpne listen, benyttes menyvalg ‘<i>Endre 
+vare/antall</i>’. Listen viser bare ordre som er merket med ‘Kundeservice’. 
+ Programmet her benyttes til å endre antall på en eller flere varelinjer, 
+og/eller endre vare på en varelinje. Ordrebehandler sender ordren til 
+kundeservice hvis det oppstår en situasjon hvor en eller flere varer må endres 
+på en ordre.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText">NB: Det er viktig at ordren når den utleveres til kunden, 
+viser hvilke varer som faktisk er utlevert. Dette er nødvendig for at systemets 
+lagertellere skal oppdateres korrekt.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText">Ved endring av pris på en eller flere varelinjer, endres 
+ordrens verdi. Utleveringsmelding som sendes nettbutikken, viser bare utlevert 
+antall, ikke verdi. Nettbutikken vet derfor ikke at prisen på varen er endret. 
+Dette er årsaken til at det ikke er lagt inn mulighet for endring av pris i 
+dette programmet. Skal pris endres, gjøres det i ‘<i>Rette pris (Feil pris fra 
+Phx)</i>’.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText">Ved endring av vare på en varelinje, kopieres linjen. Den 
+gamle linjen settes som ‘Ikke aktiv’. Dette gjøres fordi integrasjonen med 
+nettbutikken ikke støtter endring av vare på en varelinje. Meldingen som sendes 
+tilbake til nettbutikken, viser at den gamle linjen er utlevert, slik at 
+nettbutikken håndterer utlevering av ordren korrekt.</p>
+<p class="MsoBodyText">Det er derfor viktig at prisen er den samme på den nye 
+varen som legges inn. Ved søk etter vare når ny linje registreres, ligger et 
+filter som gjør at man bare ser varer som avviker +/- 50 kr i forhold til pris 
+på den opprinnelige varen.</p>
+<p class="MsoBodyText">Ved retur av ordre hvor vare er endret, se forklaring under 
+‘<i>Retur av ordre</i>’.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_115.png" alt="" /></p>
+<p class="MsoCaption">Figur 23 Menyvalg 'Endre vare/antall'</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText">Listen viser ordre som er markert med 
+‘<i>Kundeservice</i>’. </p>
+<p class="MsoBodyText">NB: Ordre som vises her, er ikke tilgjengelige for 
+kundebehandler. Bruk ‘<i>Send til ordrebehandling</i>’ for å sende en ordre 
+tilbake til kundebehandler.</p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_116.jpg" alt="" /></p>
+<p class="MsoCaption">Figur 56 Endre vare/antall</p>
+<p class="MsoBodyText"><b>Funksjonsoversikt:</b></p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_117.png" alt="" /></p>
+<p class="MsoBodyText"> </p>
+<table class="MsoTableGrid" style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none" cellspacing="0" cellpadding="0" border="1">
+  <tbody>
+  <tr>
+    <td style="BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 106.1pt; BACKGROUND: #dbe5f1; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt" valign="top" width="141"><b><span style="FONT-SIZE: 11pt"><a class="topic-link" href="gloss_funksjon.htm" target="popup">
+      <p class="MsoBodyText"><b><span style="FONT-SIZE: 11pt">Funksjon</span></b></p>
+      <p class="MsoBodyText"></p></a></span></b> </td>
+    <td style="BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 206.45pt; BACKGROUND: #dbe5f1; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="275">
+      <p class="MsoBodyText"><b><span style="FONT-SIZE: 11pt; COLOR: black">Beskrivelse</span></b><b><span style="FONT-SIZE: 11pt"></span></b></p></td>
+    <td style="BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 156.3pt; BACKGROUND: #dbe5f1; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="208">
+      <p class="MsoBodyText"><b><span style="FONT-SIZE: 11pt; COLOR: black">Merknad</span></b><b><span style="FONT-SIZE: 11pt"></span></b></p></td></tr>
+  <tr>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 106.1pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt" valign="top" width="141">
+      <p class="MsoBodyText">Utskrift av pakkseddel</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 206.45pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="275">
+      <p class="MsoBodyText">Skriver ut pakkseddel på markerte eller alle 
+      linjer.</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 156.3pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="208">
+      <p class="MsoBodyText"> </p></td></tr>
+  <tr>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 106.1pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt" valign="top" width="141">
+      <p class="MsoBodyText">Skriv postpakke etikett</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 206.45pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="275">
+      <p class="MsoBodyText">Skriver ut postpakke etikett.</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 156.3pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="208">
+      <p class="MsoBodyText"> </p></td></tr>
+  <tr>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 106.1pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt" valign="top" width="141">
+      <p class="MsoBodyText">Endre</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 206.45pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="275">
+      <p class="MsoBodyText">Endre ordreinformasjonen.</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 156.3pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="208">
+      <p class="MsoBodyText">Det åpnes en dialog hvor ordrens informasjon kan 
+      endres.</p>
+      <p class="MsoBodyText">Se beskrivelse under.</p>
+      <p class="MsoBodyText"> </p></td></tr>
+  <tr>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 106.1pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt" valign="top" width="141">
+      <p class="MsoBodyText">Utlever til kunde</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 206.45pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="275">
+      <p class="MsoBodyText">Utlevering av ordre til kunde.</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 156.3pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="208">
+      <p class="MsoBodyText"> </p></td></tr>
+  <tr>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 106.1pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt" valign="top" width="141">
+      <p class="MsoBodyText">Send til ordrebehandling</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 206.45pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="275">
+      <p class="MsoBodyText">Sender ordren tilbake til ordrebehandler.</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 156.3pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="208">
+      <p class="MsoBodyText">Benyttes når kundeservice er klar med ordren og ikke 
+      utleverer den selv. Ordren går da tilbake for videre behandling hos 
+      ordrebehandler.</p>
+      <p class="MsoBodyText"> </p></td></tr>
+  <tr>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 106.1pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt" valign="top" width="141">
+      <p class="MsoBodyText">Kanseller</p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 206.45pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="275">
+      <p class="MsoBodyText">Kansellerer ordren I sin helhet.</p>
+      <p class="MsoBodyText"> </p></td>
+    <td style="BORDER-TOP: medium none; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 156.3pt; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 5.4pt; BORDER-LEFT: medium none; PADDING-RIGHT: 5.4pt" valign="top" width="208">
+      <p class="MsoBodyText">Kanseleringsmelding sendes også til nettbutikken, 
+      hvor ordren også der kanselleres. </p>
+      <p class="MsoBodyText">NB: Antall på varelinjen skal ikke settes til 0.</p>
+      <p class="MsoBodyText"> </p></td></tr></tbody></table>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText"><b>Redigerings funksjoner på varelinje:</b></p>
+<p class="MsoBodyText">Høyreklikk med musen på en varelinje.</p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_118.png" alt="" /></p>
+<p class="MsoCaption">Figur 57 Redigeringsfunksjoner på varelinje</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText"><b>Redigering av ordre ‘Endre’:</b></p>
+<p class="MsoBodyText">Dialog med mulighet for endring av kundeinformasjonen 
+åpnes.</p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_119.png" alt="" /></p>
+<p class="MsoCaption">Figur 58 Endre ordreinformasjonen</p>
+<p class="MsoBodyText">Benytt de tre knappene ‘Ny’, ‘Lagre’ og ‘Angre’.</p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><span style="FONT-FAMILY: Verdana">•</span><span style="FONT-FAMILY: Symbol; VISIBILITY: hidden">      
+</span>‘Ny’ åpner feltene for redigering.</p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><span style="FONT-FAMILY: Verdana">•</span><span style="FONT-FAMILY: Symbol; VISIBILITY: hidden">      
+</span>‘Lagre’ lagrer informasjonen på ordren.</p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><span style="FONT-FAMILY: Verdana">•</span><span style="FONT-FAMILY: Symbol; VISIBILITY: hidden">      
+</span>‘Angre’ Angrer endring og avslutter uten å lagre.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText"><b>Redigering av ordrelinjer:</b></p>
+<p class="MsoBodyText">Følgende kan gjøres med en ordrelinje:</p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><span style="FONT-FAMILY: Verdana">•</span><span style="FONT-FAMILY: Symbol; VISIBILITY: hidden">      
+</span>Endre antall på varelinje</p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><span style="FONT-FAMILY: Verdana">•</span><span style="FONT-FAMILY: Symbol; VISIBILITY: hidden">      
+</span>Bytte vare størrelse  </p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><span style="FONT-FAMILY: Verdana">•</span><span style="FONT-FAMILY: Symbol; VISIBILITY: hidden">      
+</span>Slette kopiert rad</p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><span style="FONT-FAMILY: Verdana">•</span><span style="FONT-FAMILY: Symbol; VISIBILITY: hidden">      
+</span>Merk med manko</p>
+<p class="MsoBodyText" style="MARGIN-LEFT: 72pt; TEXT-INDENT: -18pt; tab-stops: 72.0pt"><span style="FONT-FAMILY: &quot;Courier New&quot;">o  </span>Se beskrivelse av dette under 
+‘<i>Bekreftet, men ikke behandlet</i>’.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoNormal" style="MARGIN-BOTTOM: 10pt; LINE-HEIGHT: 115%"><b>Endre 
+antall på varelinje:</b></p>
+<p class="MsoBodyText">DblKlikk på varelinje. Antalls feltet åpnes og antall kan 
+endres.</p>
+<p class="MsoNormal" style="MARGIN-BOTTOM: 10pt; LINE-HEIGHT: 115%"><img src="../ImagesExt/image30_120.png" alt="" /></p>
+<p class="MsoCaption">Figur 59 Endre antall på varelinje</p>
+<p class="MsoBodyText">NB: Antall kan bare settes til 1 eller 0 grunnet 
+begrensinger i nettbutikk integrasjonen.</p>
+<p class="MsoBodyText">Settes antall til 0, går en melding (ved utlevering av 
+ordren) til nettbutikken med beskjed om at varen ikke er levert. Kunden får 
+automatisk refundert pengene for varen via nettbutikken.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText"><b>Bytte vare/størrelse:</b></p>
+<p class="MsoBodyText">Funksjonen benyttes når kunden ønsker en annen størrelse av 
+samme vare eller en annen vare istedenfor den opprinnelig bestilte varen. 
+Høyreklikk, og velg ‘<i>Bytt vare/størrelse</i>’.</p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_121.png" alt="" /></p>
+<p class="MsoCaption">Figur 60 Menyvalg - Bytte vare/størrelse</p>
+<p class="MsoBodyText">Varesøk åpnes. Filter er da aktivt på prisavvik +/- 50 kr. 
+Velg vare som skal legges inn istedenfor den opprinnelige. DblKlikk på linjen, 
+bekreft i dialogen og den legges ned på ordren.</p>
+<p class="MsoBodyText">NB: Legge det ned en vare med høyere pris, kan ikke dette 
+belastes kunden. Legges det ned en vare med lavere pris, man eventuelt refundere 
+pengene til kunde.</p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_122.jpg" alt="" /></p>
+<p class="MsoCaption">Figur 61 Velge vare ved bytte av vare/størrelse på 
+ordrelinje</p>
+<p class="MsoBodyText">Ordrelinjene ser nå slik ut:</p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_123.png" alt="" /></p>
+<p class="MsoCaption">Figur 62 Vare/størrelse er byttet på en ordrelinje</p>
+<p class="MsoBodyText">Den opprinnelige linjen ligger der fortsatt, men den er nå 
+merket som Ikke Aktiv. Den er også påført linjenummeret til den nye linjen som 
+erstatter den. Den nye linjen er markert som Aktiv. Den er også påført 
+linjenummer til den linjen den erstatter.</p>
+<p class="MsoBodyText"> </p>
+<p class="MsoBodyText"><b>Slette kopiert rad:</b></p>
+<p class="MsoBodyText">Er det byttet vare på en varelinje, og man ønsker å legge 
+tilbake den opprinnelige linjen. Skal den nye linjen slettes. Den gamle 
+aktiveres da og legges på plass.</p>
+<p class="MsoBodyText">Marker den nye varelinjen og bruk menyvalg ‘’ til 
+dette.</p>
+<p class="MsoBodyText"><img src="../ImagesExt/image30_124.png" alt="" /></p>
+<p class="MsoCaption">Figur 63 Slette ny varelinje (Endret vare)</p>
+<p class="MsoBodyText"> </p><span id="related-topics"></span></body></html>

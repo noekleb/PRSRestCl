@@ -1,0 +1,149 @@
+[20/10/11@10:08:44.741+0200] P-105220 T-095008 1 4GL -- Logging level set to = 2
+[20/10/11@10:08:44.741+0200] P-105220 T-095008 1 4GL -- No entry types are activated
+[20/10/11@10:08:44.741+0200] P-105220 T-095008 1 4GL -- Logging level set to = 4
+[20/10/11@11:12:17.951+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@11:12:17.951+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2320, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@11:15:42.406+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@11:15:42.406+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2383, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@11:17:29.340+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@11:17:29.340+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2446, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@11:26:00.773+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@11:26:00.773+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2508, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@11:33:50.224+0200] P-105220 T-095008 1 4GL -- Lead attributes in a chained-attribute expression (a:b:c) must be type HANDLE or a user-defined type and valid (not UNKNOWN). (10068)
+[20/10/11@11:33:50.224+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/11@11:33:50.224+0200] P-105220 T-095008 1 4GL -- --> getTokenProc testDinTero.w at line 1005  (winsrc\testDinTero.r)
+[20/10/11@11:33:50.224+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 546  (winsrc\testDinTero.r)
+[20/10/11@11:33:50.224+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/11@11:53:40.881+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@11:53:40.881+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2570, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@12:13:21.118+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@12:13:21.118+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2632, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@12:25:57.962+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@12:25:57.962+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2694, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@12:32:28.351+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@12:32:28.352+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2756, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@12:32:41.136+0200] P-105220 T-095008 1 4GL -- Invalid handle.  Not initialized or points to a deleted object. (3135)
+[20/10/11@12:32:41.136+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/11@12:32:41.136+0200] P-105220 T-095008 1 4GL -- --> listProfiles cls.DinTero.ClientDinTero at line 494  (.\cls\DinTero\ClientDinTero.r)
+[20/10/11@12:32:41.136+0200] P-105220 T-095008 1 4GL --     listProfilesProc testDinTero.w at line 1111  (winsrc\testDinTero.r)
+[20/10/11@12:32:41.136+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 559  (winsrc\testDinTero.r)
+[20/10/11@12:32:41.136+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/11@12:34:13.372+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@12:34:13.372+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2818, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@12:34:16.888+0200] P-105220 T-095008 1 4GL -- Invalid handle.  Not initialized or points to a deleted object. (3135)
+[20/10/11@12:34:16.888+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/11@12:34:16.888+0200] P-105220 T-095008 1 4GL -- --> listProfiles cls.DinTero.ClientDinTero at line 494  (.\cls\DinTero\ClientDinTero.r)
+[20/10/11@12:34:16.888+0200] P-105220 T-095008 1 4GL --     listProfilesProc testDinTero.w at line 1111  (winsrc\testDinTero.r)
+[20/10/11@12:34:16.888+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 559  (winsrc\testDinTero.r)
+[20/10/11@12:34:16.888+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/11@12:38:09.271+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@12:38:09.271+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2959, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@13:02:58.562+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@13:02:58.562+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3059, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@13:07:44.054+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@13:07:44.054+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3121, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/11@13:08:21.868+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/11@13:08:21.868+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3183, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:13:31.814+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:13:31.814+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3245, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:14:40.861+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:14:40.861+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3308, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:15:42.719+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:15:42.719+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3370, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:16:18.946+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:16:18.946+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3432, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:20:57.822+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:20:57.822+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3494, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:23:33.943+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:23:33.943+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3556, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:26:34.688+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:26:34.688+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3618, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:36:01.624+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:36:01.624+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3680, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:44:26.708+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:44:26.708+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3742, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:46:59.647+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:46:59.647+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3804, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@09:53:41.801+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@09:53:41.801+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3866, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:10:39.438+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:10:39.439+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3928, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:10:56.868+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:10:56.868+0200] P-105220 T-095008 1 4GL ----------     Window handle: 3990, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:12:30.213+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:12:30.213+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4052, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:16:55.383+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:16:55.383+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4120, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:29:58.132+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:29:58.132+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4188, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:30:04.873+0200] P-105220 T-095008 1 4GL -- Entry 2 is outside the range of list . (560)
+[20/10/12@10:30:04.873+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/12@10:30:04.873+0200] P-105220 T-095008 1 4GL -- --> listTransactionsProc testDinTero.w at line 1248  (winsrc\testDinTero.r)
+[20/10/12@10:30:04.873+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 615  (winsrc\testDinTero.r)
+[20/10/12@10:30:04.873+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/12@10:30:35.260+0200] P-105220 T-095008 1 4GL -- Entry 2 is outside the range of list . (560)
+[20/10/12@10:30:35.260+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/12@10:30:35.260+0200] P-105220 T-095008 1 4GL -- --> listTransactionsProc testDinTero.w at line 1248  (winsrc\testDinTero.r)
+[20/10/12@10:30:35.260+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 615  (winsrc\testDinTero.r)
+[20/10/12@10:30:35.260+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/12@10:31:51.657+0200] P-105220 T-095008 1 4GL -- Entry 2 is outside the range of list . (560)
+[20/10/12@10:31:51.657+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/12@10:31:51.657+0200] P-105220 T-095008 1 4GL -- --> listTransactionsProc testDinTero.w at line 1248  (winsrc\testDinTero.r)
+[20/10/12@10:31:51.657+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 615  (winsrc\testDinTero.r)
+[20/10/12@10:31:51.657+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/12@10:32:56.860+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:32:56.860+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4256, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:33:04.781+0200] P-105220 T-095008 1 4GL -- Entry 2 is outside the range of list . (560)
+[20/10/12@10:33:04.781+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/12@10:33:04.781+0200] P-105220 T-095008 1 4GL -- --> listTransactionsProc testDinTero.w at line 1250  (winsrc\testDinTero.r)
+[20/10/12@10:33:04.781+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 615  (winsrc\testDinTero.r)
+[20/10/12@10:33:04.781+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/12@10:34:13.914+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:34:13.914+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4327, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:40:21.664+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:40:21.664+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4398, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:40:27.729+0200] P-105220 T-095008 1 4GL -- Attempt to update ttCallstack record data exceeding 32000. (12370)
+[20/10/12@10:40:27.729+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/12@10:40:27.729+0200] P-105220 T-095008 1 4GL -- --> listTransactionsProc testDinTero.w at line 1263  (winsrc\testDinTero.r)
+[20/10/12@10:40:27.729+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 615  (winsrc\testDinTero.r)
+[20/10/12@10:40:27.729+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/12@10:40:36.929+0200] P-105220 T-095008 1 4GL -- ** Unable to update ttCallstack Field. (142)
+[20/10/12@10:40:36.929+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/12@10:40:36.929+0200] P-105220 T-095008 1 4GL -- --> listTransactionsProc testDinTero.w at line 1263  (winsrc\testDinTero.r)
+[20/10/12@10:40:36.929+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 615  (winsrc\testDinTero.r)
+[20/10/12@10:40:36.929+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/12@10:43:06.434+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:43:06.434+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4469, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:44:24.932+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:44:24.932+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4540, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@10:50:04.501+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@10:50:04.501+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4611, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@11:11:02.390+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@11:11:02.390+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4682, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@11:11:07.213+0200] P-105220 T-095008 1 4GL -- Entry 2 is outside the range of list . (560)
+[20/10/12@11:11:07.213+0200] P-105220 T-095008 1 4GL -- ** ABL Debug-Alert Stack Trace **
+[20/10/12@11:11:07.213+0200] P-105220 T-095008 1 4GL -- --> getTransaction testDinTero.w at line 1108  (winsrc\testDinTero.r)
+[20/10/12@11:11:07.213+0200] P-105220 T-095008 1 4GL --     USER-INTERFACE-TRIGGER testDinTero.w at line 606  (winsrc\testDinTero.r)
+[20/10/12@11:11:07.213+0200] P-105220 T-095008 1 4GL --     winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+[20/10/12@11:12:24.377+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@11:12:24.377+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4753, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@11:15:17.654+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@11:15:17.654+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4827, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@11:16:56.832+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@11:16:56.832+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4901, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@11:21:19.022+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@11:21:19.023+0200] P-105220 T-095008 1 4GL ----------     Window handle: 4975, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@11:23:54.842+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@11:23:54.842+0200] P-105220 T-095008 1 4GL ----------     Window handle: 5049, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@11:24:38.297+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@11:24:38.297+0200] P-105220 T-095008 1 4GL ----------     Window handle: 5123, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@16:07:33.382+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@16:07:33.382+0200] P-105220 T-095008 1 4GL ----------     Window handle: 5197, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@16:07:55.051+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@16:07:55.051+0200] P-105220 T-095008 1 4GL ----------     Window handle: 5271, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@16:34:13.174+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@16:34:13.174+0200] P-105220 T-095008 1 4GL ----------     Window handle: 5345, Name: ?, Instantiating Procedure: testDinTero.w
+[20/10/12@17:33:42.318+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@17:33:42.318+0200] P-105220 T-095008 1 4GL ----------     Window handle: 2286, Name: ?, Instantiating Procedure: linkRutinebeskrivelse.w
+[20/10/12@17:33:42.336+0200] P-105220 T-095008 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/10/12@17:33:42.336+0200] P-105220 T-095008 1 4GL ----------     Window handle: 5419, Name: ?, Instantiating Procedure: testDinTero.w

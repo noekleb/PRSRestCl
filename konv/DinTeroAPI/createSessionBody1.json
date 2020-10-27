@@ -1,0 +1,22 @@
+{
+  "url": {
+    "return_url": "https://checkout.dintero.com/result"
+  },
+  "order": {
+    "amount": 29990,
+    "currency": "NOK",
+    "merchant_reference": "string",
+    "items":[
+      {
+        "id": "chair-1",
+        "line_id": "1",
+        "description": "Stablestol",
+        "quantity": 1,
+        "amount": 29990,
+        "vat_amount": 6000,
+        "vat": 25
+      }
+    ]
+  },
+  "profile_id": "T11112542.4XopX7PCwvdZzWxu5anRmd"
+}

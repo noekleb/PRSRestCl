@@ -1,0 +1,14 @@
+{"ttConfig": [
+  {
+    "cHost": "LAPTOP-CENEE05L",
+    "cPort": "3190",
+    "cAppServer": "asPRS",
+    "iButNr": "16",
+    "iKasseNr": "0",
+    "webbrukerid": "gant.tonsberg@gantretail.no",
+    "webpassord": "9Tønsberg!",
+    "DebugAktiv":  "TRUE",
+    "DebugLevel":  "4",
+    "DebugLogFile": "WCloggmanagerDDMMYYYY.txt"
+  }
+]}

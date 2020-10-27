@@ -1,0 +1,22 @@
+-d dmy                     # dato-format
+-e 255                     # programst›rrelse max
+-l 200                     # local buffer
+-D 100                     # directory entries
+-c 40                      # index cursors
+-E                         # europeisk standard (komma og punktum)
+-crc                       # crc-checking
+-T c:\temp                 # tmp-directory
+-h 6                       # Antall databaser
+-e 128
+-s 300                     # Stack Size
+-nb 255
+-inp 12288
+-pf c:\db\gant\skotex.pf
+-U tomn -P O394aiz1958
+-pf c:\db\gant\data.pf
+-U tomn -P tomno
+-pf c:\db\gant\vpi.pf
+-U tomn -P tomno
+-cpinternal iso8859-1
+-cpstream   iso8859-1
+-cpcoll     Norwegian

@@ -1,0 +1,129 @@
+=====================================================
+PROGRESS stack trace as of Sat Oct 17 09:26:17 2020
+=====================================================
+
+Progress OpenEdge Release 11.7 build 1388 on WINNT 
+
+Startup parameters:
+-pf C:\WebClient7_11\startup.pf,-cpinternal iso8859-1,-cpstream iso8859-1,(end .pf),-ininame ini\PRSRestWebCl.ini,-pf ini\start.pf,-d dmy,-e 255,-l 500,-D 150,-c 40,-E,-T c:\tmp,-h 10,-inp 10000,-s 1000,-L 24576,-nb 255,-mmax 8000,-nolkctr,-cpinternal iso8859-1,-cpstream iso8859-1,-cpcoll Norwegian,(end .pf),-p winsrc\startPRS.p,-debugalert,-assemblies C:\NSoft\JukeBox\assemblies
+
+Exception code: C0000005 ACCESS_VIOLATION
+Fault address:  791661CC 01:004551CC C:\WebClient7_11\bin\prowc.dll
+
+Registers:
+EAX:00000000
+EBX:00000022
+ECX:00007D00
+EDX:00000010
+ESI:00000000
+EDI:1220CA28
+CS:EIP:0023:791661CC
+SS:ESP:002B:00CFE7FC  EBP:00000000
+DS:002B  ES:002B  FS:0053  GS:002B
+Flags:00010246
+
+
+Debugging dll: C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+Symbol Path:
+ C:\WebClient7_11\bin;C:\WebClient7_11\pdbfiles
+
+
+Call Stack:
+Address   Frame
+
+
+** ABL Stack Trace **
+
+--> winsrc\startPRS.p at line 178  (.\winsrc\startPRS.r)
+
+** Persistent procedures/Classes **
+
+Handle  File Name
+003899  .\cls\StdFunk\clStandardFunksjoner.r
+003898  .\cls\DinTero\ClientDinTero.r
+003887  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003886  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003884  C:\NSoft\jukebox\oo\JBoxContainer.r
+003877  winsrc\testDinTero.r
+003803  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003802  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003800  C:\NSoft\jukebox\oo\JBoxContainer.r
+003719  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003718  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003716  C:\NSoft\jukebox\oo\JBoxContainer.r
+003635  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003634  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003632  C:\NSoft\jukebox\oo\JBoxContainer.r
+003553  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003552  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003550  C:\NSoft\jukebox\oo\JBoxContainer.r
+003471  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003470  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003468  C:\NSoft\jukebox\oo\JBoxContainer.r
+003389  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003388  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003386  C:\NSoft\jukebox\oo\JBoxContainer.r
+003307  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003306  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003304  C:\NSoft\jukebox\oo\JBoxContainer.r
+003225  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003224  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003222  C:\NSoft\jukebox\oo\JBoxContainer.r
+003143  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003142  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003140  C:\NSoft\jukebox\oo\JBoxContainer.r
+003061  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+003060  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+003058  C:\NSoft\jukebox\oo\JBoxContainer.r
+002979  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+002978  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+002976  C:\NSoft\jukebox\oo\JBoxContainer.r
+002897  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+002896  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+002894  C:\NSoft\jukebox\oo\JBoxContainer.r
+002815  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+002814  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+002812  C:\NSoft\jukebox\oo\JBoxContainer.r
+002733  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+002732  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+002730  C:\NSoft\jukebox\oo\JBoxContainer.r
+002610  C:\NSoft\jukebox\oo\JBoxBrowseFillIn.r
+002608  C:\NSoft\jukebox\oo\JBoxBrowseFillIn.r
+002602  C:\NSoft\jukebox\oo\JBoxPopupMenu.r
+002540  C:\NSoft\jukebox\oo\JBoxBrowse.r
+002510  C:\NSoft\jukebox\oo\JBoxToolbar.r
+002417  C:\NSoft\jukebox\oo\JBoxBrowse.r
+002406  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+002405  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+002403  C:\NSoft\jukebox\oo\JBoxContainer.r
+002395  winsrc\KundeOrdreEndre.r
+002389  C:\NSoft\jukebox\oo\JBoxServerAPI.r
+000000  C:\NSoft\jukebox\oo\JBoxServerAPI.r (STATIC)
+002329  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+002328  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+002326  C:\NSoft\jukebox\oo\JBoxContainer.r
+002295  C:\NSoft\jukebox\oo\JBoxStatusBar.r
+002294  C:\NSoft\jukebox\oo\JBoxContainerHelper.r
+002292  C:\NSoft\jukebox\oo\JBoxContainer.r
+002285  winsrc\linkRutinebeskrivelse.r
+001272  C:\NSoft\jukebox\oo\JBoxMainForm.r
+001261  C:\NSoft\jukebox\oo\JBoxRibbonMenu.r
+001257  C:\NSoft\jukebox\oo\JBoxMainMenu.r
+000000  C:\NSoft\jukebox\oo\JBoxMainMenu.r (STATIC)
+001043  C:\NSoft\jukebox\oo\JBoxXmlDocHelper.r
+001037  C:\NSoft\jukebox\oo\JBoxXmlDoc.r
+001021  C:\NSoft\jukebox\oo\JBoxOOTimer.r
+001015  C:\NSoft\jukebox\lib\JBoxFUlib.r
+001014  C:\NSoft\jukebox\lib\JBoxObjLib.r
+001013  C:\NSoft\jukebox\lib\JBoxUIlib.r
+001004  C:\NSoft\jukebox\lib\JBoxASlib.r
+001003  C:\NSoft\jukebox\lib\ResizeLib.r
+001002  C:\NSoft\jukebox\oo\JBoxSession.r
+000000  C:\NSoft\jukebox\oo\JBoxSession.r (STATIC)
+
+** PROPATH **
+.,wrk,winsrc,C:\NSoft\jukebox\oo,C:\NSoft\jukebox\img,C:\NSoft\jukebox\server,C:\NSoft\jukebox\lib,C:\NSoft\jukebox\obj,C:\NSoft\jukebox\winsrc,C:\NSoft\jukebox\winsrc\admin,C:\NSoft\jukebox\tools,C:\WebClient7_11\gui\adecomm.pl,C:\WebClient7_11\gui\adecomp.pl,C:\WebClient7_11\gui\adedesk.pl,C:\WebClient7_11\gui\adedict.pl,C:\WebClient7_11\gui\adeedit.pl,C:\WebClient7_11\gui\adeicon.pl,C:\WebClient7_11\gui\aderes.pl,C:\WebClient7_11\gui\adeshar.pl,C:\WebClient7_11\gui\adeuib.pl,C:\WebClient7_11\gui\adeweb.pl,C:\WebClient7_11\gui\adexml.pl,C:\WebClient7_11\gui\dataadmin.pl,C:\WebClient7_11\gui\prodict.pl,C:\WebClient7_11\gui\protools.pl,C:\WebClient7_11,C:\WebClient7_11\bin,C:\WebClient7_11\gui,C:\WebClient7_11\gui\OpenEdge.Core.pl,C:\WebClient7_11\gui\netlib\OpenEdge.Net.pl
+
+** Databases (logical/type/physical) **
+
+** End of Protrace **

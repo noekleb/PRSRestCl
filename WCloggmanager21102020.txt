@@ -1,0 +1,3 @@
+[20/10/21@10:04:13.299+0200] P-096692 T-073316 1 4GL -- Logging level set to = 2
+[20/10/21@10:04:13.300+0200] P-096692 T-073316 1 4GL -- No entry types are activated
+[20/10/21@10:04:13.300+0200] P-096692 T-073316 1 4GL -- Logging level set to = 4

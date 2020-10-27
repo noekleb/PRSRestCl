@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toc>
+  <item>
+    <title><![CDATA[Endringer]]></title>
+    <tooltip><![CDATA[Endringer]]></tooltip>
+    <item url="Documents/endringeridokumentet.htm">
+      <title><![CDATA[Endringer i dokumentet]]></title>
+      <tooltip><![CDATA[Endringer i dokumentet]]></tooltip>
+    </item>
+  </item>
+  <item>
+    <title><![CDATA[Funksjonsbeskrivelser]]></title>
+    <tooltip><![CDATA[Funksjonsbeskrivelser]]></tooltip>
+    <item url="Documents/generelt.htm">
+      <title><![CDATA[Generelt]]></title>
+      <tooltip><![CDATA[Generelt]]></tooltip>
+      <item url="Documents/verktylinjer.htm">
+        <title><![CDATA[Verktøylinjer]]></title>
+        <tooltip><![CDATA[Verktøylinjer]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/personal.htm">
+      <title><![CDATA[Personal]]></title>
+      <tooltip><![CDATA[Personal]]></tooltip>
+      <item url="Documents/registrereinnutlogging.htm">
+        <title><![CDATA[Registrere inn/ut logging]]></title>
+        <tooltip><![CDATA[Registrere inn/ut logging]]></tooltip>
+      </item>
+      <item url="Documents/rutineogfunksjonsbeskrivelser.htm">
+        <title><![CDATA[Rutine og funksjonsbeskrivelser]]></title>
+        <tooltip><![CDATA[Rutine og funksjonsbeskrivelser]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/behandlingavnettbutikkordre.htm">
+      <title><![CDATA[Behandling av nettbutikk ordre]]></title>
+      <tooltip><![CDATA[Behandling av nettbutikk ordre]]></tooltip>
+      <item url="Documents/bekreftetmenikkebehandlet.htm">
+        <title><![CDATA[Bekreftet, men ikke behandlet]]></title>
+        <tooltip><![CDATA[Bekreftet, men ikke behandlet]]></tooltip>
+      </item>
+      <item url="Documents/pakkseddelskrevet.htm">
+        <title><![CDATA[Pakkseddel skrevet]]></title>
+        <tooltip><![CDATA[Pakkseddel skrevet]]></tooltip>
+      </item>
+      <item url="Documents/postpakkeetikettskrevet.htm">
+        <title><![CDATA[Postpakke etikett skrevet]]></title>
+        <tooltip><![CDATA[Postpakke etikett skrevet]]></tooltip>
+      </item>
+      <item url="Documents/elektroniskplukking.htm">
+        <title><![CDATA[Elektronisk plukking]]></title>
+        <tooltip><![CDATA[Elektronisk plukking]]></tooltip>
+      </item>
+      <item url="Documents/levertkundeogfakturert.htm">
+        <title><![CDATA[Levert kunde og fakturert]]></title>
+        <tooltip><![CDATA[Levert kunde og fakturert]]></tooltip>
+      </item>
+      <item url="Documents/ikkelevert.htm">
+        <title><![CDATA[Ikke levert]]></title>
+        <tooltip><![CDATA[Ikke levert]]></tooltip>
+      </item>
+      <item url="Documents/kansellerte.htm">
+        <title><![CDATA[Kansellerte]]></title>
+        <tooltip><![CDATA[Kansellerte]]></tooltip>
+      </item>
+      <item url="Documents/returavvare.htm">
+        <title><![CDATA[Retur av vare]]></title>
+        <tooltip><![CDATA[Retur av vare]]></tooltip>
+      </item>
+      <item url="Documents/bytteavvare.htm">
+        <title><![CDATA[Bytte av vare]]></title>
+        <tooltip><![CDATA[Bytte av vare]]></tooltip>
+        <item url="Documents/redigeringsfunksjonerpvarelinje.htm">
+          <title><![CDATA[Redigerings funksjoner på varelinje:]]></title>
+          <tooltip><![CDATA[Redigerings funksjoner på varelinje:]]></tooltip>
+        </item>
+      </item>
+      <item url="Documents/kunderegister.htm">
+        <title><![CDATA[Kunderegister]]></title>
+        <tooltip><![CDATA[Kunderegister]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/varemottaklagerogfakturakontroll.htm">
+      <title><![CDATA[Varemottak, lager og fakturakontroll]]></title>
+      <tooltip><![CDATA[Varemottak, lager og fakturakontroll]]></tooltip>
+      <item url="Documents/lagerlisteartikkelstrrelse.htm">
+        <title><![CDATA[Lagerliste artikkel/størrelse]]></title>
+        <tooltip><![CDATA[Lagerliste artikkel/størrelse]]></tooltip>
+      </item>
+      <item url="Documents/lagerlistemodellbutikkstrrelse.htm">
+        <title><![CDATA[Lagerliste modell/butikk/størrelse]]></title>
+        <tooltip><![CDATA[Lagerliste modell/butikk/størrelse]]></tooltip>
+      </item>
+      <item url="Documents/varemottaknettbutikkslager.htm">
+        <title><![CDATA[Varemottak nettbutikks lager]]></title>
+        <tooltip><![CDATA[Varemottak nettbutikks lager]]></tooltip>
+      </item>
+      <item url="Documents/fakturakontroll.htm">
+        <title><![CDATA[Fakturakontroll]]></title>
+        <tooltip><![CDATA[Fakturakontroll]]></tooltip>
+      </item>
+      <item url="Documents/byttebutikknrppakkseddel.htm">
+        <title><![CDATA[Bytte butikknr. på pakkseddel]]></title>
+        <tooltip><![CDATA[Bytte butikknr. på pakkseddel]]></tooltip>
+      </item>
+      <item url="Documents/internoverfring.htm">
+        <title><![CDATA[Intern overføring]]></title>
+        <tooltip><![CDATA[Intern overføring]]></tooltip>
+      </item>
+      <item url="Documents/lagerjustering.htm">
+        <title><![CDATA[Lagerjustering]]></title>
+        <tooltip><![CDATA[Lagerjustering]]></tooltip>
+      </item>
+      <item url="Documents/markerpakkseddelsomsendtoutlet.htm">
+        <title><![CDATA[Marker pakkseddel som sendt Outlet]]></title>
+        <tooltip><![CDATA[Marker pakkseddel som sendt Outlet]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/kampanje1.htm">
+      <title><![CDATA[Kampanje]]></title>
+      <tooltip><![CDATA[Kampanje]]></tooltip>
+      <item url="Documents/kampanjeregister1.htm">
+        <title><![CDATA[Kampanjeregister]]></title>
+        <tooltip><![CDATA[Kampanjeregister]]></tooltip>
+      </item>
+      <item url="Documents/solgtlager.htm">
+        <title><![CDATA[Solgt% lager]]></title>
+        <tooltip><![CDATA[Solgt% lager]]></tooltip>
+      </item>
+      <item url="Documents/solgtaktivkampanje.htm">
+        <title><![CDATA[Solgt% Aktiv kampanje]]></title>
+        <tooltip><![CDATA[Solgt% Aktiv kampanje]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/kundeservice.htm">
+      <title><![CDATA[Kundeservice]]></title>
+      <tooltip><![CDATA[Kundeservice]]></tooltip>
+      <item url="Documents/endrevareantall.htm">
+        <title><![CDATA[Endre vare/antall]]></title>
+        <tooltip><![CDATA[Endre vare/antall]]></tooltip>
+      </item>
+      <item url="Documents/retteprisfeilprisfraphx.htm">
+        <title><![CDATA[Rette pris (Feil pris fra Phx)]]></title>
+        <tooltip><![CDATA[Rette pris (Feil pris fra Phx)]]></tooltip>
+      </item>
+      <item url="Documents/returetikett.htm">
+        <title><![CDATA[Retur etikett]]></title>
+        <tooltip><![CDATA[Retur etikett]]></tooltip>
+      </item>
+      <item url="Documents/linker.htm">
+        <title><![CDATA[Linker]]></title>
+        <tooltip><![CDATA[Linker]]></tooltip>
+      </item>
+    </item>
+  </item>
+  <item url="Documents/rutineoversikt.htm">
+    <title><![CDATA[Rutine oversikt]]></title>
+    <tooltip><![CDATA[Rutine oversikt]]></tooltip>
+  </item>
+  <item>
+    <title><![CDATA[Rutinebeskrivelser]]></title>
+    <tooltip><![CDATA[Rutinebeskrivelser]]></tooltip>
+    <item url="Documents/behandlingavnettbutikkordre1.htm">
+      <title><![CDATA[Behandling av nettbutikk ordre]]></title>
+      <tooltip><![CDATA[Behandling av nettbutikk ordre]]></tooltip>
+      <item url="Documents/klargjringavordre.htm">
+        <title><![CDATA[Klargjøring av ordre]]></title>
+        <tooltip><![CDATA[Klargjøring av ordre]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/kampanjehndtering.htm">
+      <title><![CDATA[Kampanje håndtering]]></title>
+      <tooltip><![CDATA[Kampanje håndtering]]></tooltip>
+      <item url="Documents/opprettekampanje.htm">
+        <title><![CDATA[Opprette kampanje]]></title>
+        <tooltip><![CDATA[Opprette kampanje]]></tooltip>
+      </item>
+      <item url="Documents/aktiverekampanje.htm">
+        <title><![CDATA[Aktivere kampanje]]></title>
+        <tooltip><![CDATA[Aktivere kampanje]]></tooltip>
+      </item>
+      <item url="Documents/kopierekampanje.htm">
+        <title><![CDATA[Kopiere kampanje]]></title>
+        <tooltip><![CDATA[Kopiere kampanje]]></tooltip>
+      </item>
+      <item url="Documents/endrerabattpaktivkampanje.htm">
+        <title><![CDATA[Endre rabatt på aktiv kampanje]]></title>
+        <tooltip><![CDATA[Endre rabatt på aktiv kampanje]]></tooltip>
+      </item>
+      <item url="Documents/avslutteenpgendekampanje.htm">
+        <title><![CDATA[Avslutte en pågående kampanje]]></title>
+        <tooltip><![CDATA[Avslutte en pågående kampanje]]></tooltip>
+      </item>
+    </item>
+  </item>
+  <item>
+    <title><![CDATA[Krav og regler]]></title>
+    <tooltip><![CDATA[Krav og regler]]></tooltip>
+    <item url="Documents/personal1.htm">
+      <title><![CDATA[Personal]]></title>
+      <tooltip><![CDATA[Personal]]></tooltip>
+      <item url="Documents/registrereinnutlogging1.htm">
+        <title><![CDATA[Registrere inn/utlogging]]></title>
+        <tooltip><![CDATA[Registrere inn/utlogging]]></tooltip>
+      </item>
+      <item url="Documents/personalsalg1.htm">
+        <title><![CDATA[Personalsalg]]></title>
+        <tooltip><![CDATA[Personalsalg]]></tooltip>
+      </item>
+      <item url="Documents/rutineogfunksjonsbeskrivelser1.htm">
+        <title><![CDATA[Rutine og funksjonsbeskrivelser]]></title>
+        <tooltip><![CDATA[Rutine og funksjonsbeskrivelser]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/behandlingavnettbutikkordre2.htm">
+      <title><![CDATA[Behandling av nettbutikkordre]]></title>
+      <tooltip><![CDATA[Behandling av nettbutikkordre]]></tooltip>
+      <item url="Documents/bekreftetmenikkebehandlet1.htm">
+        <title><![CDATA[Bekreftet, men ikke behandlet]]></title>
+        <tooltip><![CDATA[Bekreftet, men ikke behandlet]]></tooltip>
+      </item>
+      <item url="Documents/pakkseddelskrevet1.htm">
+        <title><![CDATA[Pakkseddel skrevet]]></title>
+        <tooltip><![CDATA[Pakkseddel skrevet]]></tooltip>
+      </item>
+      <item url="Documents/postpakkeetikettskrevet1.htm">
+        <title><![CDATA[Postpakke etikett skrevet]]></title>
+        <tooltip><![CDATA[Postpakke etikett skrevet]]></tooltip>
+      </item>
+      <item url="Documents/elektroniskplukking1.htm">
+        <title><![CDATA[Elektronisk plukking]]></title>
+        <tooltip><![CDATA[Elektronisk plukking]]></tooltip>
+      </item>
+      <item url="Documents/leverspeditr.htm">
+        <title><![CDATA[Lever speditør]]></title>
+        <tooltip><![CDATA[Lever speditør]]></tooltip>
+      </item>
+      <item url="Documents/bekreftetmottattspeditr1.htm">
+        <title><![CDATA[Bekreftet mottatt speditør]]></title>
+        <tooltip><![CDATA[Bekreftet mottatt speditør]]></tooltip>
+      </item>
+      <item url="Documents/levertkundeogfakturert1.htm">
+        <title><![CDATA[Levert kunde og fakturert]]></title>
+        <tooltip><![CDATA[Levert kunde og fakturert]]></tooltip>
+      </item>
+      <item url="Documents/ikkelevert1.htm">
+        <title><![CDATA[Ikke levert]]></title>
+        <tooltip><![CDATA[Ikke levert]]></tooltip>
+      </item>
+      <item url="Documents/kansellerte1.htm">
+        <title><![CDATA[Kansellerte]]></title>
+        <tooltip><![CDATA[Kansellerte]]></tooltip>
+        <item url="Documents/reglerforkansellering.htm">
+          <title><![CDATA[Regler for kansellering]]></title>
+          <tooltip><![CDATA[Regler for kansellering]]></tooltip>
+        </item>
+        <item url="Documents/reglerforlagerbevegelsersomflgeavkansellering.htm">
+          <title><![CDATA[Regler for lagerbevegelser som følge av kansellering]]></title>
+          <tooltip><![CDATA[Regler for lagerbevegelser som følge av kansellering]]></tooltip>
+        </item>
+      </item>
+      <item url="Documents/postpakkelevertspeditrskanning.htm">
+        <title><![CDATA[Postpakke levert speditør (Skanning)]]></title>
+        <tooltip><![CDATA[Postpakke levert speditør (Skanning)]]></tooltip>
+      </item>
+      <item url="Documents/returavvarer.htm">
+        <title><![CDATA[Retur av varer]]></title>
+        <tooltip><![CDATA[Retur av varer]]></tooltip>
+        <item url="Documents/reglerforregistreringavreturvarer.htm">
+          <title><![CDATA[Regler for registrering av returvarer]]></title>
+          <tooltip><![CDATA[Regler for registrering av returvarer]]></tooltip>
+        </item>
+        <item url="Documents/returavvarelinjehvorvarenikkeerendretfrutlevering.htm">
+          <title><![CDATA[Retur av varelinje hvor varen ikke er endret før utlevering]]></title>
+          <tooltip><![CDATA[Retur av varelinje hvor varen ikke er endret før utlevering]]></tooltip>
+        </item>
+        <item url="Documents/returavvarelinjehvorvarenvarendretfrutlevering.htm">
+          <title><![CDATA[Retur av varelinje hvor varen var endret før utlevering]]></title>
+          <tooltip><![CDATA[Retur av varelinje hvor varen var endret før utlevering]]></tooltip>
+        </item>
+        <item url="Documents/returavvarerhvorkundenreturnerervareneienbutikk.htm">
+          <title><![CDATA[Retur av varer hvor kunden returnerer varene i en butikk]]></title>
+          <tooltip><![CDATA[Retur av varer hvor kunden returnerer varene i en butikk]]></tooltip>
+        </item>
+      </item>
+      <item url="Documents/bytteavvarer.htm">
+        <title><![CDATA[Bytte av varer]]></title>
+        <tooltip><![CDATA[Bytte av varer]]></tooltip>
+        <item url="Documents/reglerforregistreringavbyttevarer.htm">
+          <title><![CDATA[Regler for registrering av byttevarer]]></title>
+          <tooltip><![CDATA[Regler for registrering av byttevarer]]></tooltip>
+        </item>
+        <item url="Documents/reglerforlagerbevegelsermmsomflgeavvarebytte.htm">
+          <title><![CDATA[Regler for lagerbevegelser m.m. som følge av varebytte]]></title>
+          <tooltip><![CDATA[Regler for lagerbevegelser m.m. som følge av varebytte]]></tooltip>
+        </item>
+      </item>
+      <item url="Documents/kunderegister1.htm">
+        <title><![CDATA[Kunderegister]]></title>
+        <tooltip><![CDATA[Kunderegister]]></tooltip>
+      </item>
+      <item url="Documents/fellesfunksjoner.htm">
+        <title><![CDATA[Felles funksjoner]]></title>
+        <tooltip><![CDATA[Felles funksjoner]]></tooltip>
+        <item url="Documents/utleveringavordre.htm">
+          <title><![CDATA[Utlevering av ordre]]></title>
+          <tooltip><![CDATA[Utlevering av ordre]]></tooltip>
+        </item>
+      </item>
+    </item>
+    <item url="Documents/varemottaklagerogfakturakontroll1.htm">
+      <title><![CDATA[Varemottak, lager og fakturakontroll]]></title>
+      <tooltip><![CDATA[Varemottak, lager og fakturakontroll]]></tooltip>
+    </item>
+    <item url="Documents/kampanje2.htm">
+      <title><![CDATA[Kampanje]]></title>
+      <tooltip><![CDATA[Kampanje]]></tooltip>
+    </item>
+    <item url="Documents/kundeservice1.htm">
+      <title><![CDATA[Kundeservice]]></title>
+      <tooltip><![CDATA[Kundeservice]]></tooltip>
+    </item>
+    <item url="Documents/system.htm">
+      <title><![CDATA[System]]></title>
+      <tooltip><![CDATA[System]]></tooltip>
+    </item>
+  </item>
+  <item url="Documents/ordoguttrykk.htm" glossary="1">
+    <title><![CDATA[Ord og uttrykk]]></title>
+    <tooltip><![CDATA[Ord og uttrykk]]></tooltip>
+  </item>
+  <item>
+    <title><![CDATA[Vedlegg]]></title>
+    <tooltip><![CDATA[Vedlegg]]></tooltip>
+    <item url="Documents/maler1.htm">
+      <title><![CDATA[Maler]]></title>
+      <tooltip><![CDATA[Maler]]></tooltip>
+      <item url="Documents/rutinemal1.htm">
+        <title><![CDATA[Rutinemal]]></title>
+        <tooltip><![CDATA[Rutinemal]]></tooltip>
+      </item>
+    </item>
+  </item>
+</toc>

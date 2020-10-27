@@ -1,0 +1,14 @@
+{"ttConfig": [
+  {
+    "cHost": "LAPTOP-CENEE05L",
+    "cPort": "3190",
+    "cAppServer": "asPRS",
+    "iButNr": "2",
+    "iKasseNr": "1",
+    "iSelgerId": "7",
+    "cNavnIKasse": "TestMann",
+    "cSelgerNavn": "Mr. Test Mannen",
+    "webbrukerid": "gant.tonsberg@gantretail.no",
+    "webpassord": "9Tønsberg!"
+  }
+]}

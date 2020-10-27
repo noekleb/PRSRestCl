@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toc>
+  <item>
+    <title><![CDATA[Endringer]]></title>
+    <tooltip><![CDATA[Endringer]]></tooltip>
+    <item url="Documents/endringeridokumentet.htm">
+      <title><![CDATA[Endringer i dokumentet]]></title>
+      <tooltip><![CDATA[Endringer i dokumentet]]></tooltip>
+    </item>
+  </item>
+  <item>
+    <title><![CDATA[Funksjonsbeskrivelser]]></title>
+    <tooltip><![CDATA[Funksjonsbeskrivelser]]></tooltip>
+    <item url="Documents/generelt.htm">
+      <title><![CDATA[Generelt]]></title>
+      <tooltip><![CDATA[Generelt]]></tooltip>
+      <item url="Documents/verktylinjer.htm">
+        <title><![CDATA[Verktøylinjer]]></title>
+        <tooltip><![CDATA[Verktøylinjer]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/personal.htm">
+      <title><![CDATA[Personal]]></title>
+      <tooltip><![CDATA[Personal]]></tooltip>
+      <item url="Documents/registrereinnutlogging.htm">
+        <title><![CDATA[Registrere inn/ut logging]]></title>
+        <tooltip><![CDATA[Registrere inn/ut logging]]></tooltip>
+      </item>
+      <item url="Documents/rutineogfunksjonsbeskrivelser.htm">
+        <title><![CDATA[Rutine og funksjonsbeskrivelser]]></title>
+        <tooltip><![CDATA[Rutine og funksjonsbeskrivelser]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/reservasjoner.htm">
+      <title><![CDATA[Reservasjoner]]></title>
+      <tooltip><![CDATA[Reservasjoner]]></tooltip>
+      <item url="Documents/reservasjonerfrabutikk.htm">
+        <title><![CDATA[Reservasjoner fra butikk]]></title>
+        <tooltip><![CDATA[Reservasjoner fra butikk]]></tooltip>
+      </item>
+    </item>
+  </item>
+  <item>
+    <title><![CDATA[Vedlegg]]></title>
+    <tooltip><![CDATA[Vedlegg]]></tooltip>
+    <item url="Documents/maler.htm">
+      <title><![CDATA[Maler]]></title>
+      <tooltip><![CDATA[Maler]]></tooltip>
+      <item url="Documents/rutinemal.htm">
+        <title><![CDATA[Rutinemal]]></title>
+        <tooltip><![CDATA[Rutinemal]]></tooltip>
+      </item>
+    </item>
+  </item>
+  <item url="Documents/glossaryofterms.htm" glossary="1">
+    <title><![CDATA[Glossary of Terms]]></title>
+    <tooltip><![CDATA[Glossary of Terms]]></tooltip>
+  </item>
+</toc>
