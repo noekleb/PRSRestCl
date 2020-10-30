@@ -97,15 +97,16 @@ btnGetToken edToken_Entity btnListSessions fiFilListSessions ~
 btnCreateSession btnListTransactions fiFilListTransactions fiCustomer_id ~
 btnListProfiles fiFilListProfiles fiCustomer_eMail fiCustomer_phone_number ~
 btnVoidTransaction fiFilVoidTransaction tgSms btnRefundTransaction ~
-fiFilRefundTransaction fiKOrdre_Id fiSesjonsId btnGetSessionDetails ~
-fiFilGetSessioonDetails fiTransactionId btnGetTransaction ~
-fiFilGetTransaction 
+fiFilRefundTransaction fiKOrdre_Id fiSesjonsId btnSokKunde fiFilSokKunde ~
+fiMobilNr btnGetSessionDetails fiFilGetSessioonDetails fiNavn ~
+fiTransactionId btnGetTransaction fiFilGetTransaction 
 &Scoped-Define DISPLAYED-OBJECTS edToken_Entity fiGetTokenStatusCode ~
 fiExpires_in fitoken_type fiAccess_Token fiToken_StatusReason fiToken_Read ~
 fiFilListSessions fiFilCreateSessions fiFilListTransactions fiCustomer_id ~
 fiFilListProfiles fiCustomer_eMail fiCustomer_phone_number ~
 fiFilVoidTransaction tgSms fiFilRefundTransaction fiKOrdre_Id fiSesjonsId ~
-fiFilGetSessioonDetails fiTransactionId fiFilGetTransaction 
+fiFilSokKunde fiMobilNr fiFilGetSessioonDetails fiNavn fiTransactionId ~
+fiFilGetTransaction 
 
 /* Custom List Definitions                                              */
 /* List-1,List-2,List-3,List-4,List-5,List-6                            */
@@ -152,6 +153,10 @@ DEFINE BUTTON btnListTransactions
 DEFINE BUTTON btnRefundTransaction 
      LABEL "refundTransaction" 
      SIZE 25 BY 1.14 TOOLTIP "Retur av vare.".
+
+DEFINE BUTTON btnSokKunde 
+     LABEL "Søk kunde" 
+     SIZE 25 BY 1.14 TOOLTIP "Søk etter kunde med mobilnr".
 
 DEFINE BUTTON btnVoidTransaction 
      LABEL "VoidTransaction" 
@@ -221,6 +226,11 @@ DEFINE VARIABLE fiFilRefundTransaction AS CHARACTER FORMAT "X(256)":U
      VIEW-AS FILL-IN 
      SIZE 30 BY 1 NO-UNDO.
 
+DEFINE VARIABLE fiFilSokKunde AS CHARACTER FORMAT "X(256)":U 
+     LABEL "Fil" 
+     VIEW-AS FILL-IN 
+     SIZE 30 BY 1 NO-UNDO.
+
 DEFINE VARIABLE fiFilVoidTransaction AS CHARACTER FORMAT "X(256)":U 
      LABEL "Fil" 
      VIEW-AS FILL-IN 
@@ -236,6 +246,16 @@ DEFINE VARIABLE fiKOrdre_Id AS CHARACTER FORMAT "X(256)":U INITIAL "1200000011"
      LABEL "Kundeordre id" 
      VIEW-AS FILL-IN 
      SIZE 30 BY 1 TOOLTIP "Kundeordrens id." NO-UNDO.
+
+DEFINE VARIABLE fiMobilNr AS CHARACTER FORMAT "X(256)":U 
+     LABEL "Mobilnr" 
+     VIEW-AS FILL-IN 
+     SIZE 30 BY 1 NO-UNDO.
+
+DEFINE VARIABLE fiNavn AS CHARACTER FORMAT "X(256)":U 
+     LABEL "Navn" 
+     VIEW-AS FILL-IN 
+     SIZE 30 BY 1 NO-UNDO.
 
 DEFINE VARIABLE fiSesjonsId AS CHARACTER FORMAT "X(256)":U 
      LABEL "SesjonsId" 
@@ -270,7 +290,7 @@ DEFINE RECTANGLE rectGetSessionDetails
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL   
      SIZE 69.4 BY 4.05.
 
-DEFINE VARIABLE tgSms AS LOGICAL INITIAL YES 
+DEFINE VARIABLE tgSms AS LOGICAL INITIAL yes 
      LABEL "betale via SMS" 
      VIEW-AS TOGGLE-BOX
      SIZE 29 BY .81 TOOLTIP "Marker for at kunde skal få link sendt via SMS til mobil." NO-UNDO.
@@ -305,16 +325,20 @@ DEFINE FRAME DEFAULT-FRAME
      fiFilRefundTransaction AT ROW 15.19 COL 138.6 COLON-ALIGNED
      fiKOrdre_Id AT ROW 15.95 COL 28.2 COLON-ALIGNED
      fiSesjonsId AT ROW 17.1 COL 28.2 COLON-ALIGNED
+     btnSokKunde AT ROW 17.67 COL 112 WIDGET-ID 38
+     fiFilSokKunde AT ROW 17.76 COL 138.6 COLON-ALIGNED
+     fiMobilNr AT ROW 18.86 COL 138.6 COLON-ALIGNED
      btnGetSessionDetails AT ROW 19.57 COL 2 WIDGET-ID 36
      fiFilGetSessioonDetails AT ROW 19.57 COL 28.8 COLON-ALIGNED
+     fiNavn AT ROW 19.95 COL 138.6 COLON-ALIGNED
      fiTransactionId AT ROW 20.81 COL 28.8 COLON-ALIGNED
      btnGetTransaction AT ROW 21.95 COL 2 WIDGET-ID 16
      fiFilGetTransaction AT ROW 22.05 COL 28.6 COLON-ALIGNED
-     "Henter sesjonsstatus og transaksjonsid" VIEW-AS TEXT
-          SIZE 49.8 BY .62 AT ROW 18.76 COL 3.2 WIDGET-ID 34
-          FONT 6
      "Opprettelse/registrering av ny sesjon (Salg)" VIEW-AS TEXT
           SIZE 51 BY .62 AT ROW 9.71 COL 2.4 WIDGET-ID 30
+          FONT 6
+     "Henter sesjonsstatus og transaksjonsid" VIEW-AS TEXT
+          SIZE 49.8 BY .62 AT ROW 18.76 COL 3.2 WIDGET-ID 34
           FONT 6
      rectCreateSession AT ROW 10.29 COL 1 WIDGET-ID 22
      rectGetSessionDetails AT ROW 19.33 COL 1 WIDGET-ID 32
@@ -346,15 +370,15 @@ IF SESSION:DISPLAY-TYPE = "GUI":U THEN
          MAX-WIDTH          = 173.4
          VIRTUAL-HEIGHT     = 26.62
          VIRTUAL-WIDTH      = 173.4
-         RESIZE             = YES
-         SCROLL-BARS        = NO
-         STATUS-AREA        = NO
+         RESIZE             = yes
+         SCROLL-BARS        = no
+         STATUS-AREA        = no
          BGCOLOR            = ?
          FGCOLOR            = ?
-         KEEP-FRAME-Z-ORDER = YES
-         THREE-D            = YES
-         MESSAGE-AREA       = NO
-         SENSITIVE          = YES.
+         KEEP-FRAME-Z-ORDER = yes
+         THREE-D            = yes
+         MESSAGE-AREA       = no
+         SENSITIVE          = yes.
 ELSE {&WINDOW-NAME} = CURRENT-WINDOW.
 /* END WINDOW DEFINITION                                                */
 &ANALYZE-RESUME
@@ -428,7 +452,7 @@ ASSIGN
                 "yes".
 
 IF SESSION:DISPLAY-TYPE = "GUI":U AND VALID-HANDLE(C-Win)
-THEN C-Win:HIDDEN = YES.
+THEN C-Win:HIDDEN = yes.
 
 /* _RUN-TIME-ATTRIBUTES-END */
 &ANALYZE-RESUME
@@ -554,6 +578,17 @@ END.
 ON CHOOSE OF btnRefundTransaction IN FRAME DEFAULT-FRAME /* refundTransaction */
 DO:
   RUN refundTransaction.  
+END.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+
+&Scoped-define SELF-NAME btnSokKunde
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _CONTROL btnSokKunde C-Win
+ON CHOOSE OF btnSokKunde IN FRAME DEFAULT-FRAME /* Søk kunde */
+DO:
+  RUN SokKunde.  
 END.
 
 /* _UIB-CODE-BLOCK-END */
@@ -766,16 +801,17 @@ PROCEDURE enable_UI :
           fiFilCreateSessions fiFilListTransactions fiCustomer_id 
           fiFilListProfiles fiCustomer_eMail fiCustomer_phone_number 
           fiFilVoidTransaction tgSms fiFilRefundTransaction fiKOrdre_Id 
-          fiSesjonsId fiFilGetSessioonDetails fiTransactionId 
-          fiFilGetTransaction 
+          fiSesjonsId fiFilSokKunde fiMobilNr fiFilGetSessioonDetails fiNavn 
+          fiTransactionId fiFilGetTransaction 
       WITH FRAME DEFAULT-FRAME IN WINDOW C-Win.
   ENABLE rectCreateSession rectGetSessionDetails btnGetToken edToken_Entity 
          btnListSessions fiFilListSessions btnCreateSession btnListTransactions 
          fiFilListTransactions fiCustomer_id btnListProfiles fiFilListProfiles 
          fiCustomer_eMail fiCustomer_phone_number btnVoidTransaction 
          fiFilVoidTransaction tgSms btnRefundTransaction fiFilRefundTransaction 
-         fiKOrdre_Id fiSesjonsId btnGetSessionDetails fiFilGetSessioonDetails 
-         fiTransactionId btnGetTransaction fiFilGetTransaction 
+         fiKOrdre_Id fiSesjonsId btnSokKunde fiFilSokKunde fiMobilNr 
+         btnGetSessionDetails fiFilGetSessioonDetails fiNavn fiTransactionId 
+         btnGetTransaction fiFilGetTransaction 
       WITH FRAME DEFAULT-FRAME IN WINDOW C-Win.
   {&OPEN-BROWSERS-IN-QUERY-DEFAULT-FRAME}
 END PROCEDURE.
@@ -783,9 +819,8 @@ END PROCEDURE.
 /* _UIB-CODE-BLOCK-END */
 &ANALYZE-RESUME
 
-
-&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE getGetSessionDetails C-Win
-PROCEDURE getGetSessionDetails:
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE getGetSessionDetails C-Win 
+PROCEDURE getGetSessionDetails :
 /*------------------------------------------------------------------------------
  Purpose:
  Notes:
@@ -885,11 +920,9 @@ PROCEDURE getGetSessionDetails:
 
 
 END PROCEDURE.
-  
+
 /* _UIB-CODE-BLOCK-END */
 &ANALYZE-RESUME
-
-
 
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE getTokenProc C-Win 
 PROCEDURE getTokenProc :
