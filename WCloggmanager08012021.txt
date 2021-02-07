@@ -1,0 +1,55 @@
+[21/01/08@11:30:40.935+0100] P-023076 T-017640 1 4GL -- Logging level set to = 2
+[21/01/08@11:30:40.935+0100] P-023076 T-017640 1 4GL -- No entry types are activated
+[21/01/08@11:30:40.935+0100] P-023076 T-017640 1 4GL -- Logging level set to = 4
+[21/01/08@13:00:19.880+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:00:19.880+0100] P-023076 T-017640 1 4GL ----------     Window handle: 2516, Name: ?, Instantiating Procedure: ArtikkelButStr.w
+[21/01/08@13:00:19.893+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:00:19.893+0100] P-023076 T-017640 1 4GL ----------     Window handle: 2663, Name: ?, Instantiating Procedure: ArtikkelStrekkode.w
+[21/01/08@13:00:19.894+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:00:19.894+0100] P-023076 T-017640 1 4GL ----------     Window handle: 2735, Name: ?, Instantiating Procedure: ArtikkelPris.w
+[21/01/08@13:00:19.895+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:00:19.895+0100] P-023076 T-017640 1 4GL ----------     Window handle: 2794, Name: ?, Instantiating Procedure: Varetransaksjoner.w
+[21/01/08@13:00:19.923+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:00:19.923+0100] P-023076 T-017640 1 4GL ----------     Window handle: 2364, Name: ?, Instantiating Procedure: LagerListeModButStr.w
+[21/01/08@13:33:03.492+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:33:03.492+0100] P-023076 T-017640 1 4GL ----------     Window handle: 3619, Name: ?, Instantiating Procedure: ArtikkelButStr.w
+[21/01/08@13:33:03.504+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:33:03.504+0100] P-023076 T-017640 1 4GL ----------     Window handle: 3766, Name: ?, Instantiating Procedure: ArtikkelStrekkode.w
+[21/01/08@13:33:03.513+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:33:03.513+0100] P-023076 T-017640 1 4GL ----------     Window handle: 3838, Name: ?, Instantiating Procedure: ArtikkelPris.w
+[21/01/08@13:33:03.520+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:33:03.520+0100] P-023076 T-017640 1 4GL ----------     Window handle: 3897, Name: ?, Instantiating Procedure: Varetransaksjoner.w
+[21/01/08@13:33:03.537+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:33:03.537+0100] P-023076 T-017640 1 4GL ----------     Window handle: 3469, Name: ?, Instantiating Procedure: LagerListeModButStr.w
+[21/01/08@13:34:56.339+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:34:56.340+0100] P-023076 T-017640 1 4GL ----------     Window handle: 4630, Name: ?, Instantiating Procedure: ArtikkelButStr.w
+[21/01/08@13:34:56.349+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:34:56.349+0100] P-023076 T-017640 1 4GL ----------     Window handle: 4777, Name: ?, Instantiating Procedure: ArtikkelStrekkode.w
+[21/01/08@13:34:56.358+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:34:56.358+0100] P-023076 T-017640 1 4GL ----------     Window handle: 4849, Name: ?, Instantiating Procedure: ArtikkelPris.w
+[21/01/08@13:34:56.365+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:34:56.365+0100] P-023076 T-017640 1 4GL ----------     Window handle: 4908, Name: ?, Instantiating Procedure: Varetransaksjoner.w
+[21/01/08@13:34:56.382+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:34:56.382+0100] P-023076 T-017640 1 4GL ----------     Window handle: 4480, Name: ?, Instantiating Procedure: LagerListeModButStr.w
+[21/01/08@13:38:19.893+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:38:19.893+0100] P-023076 T-017640 1 4GL ----------     Window handle: 5359, Name: ?, Instantiating Procedure: ArtikkelButStr.w
+[21/01/08@13:38:19.901+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:38:19.901+0100] P-023076 T-017640 1 4GL ----------     Window handle: 5506, Name: ?, Instantiating Procedure: ArtikkelStrekkode.w
+[21/01/08@13:38:19.911+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:38:19.911+0100] P-023076 T-017640 1 4GL ----------     Window handle: 5578, Name: ?, Instantiating Procedure: ArtikkelPris.w
+[21/01/08@13:38:19.912+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:38:19.912+0100] P-023076 T-017640 1 4GL ----------     Window handle: 5637, Name: ?, Instantiating Procedure: Varetransaksjoner.w
+[21/01/08@13:38:19.928+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/08@13:38:19.928+0100] P-023076 T-017640 1 4GL ----------     Window handle: 5209, Name: ?, Instantiating Procedure: LagerListeModButStr.w
+[21/01/09@09:48:22.916+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/09@09:48:22.916+0100] P-023076 T-017640 1 4GL ----------     Window handle: 6099, Name: ?, Instantiating Procedure: ArtikkelButStr.w
+[21/01/09@09:48:22.943+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/09@09:48:22.943+0100] P-023076 T-017640 1 4GL ----------     Window handle: 6246, Name: ?, Instantiating Procedure: ArtikkelStrekkode.w
+[21/01/09@09:48:22.945+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/09@09:48:22.945+0100] P-023076 T-017640 1 4GL ----------     Window handle: 6318, Name: ?, Instantiating Procedure: ArtikkelPris.w
+[21/01/09@09:48:22.946+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/09@09:48:22.946+0100] P-023076 T-017640 1 4GL ----------     Window handle: 6377, Name: ?, Instantiating Procedure: Varetransaksjoner.w
+[21/01/09@09:48:22.959+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/09@09:48:22.959+0100] P-023076 T-017640 1 4GL ----------     Window handle: 5949, Name: ?, Instantiating Procedure: LagerListeModButStr.w
+[21/01/09@09:48:22.967+0100] P-023076 T-017640 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[21/01/09@09:48:22.967+0100] P-023076 T-017640 1 4GL ----------     Window handle: 2329, Name: ?, Instantiating Procedure: linkRutinebeskrivelse.w

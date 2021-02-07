@@ -1,0 +1,7 @@
+[20/11/10@06:39:51.613+0100] P-009256 T-012260 1 4GL -- Logging level set to = 2
+[20/11/10@06:39:51.613+0100] P-009256 T-012260 1 4GL -- No entry types are activated
+[20/11/10@06:39:51.613+0100] P-009256 T-012260 1 4GL -- Logging level set to = 4
+[20/11/11@21:23:10.206+0100] P-009256 T-012260 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/11/11@21:23:10.206+0100] P-009256 T-012260 1 4GL ----------     Window handle: 2286, Name: ?, Instantiating Procedure: linkRutinebeskrivelse.w
+[20/11/11@21:23:10.380+0100] P-009256 T-012260 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
+[20/11/11@21:23:10.380+0100] P-009256 T-012260 1 4GL ----------     Window handle: 2323, Name: ?, Instantiating Procedure: PkSdlBehandling.w

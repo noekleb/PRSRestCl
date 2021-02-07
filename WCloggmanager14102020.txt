@@ -1,7 +1,0 @@
-[20/10/14@10:12:12.916+0200] P-031152 T-042828 1 4GL -- Logging level set to = 2
-[20/10/14@10:12:12.917+0200] P-031152 T-042828 1 4GL -- No entry types are activated
-[20/10/14@10:12:12.917+0200] P-031152 T-042828 1 4GL -- Logging level set to = 4
-[20/10/14@20:08:17.667+0200] P-031152 T-042828 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
-[20/10/14@20:08:17.667+0200] P-031152 T-042828 1 4GL ----------     Window handle: 2286, Name: ?, Instantiating Procedure: linkRutinebeskrivelse.w
-[20/10/14@20:08:17.751+0200] P-031152 T-042828 1 4GL ----------     Widgets have been unrealized because the form which contained them was closed before the widgets were destroyed. The AVM may be in an unstable state. (16679)
-[20/10/14@20:08:17.751+0200] P-031152 T-042828 1 4GL ----------     Window handle: 2325, Name: ?, Instantiating Procedure: PkSdlBehandling.w

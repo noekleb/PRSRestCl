@@ -96,6 +96,19 @@ oMenuXML:AddNode("cMenuLabel","Rutine og funksjonsbeskrivelser").
 oMenuXML:AddNode("cLaunch","linkRutinebeskrivelse.w").
 oMenuXML:AddNode("cImage","icon\png\help2.png").
 oMenuXML:AddNode("cParameter","NetHelp\index.html").
+
+oMenuXML:AddBlockNode("tv-nav-bar","sub-menu").
+oMenuXML:AddNode("cMenuLabel","Kunde/Medlems registre").
+
+oMenuXML:AddBlockNode("sub-menu","menu-item").
+oMenuXML:AddNode("cMenuLabel","Kunderegister").
+oMenuXML:AddNode("cLaunch","Kunderegister.w").
+oMenuXML:AddNode("cImage","icon\png\businesspeople2.png").
+
+oMenuXML:AddBlockNode("sub-menu","menu-item").
+oMenuXML:AddNode("cMenuLabel","Medlemsregister").
+oMenuXML:AddNode("cLaunch","Medlemsregister.w").
+oMenuXML:AddNode("cImage","icon\png\businessman_preferences.png").
     
 oMenuXML:AddBlockNode("tv-nav-bar","sub-menu").
 oMenuXML:AddNode("cMenuLabel","Behandling av nettbutikkordre").
@@ -183,11 +196,6 @@ oMenuXML:AddNode("cMenuLabel","Postpakke levert speditør (Skanning)").
 oMenuXML:AddNode("cLaunch","PostPakkeScanning.w").
 oMenuXML:AddNode("cImage","icon\png\barcode_scanner.png").
 END.
-
-oMenuXML:AddBlockNode("sub-menu","menu-item").
-oMenuXML:AddNode("cMenuLabel","Kunderegister").
-oMenuXML:AddNode("cLaunch","Kunderegister.w").
-oMenuXML:AddNode("cImage","icon\png\astrologer.png").
 
 oMenuXML:AddBlockNode("sub-menu","menu-item").
 oMenuXML:AddNode("cMenuLabel","GANT Ordrestatus").

@@ -88,6 +88,8 @@ DEF VAR cKategoriRowIdList AS CHARACTER NO-UNDO.
 DEF VAR cKategoriIdList AS CHARACTER NO-UNDO.
 DEF VAR cButikkRowIdList AS CHARACTER NO-UNDO.
 DEF VAR cButikkIdList AS CHARACTER NO-UNDO.
+DEF VAR cOutletRowIdList AS CHARACTER NO-UNDO.
+DEF VAR cOutletIdList AS CHARACTER NO-UNDO.
 DEF VAR cSORowIdList AS CHARACTER NO-UNDO.
 DEF VAR cSOIdList AS CHARACTER NO-UNDO.
 
@@ -407,14 +409,14 @@ refresh_tbPkSdlHode filter_tbPkSdlHode browseconfig_tbPkSdlHode ~
 excel_tbPkSdlHode btnUtvalgSO fiPkSdlNr fiLevFargKod fiSOLst ~
 btnUtvalgKategori fiSesong fiLevKod fiHovedKatLst btnUtvalgAnv-Kod ~
 fiLokasjon fiMainGroup fiAnv-IdLst btnUtvalgButikk fiPalleNr fiStorl ~
-fiButikkLst fiVaretype fiArtGroup cbPkSdlStatus BtnBlank btnSum ~
-BrwPkSdlHode first_tbPkSdlLinje prev_tbPkSdlLinje next_tbPkSdlLinje ~
-last_tbPkSdlLinje copy_tbPkSdlLinje delete_tbPkSdlLinje excel_tbPkSdlLinje ~
-LeggTilVare_tbPkSdlLinje fiStrekkode BrwPkSdlLinje 
+fiButikkLst btnOutlet fiVaretype fiArtGroup fiOutletLst cbPkSdlStatus ~
+BtnBlank btnSum BrwPkSdlHode first_tbPkSdlLinje prev_tbPkSdlLinje ~
+next_tbPkSdlLinje last_tbPkSdlLinje copy_tbPkSdlLinje delete_tbPkSdlLinje ~
+excel_tbPkSdlLinje LeggTilVare_tbPkSdlLinje fiStrekkode BrwPkSdlLinje 
 &Scoped-Define DISPLAYED-OBJECTS fiPkSdlNr fiLevFargKod fiSOLst fiAntPkSdl ~
 fiVerdiPkSdl fiSesong fiLevKod fiHovedKatLst fiWholeSalePkSdl fiLokasjon ~
-fiMainGroup fiAnv-IdLst fiLCVerdi fiPalleNr fiStorl fiButikkLst fiVaretype ~
-fiArtGroup cbPkSdlStatus fiStrekkode 
+fiMainGroup fiAnv-IdLst fiLCVerdi fiPalleNr fiStorl fiButikkLst fiWholeSale ~
+fiVaretype fiArtGroup fiOutletLst cbPkSdlStatus fiStrekkode 
 
 /* Custom List Definitions                                              */
 /* List-1,List-2,List-3,List-4,List-5,List-6                            */
@@ -438,6 +440,10 @@ DEFINE BUTTON browseconfig_tbPkSdlHode
 DEFINE BUTTON BtnBlank 
      LABEL "<Blank filter>" 
      SIZE 16 BY 1.14.
+
+DEFINE BUTTON btnOutlet 
+     LABEL "Outlet" 
+     SIZE 18.4 BY 1.14 TOOLTIP "Velg Outlet butikker".
 
 DEFINE BUTTON btnSplitBarY 
      IMAGE-UP FILE "bmp/tabup.bmp":U NO-FOCUS FLAT-BUTTON
@@ -606,6 +612,11 @@ DEFINE VARIABLE fiMainGroup AS CHARACTER FORMAT "X(256)":U
      VIEW-AS FILL-IN 
      SIZE 21.6 BY 1 NO-UNDO.
 
+DEFINE VARIABLE fiOutletLst AS CHARACTER FORMAT "X(256)":U 
+     LABEL "Outlet" 
+     VIEW-AS FILL-IN 
+     SIZE 24.6 BY 1 TOOLTIP "Butikker det skal vises pakkseddler for" NO-UNDO.
+
 DEFINE VARIABLE fiPalleNr AS CHARACTER FORMAT "X(256)":U 
      LABEL "Pallenr" 
      VIEW-AS FILL-IN 
@@ -646,6 +657,11 @@ DEFINE VARIABLE fiVerdiPkSdl AS DECIMAL FORMAT "->>>,>>>,>>9":U INITIAL 0
      VIEW-AS FILL-IN NATIVE 
      SIZE 17 BY 1 TOOLTIP "Sum wholesale med rabatt" NO-UNDO.
 
+DEFINE VARIABLE fiWholeSale AS DECIMAL FORMAT ">>>,>>>,>>9":U INITIAL 0 
+     LABEL "Wholesale u/LC" 
+     VIEW-AS FILL-IN NATIVE 
+     SIZE 17 BY 1 TOOLTIP "Viser wholesale pris u/rabatt pï¿½ pakksedler uten LC" NO-UNDO.
+
 DEFINE VARIABLE fiWholeSalePkSdl AS DECIMAL FORMAT "->>>,>>>,>>9":U INITIAL 0 
      LABEL "u/rab" 
      VIEW-AS FILL-IN NATIVE 
@@ -653,11 +669,11 @@ DEFINE VARIABLE fiWholeSalePkSdl AS DECIMAL FORMAT "->>>,>>>,>>9":U INITIAL 0
 
 DEFINE RECTANGLE RECT-4
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL   
-     SIZE 147.2 BY 5.86.
+     SIZE 147.2 BY 6.81.
 
 DEFINE RECTANGLE RECT-5
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL   
-     SIZE 41.4 BY 5.86.
+     SIZE 41.4 BY 6.81.
 
 DEFINE RECTANGLE searchPkSdlHode
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL   
@@ -745,7 +761,7 @@ DEFINE BROWSE BrwPkSdlHode
       PkSdlHode.PkSdlId HELP "Internt pakkseddelid."
 /* _UIB-CODE-BLOCK-END */
 &ANALYZE-RESUME
-    WITH NO-ROW-MARKERS SEPARATORS MULTIPLE DROP-TARGET SIZE 220 BY 8.91 ROW-HEIGHT-CHARS .52 FIT-LAST-COLUMN.
+    WITH NO-ROW-MARKERS SEPARATORS MULTIPLE DROP-TARGET SIZE 220 BY 7.95 ROW-HEIGHT-CHARS .52 FIT-LAST-COLUMN.
 
 DEFINE BROWSE BrwPkSdlLinje
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _DISPLAY-FIELDS BrwPkSdlLinje C-Win _STRUCTURED
@@ -820,12 +836,15 @@ DEFINE FRAME DEFAULT-FRAME
      fiPalleNr AT ROW 6.62 COL 45.4 COLON-ALIGNED
      fiStorl AT ROW 6.62 COL 81 COLON-ALIGNED
      fiButikkLst AT ROW 6.62 COL 118 COLON-ALIGNED
+     btnOutlet AT ROW 7.62 COL 144.6 WIDGET-ID 92
+     fiWholeSale AT ROW 7.62 COL 200.4 COLON-ALIGNED
      fiVaretype AT ROW 7.67 COL 45.4 COLON-ALIGNED
      fiArtGroup AT ROW 7.67 COL 81 COLON-ALIGNED
-     cbPkSdlStatus AT ROW 7.67 COL 118 COLON-ALIGNED WIDGET-ID 88
-     BtnBlank AT ROW 7.67 COL 163.2 WIDGET-ID 62
-     btnSum AT ROW 7.67 COL 202.6 WIDGET-ID 72
-     BrwPkSdlHode AT ROW 9.33 COL 2 WIDGET-ID 200
+     fiOutletLst AT ROW 7.67 COL 118 COLON-ALIGNED
+     cbPkSdlStatus AT ROW 8.76 COL 118 COLON-ALIGNED WIDGET-ID 88
+     BtnBlank AT ROW 8.76 COL 163.2 WIDGET-ID 62
+     btnSum AT ROW 8.76 COL 202.6 WIDGET-ID 72
+     BrwPkSdlHode AT ROW 10.29 COL 2 WIDGET-ID 200
      first_tbPkSdlLinje AT ROW 19 COL 2 WIDGET-ID 38
      prev_tbPkSdlLinje AT ROW 19 COL 6.8 WIDGET-ID 40
      next_tbPkSdlLinje AT ROW 19 COL 11.4 WIDGET-ID 42
@@ -844,7 +863,7 @@ DEFINE FRAME DEFAULT-FRAME
           FONT 6
      tbPkSdlHode AT ROW 1.48 COL 2 WIDGET-ID 2
      tbPkSdlLinje AT ROW 18.91 COL 1.8 WIDGET-ID 36
-     searchPkSdlHode AT ROW 8.14 COL 2.6 WIDGET-ID 54
+     searchPkSdlHode AT ROW 9.1 COL 2.6 WIDGET-ID 54
      RECT-4 AT ROW 3.24 COL 32.8 WIDGET-ID 58
      RECT-5 AT ROW 3.24 COL 180.6 WIDGET-ID 68
     WITH 1 DOWN NO-BOX KEEP-TAB-ORDER OVERLAY 
@@ -875,15 +894,15 @@ IF SESSION:DISPLAY-TYPE = "GUI":U THEN
          MAX-WIDTH          = 248.4
          VIRTUAL-HEIGHT     = 24.38
          VIRTUAL-WIDTH      = 248.4
-         RESIZE             = yes
-         SCROLL-BARS        = no
-         STATUS-AREA        = no
+         RESIZE             = YES
+         SCROLL-BARS        = NO
+         STATUS-AREA        = NO
          BGCOLOR            = ?
          FGCOLOR            = ?
-         KEEP-FRAME-Z-ORDER = yes
-         THREE-D            = yes
-         MESSAGE-AREA       = no
-         SENSITIVE          = yes.
+         KEEP-FRAME-Z-ORDER = YES
+         THREE-D            = YES
+         MESSAGE-AREA       = NO
+         SENSITIVE          = YES.
 ELSE {&WINDOW-NAME} = CURRENT-WINDOW.
 /* END WINDOW DEFINITION                                                */
 &ANALYZE-RESUME
@@ -927,6 +946,8 @@ ASSIGN
    NO-ENABLE                                                            */
 /* SETTINGS FOR FILL-IN fiVerdiPkSdl IN FRAME DEFAULT-FRAME
    NO-ENABLE                                                            */
+/* SETTINGS FOR FILL-IN fiWholeSale IN FRAME DEFAULT-FRAME
+   NO-ENABLE                                                            */
 /* SETTINGS FOR FILL-IN fiWholeSalePkSdl IN FRAME DEFAULT-FRAME
    NO-ENABLE                                                            */
 ASSIGN 
@@ -935,10 +956,10 @@ ASSIGN
 
 ASSIGN 
        tbPkSdlLinje:PRIVATE-DATA IN FRAME DEFAULT-FRAME     = 
-                "first;First,prev;Prev,next;Next,last;Last,copy;Kopier,delete;Slett,excel;Eksporter til E&xcel,LeggTilVare;Legg til vare¤enablemaxborder".
+                "first;First,prev;Prev,next;Next,last;Last,copy;Kopier,delete;Slett,excel;Eksporter til E&xcel,LeggTilVare;Legg til vareï¿½enablemaxborder".
 
 IF SESSION:DISPLAY-TYPE = "GUI":U AND VALID-HANDLE(C-Win)
-THEN C-Win:HIDDEN = yes.
+THEN C-Win:HIDDEN = YES.
 
 /* _RUN-TIME-ATTRIBUTES-END */
 &ANALYZE-RESUME
@@ -1167,6 +1188,31 @@ END.
 &ANALYZE-RESUME
 
 
+&Scoped-define SELF-NAME btnOutlet
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _CONTROL btnOutlet C-Win
+ON CHOOSE OF btnOutlet IN FRAME DEFAULT-FRAME /* Outlet */
+DO:
+  THIS-PROCEDURE:CURRENT-WINDOW:SENSITIVE = FALSE.
+  RUN JBoxSelector.w (THIS-PROCEDURE,0,
+                      "Butiker;Butik;ButNamn;harButikksystem",
+                      "where Butiker.harButikksystem = 'TRUE' AND LOOKUP(STRING(Butiker.Butik),'10,40') > 0",
+                      INPUT-OUTPUT cOutletRowIdList,
+                      "Butik",
+                      INPUT-OUTPUT cOutletIdList,
+                      "","",
+                      OUTPUT bOK).
+  THIS-PROCEDURE:CURRENT-WINDOW:SENSITIVE = TRUE.
+  ASSIGN 
+    fiOutletLst:SCREEN-VALUE = 'Ant.valgt: ' + STRING(NUM-ENTRIES(cOutletIdList,'|'))
+    .
+  IF bOk THEN 
+    RUN setFilter.
+END.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+
 &Scoped-define SELF-NAME btnSplitBarY
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _CONTROL btnSplitBarY C-Win
 ON END-MOVE OF btnSplitBarY IN FRAME DEFAULT-FRAME /* Button 1 */
@@ -1186,7 +1232,7 @@ END.
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _CONTROL btnSum C-Win
 ON CHOOSE OF btnSum IN FRAME DEFAULT-FRAME /* Summer */
 DO:
-  oBrwPkSdlHode:processSet("pksdl_totsum.p","" + '@' + cAnv-KodIdList + '@' + cKategoriIdList + '@' + cButikkIdList).
+  oBrwPkSdlHode:processSet("pksdl_totsum.p","" + '@' + cAnv-KodIdList + '@' + cKategoriIdList + '@' + cButikkIdList + '@' + cOutletIdList).
   cTekst = JBoxServerAPI:Instance:getCallMessage().
   IF NUM-ENTRIES(cTekst,'|') >= 4 THEN 
   DO  WITH FRAME {&FRAME-NAME}:
@@ -1195,6 +1241,7 @@ DO:
       fiVerdiPkSdl:SCREEN-VALUE     = ENTRY(2,cTekst,'|')
       fiLCVerdi:SCREEN-VALUE        = ENTRY(3,cTekst,'|')
       fiWholeSalePkSdl:SCREEN-VALUE = ENTRY(4,cTekst,'|')
+      fiWholeSale:SCREEN-VALUE      = ENTRY(5,cTekst,'|')
       .
   END.
   ELSE 
@@ -1204,6 +1251,7 @@ DO:
       fiVerdiPkSdl:SCREEN-VALUE     = ''
       fiLCVerdi:SCREEN-VALUE        = ''
       fiWholeSalePkSdl:SCREEN-VALUE = ''
+      fiWholeSale:SCREEN-VALUE      = ''
       .
   END.         
   
@@ -2140,8 +2188,8 @@ PROCEDURE enable_UI :
 ------------------------------------------------------------------------------*/
   DISPLAY fiPkSdlNr fiLevFargKod fiSOLst fiAntPkSdl fiVerdiPkSdl fiSesong 
           fiLevKod fiHovedKatLst fiWholeSalePkSdl fiLokasjon fiMainGroup 
-          fiAnv-IdLst fiLCVerdi fiPalleNr fiStorl fiButikkLst fiVaretype 
-          fiArtGroup cbPkSdlStatus fiStrekkode 
+          fiAnv-IdLst fiLCVerdi fiPalleNr fiStorl fiButikkLst fiWholeSale 
+          fiVaretype fiArtGroup fiOutletLst cbPkSdlStatus fiStrekkode 
       WITH FRAME DEFAULT-FRAME IN WINDOW C-Win.
   ENABLE btnSplitBarY tbPkSdlHode tbPkSdlLinje searchPkSdlHode RECT-4 RECT-5 
          first_tbPkSdlHode prev_tbPkSdlHode next_tbPkSdlHode last_tbPkSdlHode 
@@ -2149,9 +2197,9 @@ PROCEDURE enable_UI :
          filter_tbPkSdlHode browseconfig_tbPkSdlHode excel_tbPkSdlHode 
          btnUtvalgSO fiPkSdlNr fiLevFargKod fiSOLst btnUtvalgKategori fiSesong 
          fiLevKod fiHovedKatLst btnUtvalgAnv-Kod fiLokasjon fiMainGroup 
-         fiAnv-IdLst btnUtvalgButikk fiPalleNr fiStorl fiButikkLst fiVaretype 
-         fiArtGroup cbPkSdlStatus BtnBlank btnSum BrwPkSdlHode 
-         first_tbPkSdlLinje prev_tbPkSdlLinje next_tbPkSdlLinje 
+         fiAnv-IdLst btnUtvalgButikk fiPalleNr fiStorl fiButikkLst btnOutlet 
+         fiVaretype fiArtGroup fiOutletLst cbPkSdlStatus BtnBlank btnSum 
+         BrwPkSdlHode first_tbPkSdlLinje prev_tbPkSdlLinje next_tbPkSdlLinje 
          last_tbPkSdlLinje copy_tbPkSdlLinje delete_tbPkSdlLinje 
          excel_tbPkSdlLinje LeggTilVare_tbPkSdlLinje fiStrekkode BrwPkSdlLinje 
       WITH FRAME DEFAULT-FRAME IN WINDOW C-Win.
@@ -2494,9 +2542,15 @@ DO WITH FRAME {&FRAME-NAME}:
         END.
       WHEN '40' THEN DO: /* "Marker pakkseddel som sendt Outlet" */
           cbPkSdlStatus = 10.
-/*          oBrwPkSdlHode:baseQuery  = "WHERE PkSdlStatus = '10' AND ButikkNr = '10' ".*/
-          oBrwPkSdlHode:baseQuery  = "WHERE ButikkNr = '10' ".
+/*          oBrwPkSdlHode:baseQuery  = "WHERE ButikkNr = '10' ".*/
           oBrwPkSdlHode:setQuerySort('pksdlid;DESC').
+          
+          IF JBoxServerAPI:Instance:Find("Butiker", "WHERE Butik = 10") THEN
+           cOutletIdList = STRING(JBoxServerAPI:Instance:FieldValue("Butiker.Butik")).
+           cOutletRowIdList = STRING(JBoxServerAPI:Instance:RowIdent("Butiker")).
+          ASSIGN 
+            fiOutletLst:SCREEN-VALUE = 'Ant.valgt: ' + STRING(NUM-ENTRIES(cOutletIdList,'|'))
+            .
         END.
   END CASE.   
 
@@ -3461,10 +3515,23 @@ PROCEDURE setFilter :
         cWhere    = ''
         cOperator = ''
         .
+
+    IF cOutletIdList = '10' THEN 
+      oBrwPkSdlHode:baseQuery  = "WHERE ButikkNr = 10 ".
+    ELSE IF cOutletIdList = '40' THEN 
+      oBrwPkSdlHode:baseQuery  = "WHERE ButikkNr = 40 ".
+    ELSE IF cOutletIdList <> '' THEN
+    DO: 
+      oBrwPkSdlHode:baseQuery  = "WHERE TRUE ".
+      oBrwPkSdlHode:setCalcFieldParam("pksdl_ButikkNr", REPLACE(cOutletIdList,'|',CHR(1))).
+    END.
+    ELSE 
+      oBrwPkSdlHode:baseQuery  = "WHERE TRUE ".
         
     /* Sender med parameter verdi inn i icParam i pksdl_brwcalc.p (Andre input parameteren. */    
     oBrwPkSdlHode:setCalcFieldParam("pksdl_SkipFraButikk", REPLACE(cButikkIDList,'|',CHR(1))).
     oBrwPkSdlHode:setCalcFieldParam("pksdl_SkipSendtOutlet", REPLACE(cSOIDList,'|',CHR(1))).
+    
 
     IF cKategoriIdList = "" AND cAnv-KodIdList = "" THEN
       oBrwPkSdlHode:preScanBaseQuery = "".
@@ -3576,13 +3643,15 @@ PROCEDURE setFilter :
 /*VIEW-AS ALERT-BOX.     */
     
     oBrwPkSdlHode:setFilter(cFields,cOperator,cWhere).
-    oBrwPkSdlHode:openQuery(). 
+    oBrwPkSdlHode:openQuery().
+     
     DO  WITH FRAME {&FRAME-NAME}:
       ASSIGN 
         fiAntPkSdl:SCREEN-VALUE       = ''
         fiVerdiPkSdl:SCREEN-VALUE     = ''
         fiLCVerdi:SCREEN-VALUE        = ''
         fiWholeSalePkSdl:SCREEN-VALUE = ''
+        fiWholeSale:SCREEN-VALUE      = ''
         .
     END.         
     

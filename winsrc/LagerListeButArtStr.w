@@ -467,15 +467,15 @@ IF SESSION:DISPLAY-TYPE = "GUI":U THEN
          MAX-WIDTH          = 231.8
          VIRTUAL-HEIGHT     = 23.52
          VIRTUAL-WIDTH      = 231.8
-         RESIZE             = yes
-         SCROLL-BARS        = no
-         STATUS-AREA        = no
+         RESIZE             = YES
+         SCROLL-BARS        = NO
+         STATUS-AREA        = NO
          BGCOLOR            = ?
          FGCOLOR            = ?
-         KEEP-FRAME-Z-ORDER = yes
-         THREE-D            = yes
-         MESSAGE-AREA       = no
-         SENSITIVE          = yes.
+         KEEP-FRAME-Z-ORDER = YES
+         THREE-D            = YES
+         MESSAGE-AREA       = NO
+         SENSITIVE          = YES.
 ELSE {&WINDOW-NAME} = CURRENT-WINDOW.
 /* END WINDOW DEFINITION                                                */
 &ANALYZE-RESUME
@@ -525,7 +525,7 @@ ASSIGN
           SIZE 8 BY .62 AT ROW 2.67 COL 42.8 RIGHT-ALIGNED              */
 
 IF SESSION:DISPLAY-TYPE = "GUI":U AND VALID-HANDLE(C-Win)
-THEN C-Win:HIDDEN = yes.
+THEN C-Win:HIDDEN = YES.
 
 /* _RUN-TIME-ATTRIBUTES-END */
 &ANALYZE-RESUME
@@ -1933,7 +1933,7 @@ PROCEDURE ValgtVareRecord :
           END.
       END CASE.
       oBrwArtlag:refreshSelectedRows(). 
-      APPLY "CLOSE":U TO THIS-PROCEDURE. 
+/*      APPLY "CLOSE":U TO THIS-PROCEDURE.*/
     END.
     ELSE 
     DO: 

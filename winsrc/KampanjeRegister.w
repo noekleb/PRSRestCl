@@ -2889,8 +2889,6 @@ DO WITH FRAME {&FRAME-NAME}:
          ProfilNr:SENSITIVE = FALSE
          AvslagType:SENSITIVE = FALSE
          .
-MESSAGE 'gurre var her'
-VIEW-AS ALERT-BOX.
      END.
   END CASE.
 END.

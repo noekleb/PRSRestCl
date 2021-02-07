@@ -59,6 +59,7 @@ DEFINE VARIABLE pcTekst AS CHARACTER NO-UNDO.
 DEFINE VARIABLE hLagerkoderColumn AS HANDLE NO-UNDO.
 DEFINE VARIABLE hArtBas_TilbudsPrisColumn AS HANDLE NO-UNDO.
 DEFINE VARIABLE hArtBas_KampRab%Column AS HANDLE NO-UNDO.
+DEFINE VARIABLE hArtBas_KampPrisColumn AS HANDLE NO-UNDO.
 DEFINE VARIABLE opopupModell AS JBoxPopupMenu NO-UNDO.
 DEFINE VARIABLE cLevKod AS CHARACTER NO-UNDO.
 DEFINE VARIABLE cLevFargKod AS CHARACTER NO-UNDO.
@@ -83,15 +84,20 @@ DEF TEMP-TABLE ArtBas
     FIELD ArtBas_Varemerke AS CHARACTER
     FIELD ArtBas_Brukskode AS CHARACTER
     FIELD ArtBas_Produsent AS CHARACTER
+    FIELD HovedModellFarge AS LOGICAL
     FIELD ArtikkelNr AS DECIMAL
+    FIELD ModellFarge AS DECIMAL
     FIELD Vg AS INTEGER
     FIELD Hg AS INTEGER
     FIELD VMId AS INTEGER
     FIELD LevNr AS INTEGER
     FIELD lager AS LOGICAL
-    FIELD ProdNr AS integer
-    FIELD HovedKatNr AS integer
-    FIELD anv-id AS integer
+    FIELD ProdNr AS INTEGER
+    FIELD HovedKatNr AS INTEGER
+    FIELD anv-id AS INTEGER
+    FIELD RegistrertDato AS DATE
+    FIELD EDato AS DATE
+    FIELD ArtBas_KampPris AS DECIMAL
     FIELD RowIdent1 AS CHARACTER 
     FIELD RowCount AS INTEGER
     FIELD jbCountDistinct AS INTEGER FORMAT '>>>,>>>,>>9' INIT 1
@@ -110,7 +116,9 @@ FUNCTION getBuffersAndFieldsBrwArtBas RETURNS CHARACTER():
      + ';SaSong'
      + ';Lagerkoder'
      + ';WebButikkArtikkel'
+     + ';HovedModellFarge'
      + ';ArtikkelNr'
+     + ';ModellFarge'
      + ';Vg'
      + ';Hg'
      + ';VMId'
@@ -119,6 +127,8 @@ FUNCTION getBuffersAndFieldsBrwArtBas RETURNS CHARACTER():
      + ';ProdNr'
      + ';HovedKatNr'
      + ';anv-id'
+     + ';RegistrertDato'
+     + ';EDato'
      + ';+ArtBas_Pris|DECIMAL||ArtBas_Pris|Pris'
      + ';+ArtBas_TilbudsPris|DECIMAL||ArtBas_TilbudsPris|TilbudsPris'
      + ';+ArtBas_KampRab%|DECIMAL||ArtBas_KampRab%|KampRab%'
@@ -128,6 +138,7 @@ FUNCTION getBuffersAndFieldsBrwArtBas RETURNS CHARACTER():
      + ';+ArtBas_Varemerke|CHARACTER||ArtBas_Varemerke|VaremerkeNavn'
      + ';+ArtBas_Brukskode|CHARACTER||ArtBas_Brukskode|BrukskodeNavn'
      + ';+ArtBas_Produsent|CHARACTER||ArtBas_Produsent|ProdusentNavn'
+     + ';+ArtBas_KampPris|DECIMAL||ArtBas_KampPris|KampPrris'
      .
 END FUNCTION.
 FUNCTION getQueryJoinBrwArtBas RETURNS CHARACTER():
@@ -144,6 +155,7 @@ FUNCTION getCalcFieldProcBrwArtBas RETURNS CHARACTER():
    + ',server/artbas_brwcalc.p' /* ArtBas_Varemerke */
    + ',server/artbas_brwcalc.p' /* ArtBas_Brukskode */
    + ',server/artbas_brwcalc.p' /* ArtBas_Produsent */
+   + ',server/artbas_brwcalc.p' /* ArtBas_KampPris */
      .
 END FUNCTION.
 
@@ -177,8 +189,10 @@ ArtBas.Beskr ArtBas.SaSong ArtBas.Lagerkoder ArtBas.ArtBas_Pris ~
 ArtBas.ArtBas_TilbudsPris ArtBas.ArtBas_KampRab% ArtBas.WebButikkArtikkel ~
 ArtBas.ArtBas_HarLager ArtBas.ArtBas_Kampanje ArtBas.ArtBas_HovedKategori ~
 ArtBas.ArtBas_Varemerke ArtBas.ArtBas_Brukskode ArtBas.ArtBas_Produsent ~
-ArtBas.ArtikkelNr ArtBas.Vg ArtBas.Hg ArtBas.VMId ArtBas.LevNr ArtBas.lager ~
-ArtBas.ProdNr ArtBas.HovedKatNr ArtBas.anv-id 
+ArtBas.HovedModellFarge ArtBas.ArtikkelNr ArtBas.ModellFarge ArtBas.Vg ~
+ArtBas.Hg ArtBas.VMId ArtBas.LevNr ArtBas.lager ArtBas.ProdNr ~
+ArtBas.HovedKatNr ArtBas.anv-id ArtBas.RegistrertDato ArtBas.EDato ~
+ArtBas.ArtBas_KampPris 
 &Scoped-define ENABLED-FIELDS-IN-QUERY-BrwArtBas ArtBas.LevKod ArtBas.Beskr ~
 ArtBas.ArtikkelNr ArtBas.Vg 
 &Scoped-define ENABLED-TABLES-IN-QUERY-BrwArtBas ArtBas
@@ -194,8 +208,9 @@ ArtBas.ArtikkelNr ArtBas.Vg
 /* Standard List Definitions                                            */
 &Scoped-Define ENABLED-OBJECTS tbArtBas tbFilter TabArtBas searchArtBas ~
 first_tbArtBas prev_tbArtBas next_tbArtBas last_tbArtBas refresh_tbArtBas ~
-filter_tbArtBas excel_tbArtBas TGKampanje BtnBlank fiBeskr fiLevKod ~
-fiLevFargKod cbLagant cbLagerkoder tgNettbutikk BrwArtBas 
+filter_tbArtBas excel_tbArtBas SendTilKasse_tbArtBas SettPubliser_tbArtBas ~
+SendTilKampanje_tbArtBas TGKampanje BtnBlank fiBeskr fiLevKod fiLevFargKod ~
+cbLagant cbLagerkoder tgNettbutikk BrwArtBas 
 &Scoped-Define DISPLAYED-OBJECTS TGKampanje fiBeskr fiLevKod fiLevFargKod ~
 cbLagant cbLagerkoder tgNettbutikk 
 
@@ -251,6 +266,18 @@ DEFINE BUTTON refresh_tbArtBas
      IMAGE-UP FILE "gif/refresh.gif":U
      LABEL "Refresh" 
      SIZE 4.6 BY 1.1 TOOLTIP "Refresh (F5)".
+
+DEFINE BUTTON SendTilKampanje_tbArtBas 
+     LABEL "Send til kampanje" 
+     SIZE 18 BY 1.1 TOOLTIP "Sender varene til en kampanje".
+
+DEFINE BUTTON SendTilKasse_tbArtBas 
+     LABEL "Send til nettbutik" 
+     SIZE 19 BY 1.1 TOOLTIP "Initierer sending av vareinformasjonen til kasse og nettbutikk".
+
+DEFINE BUTTON SettPubliser_tbArtBas 
+     LABEL "Publiser i nettbutikk(Toggler)" 
+     SIZE 31 BY 1.1 TOOLTIP "Publiserer artikkel i nettbutikk".
 
 DEFINE VARIABLE cbLagant AS INTEGER FORMAT "->,>>>,>>9":U INITIAL 0 
      VIEW-AS COMBO-BOX INNER-LINES 25
@@ -344,8 +371,11 @@ DEFINE BROWSE BrwArtBas
       ArtBas.ArtBas_Varemerke COLUMN-LABEL "VaremerkeNavn" FORMAT "X(20)":U
       ArtBas.ArtBas_Brukskode COLUMN-LABEL "BrukskodeNavn" FORMAT "X(20)":U
       ArtBas.ArtBas_Produsent COLUMN-LABEL "ProdusentNavn" FORMAT "X(20)":U
+      ArtBas.HovedModellFarge COLUMN-LABEL "HMF" FORMAT "*/":U
+            WIDTH 4
       ArtBas.ArtikkelNr COLUMN-LABEL "Artikkelnummer" FORMAT "zzzzzzzzzzzz9":U
             WIDTH 14.4
+      ArtBas.ModellFarge COLUMN-LABEL "ModellFarge" FORMAT ">>>>>>>>>>>>9":U
       ArtBas.Vg COLUMN-LABEL "Varegruppe" FORMAT "zzzzz9":U
       ArtBas.Hg COLUMN-LABEL "Hovedgruppe" FORMAT ">>>>9":U
       ArtBas.VMId COLUMN-LABEL "VareMerke" FORMAT ">>>>>9":U
@@ -353,7 +383,12 @@ DEFINE BROWSE BrwArtBas
       ArtBas.lager COLUMN-LABEL "Lagerstyrt" FORMAT "*/":U WIDTH 6
       ArtBas.ProdNr COLUMN-LABEL "Produsent" FORMAT "zzzzzz9":U
       ArtBas.HovedKatNr COLUMN-LABEL "Hovedkategori" FORMAT ">>>>>9":U
-      ArtBas.anv-id COLUMN-LABEL "Brukskode" FORMAT ">>>>9":U
+            WIDTH 7.2
+      ArtBas.anv-id COLUMN-LABEL "Brukskode" FORMAT ">>>>9":U WIDTH 6
+      ArtBas.RegistrertDato COLUMN-LABEL "RDato" FORMAT "99/99/9999":U
+      ArtBas.EDato COLUMN-LABEL "Endret" FORMAT "99/99/9999":U
+      ArtBas.ArtBas_KampPris COLUMN-LABEL "KampPrris" FORMAT "->>>,>>9.99":U
+            WIDTH 12
   ENABLE
       ArtBas.LevKod HELP "Leverandørens artikkelnummer"
       ArtBas.Beskr HELP "Kort beskrivelse av artikkelen"
@@ -374,6 +409,9 @@ DEFINE FRAME DEFAULT-FRAME
      refresh_tbArtBas AT ROW 1.33 COL 20.6 WIDGET-ID 14
      filter_tbArtBas AT ROW 1.33 COL 25.2 WIDGET-ID 16
      excel_tbArtBas AT ROW 1.33 COL 29.8 WIDGET-ID 18
+     SendTilKasse_tbArtBas AT ROW 1.33 COL 34.4 WIDGET-ID 54
+     SettPubliser_tbArtBas AT ROW 1.33 COL 53.4 WIDGET-ID 58
+     SendTilKampanje_tbArtBas AT ROW 1.33 COL 84.6 WIDGET-ID 56
      TGKampanje AT ROW 3.24 COL 88.6 WIDGET-ID 52
      BtnBlank AT ROW 3.76 COL 78.4 WIDGET-ID 42
      fiBeskr AT ROW 3.81 COL 1.6 COLON-ALIGNED NO-LABEL
@@ -383,20 +421,20 @@ DEFINE FRAME DEFAULT-FRAME
      cbLagerkoder AT ROW 3.81 COL 120.8 COLON-ALIGNED NO-LABEL WIDGET-ID 40
      tgNettbutikk AT ROW 4 COL 88.6 WIDGET-ID 46
      BrwArtBas AT ROW 6.24 COL 2.8 WIDGET-ID 200
-     "Filter" VIEW-AS TEXT
-          SIZE 8 BY .62 AT ROW 2.48 COL 4.2 WIDGET-ID 28
-          FONT 6
-     "Lagerkoder" VIEW-AS TEXT
-          SIZE 18 BY .62 AT ROW 3.19 COL 123.4 WIDGET-ID 38
-          FONT 6
-     "Lager" VIEW-AS TEXT
-          SIZE 18 BY .62 AT ROW 3.19 COL 102.6 WIDGET-ID 48
+     "Varetekst" VIEW-AS TEXT
+          SIZE 18 BY .62 AT ROW 3.19 COL 4.2 WIDGET-ID 30
           FONT 6
      "Lev.artikkelnr" VIEW-AS TEXT
           SIZE 18 BY .62 AT ROW 3.19 COL 38 WIDGET-ID 32
           FONT 6
-     "Varetekst" VIEW-AS TEXT
-          SIZE 18 BY .62 AT ROW 3.19 COL 4.2 WIDGET-ID 30
+     "Lager" VIEW-AS TEXT
+          SIZE 18 BY .62 AT ROW 3.19 COL 102.6 WIDGET-ID 48
+          FONT 6
+     "Lagerkoder" VIEW-AS TEXT
+          SIZE 18 BY .62 AT ROW 3.19 COL 123.4 WIDGET-ID 38
+          FONT 6
+     "Filter" VIEW-AS TEXT
+          SIZE 8 BY .62 AT ROW 2.48 COL 4.2 WIDGET-ID 28
           FONT 6
      "lev.fargekode" VIEW-AS TEXT
           SIZE 18 BY .62 AT ROW 3.19 COL 56.6 WIDGET-ID 34
@@ -493,7 +531,7 @@ ASSIGN
 
 ASSIGN 
        tbArtBas:PRIVATE-DATA IN FRAME DEFAULT-FRAME     = 
-                "first;First,prev;Prev,next;Next,last;Last,refresh;Refresh,filter;Filter,excel;Eksporter til E&xcel".
+                "first;First,prev;Prev,next;Next,last;Last,refresh;Refresh,filter;Filter,excel;Eksporter til E&xcel,SendTilKasse;Send til nettbutik,SettPubliser;Publiser i nettbutikk(Toggler),SendTilKampanje;Send til kampanjemaxborder".
 
 /* SETTINGS FOR FRAME frSplitBarX
                                                                         */
@@ -543,24 +581,34 @@ THEN C-Win:HIDDEN = yes.
 "ArtBas.ArtBas_Brukskode" "BrukskodeNavn" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[15]   > "_<CALC>"
 "ArtBas.ArtBas_Produsent" "ProdusentNavn" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[16]   > ArtBas.ArtikkelNr
+     _FldNameList[16]   > ArtBas.HovedModellFarge
+"ArtBas.HovedModellFarge" "HMF" "*~~/" "LOGICAL" ? ? ? ? ? ? no "Artikkelen er hovedartikkel i en model/farge." no no "4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[17]   > ArtBas.ArtikkelNr
 "ArtBas.ArtikkelNr" "Artikkelnummer" "zzzzzzzzzzzz9" "DECIMAL" ? ? ? ? ? ? yes "" no no "14.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[17]   > ArtBas.Vg
+     _FldNameList[18]   > ArtBas.ModellFarge
+"ArtBas.ModellFarge" "ModellFarge" ">>>>>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "Kobler sammen flere artikler som utgjør en modell." no no "15.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[19]   > ArtBas.Vg
 "ArtBas.Vg" "Varegruppe" "zzzzz9" "INTEGER" ? ? ? ? ? ? yes "'varegruppenummer" no no "11" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[18]   > ArtBas.Hg
+     _FldNameList[20]   > ArtBas.Hg
 "ArtBas.Hg" "Hovedgruppe" ">>>>9" "INTEGER" ? ? ? ? ? ? no "" no no "13" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[19]   > ArtBas.VMId
+     _FldNameList[21]   > ArtBas.VMId
 "ArtBas.VMId" "VareMerke" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Varemerke ('Brand')." no no "10.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[20]   > ArtBas.LevNr
+     _FldNameList[22]   > ArtBas.LevNr
 "ArtBas.LevNr" "Leverandørnummer" "zzzzz9" "INTEGER" ? ? ? ? ? ? no "Leverandørnummer" no no "18.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[21]   > ArtBas.lager
+     _FldNameList[23]   > ArtBas.lager
 "ArtBas.lager" "Lagerstyrt" "*~~/" "LOGICAL" ? ? ? ? ? ? no "Artikkelen har lagerstyring." no no "6" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[22]   > ArtBas.ProdNr
-"ArtBas.ProdNr" "Produsent" "zzzzzz9" "integer" ? ? ? ? ? ? no "Produsent" no no "9.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[23]   > ArtBas.HovedKatNr
-"ArtBas.HovedKatNr" "Hovedkategori" ">>>>>9" "integer" ? ? ? ? ? ? no "Kobling av artikkel til hovedkategori" no no "7.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[24]   > ArtBas.anv-id
-"ArtBas.anv-id" "Brukskode" ">>>>9" "integer" ? ? ? ? ? ? no "" no no "6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[24]   > ArtBas.ProdNr
+"ArtBas.ProdNr" "Produsent" "zzzzzz9" "INTEGER" ? ? ? ? ? ? no "Produsent" no no "9.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[25]   > ArtBas.HovedKatNr
+"ArtBas.HovedKatNr" "Hovedkategori" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Kobling av artikkel til hovedkategori" no no "7.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[26]   > ArtBas.anv-id
+"ArtBas.anv-id" "Brukskode" ">>>>9" "INTEGER" ? ? ? ? ? ? no "" no no "6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[27]   > ArtBas.RegistrertDato
+"ArtBas.RegistrertDato" "RDato" "99/99/9999" "DATE" ? ? ? ? ? ? no "Dato da posten ble registrert i registeret" no no "11.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[28]   > ArtBas.EDato
+"ArtBas.EDato" "Endret" "99/99/9999" "DATE" ? ? ? ? ? ? no "Endret dato" no no "11.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[29]   > "_<CALC>"
+"ArtBas.ArtBas_KampPris" "KampPrris" "->>>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "Pris som var gjeldende når kampanjen ble aktivert." no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _Query            is NOT OPENED
 */  /* BROWSE BrwArtBas */
 &ANALYZE-RESUME
@@ -944,13 +992,39 @@ PROCEDURE enable_UI :
       WITH FRAME DEFAULT-FRAME IN WINDOW C-Win.
   ENABLE tbArtBas tbFilter TabArtBas searchArtBas first_tbArtBas prev_tbArtBas 
          next_tbArtBas last_tbArtBas refresh_tbArtBas filter_tbArtBas 
-         excel_tbArtBas TGKampanje BtnBlank fiBeskr fiLevKod fiLevFargKod 
-         cbLagant cbLagerkoder tgNettbutikk BrwArtBas 
+         excel_tbArtBas SendTilKasse_tbArtBas SettPubliser_tbArtBas 
+         SendTilKampanje_tbArtBas TGKampanje BtnBlank fiBeskr fiLevKod 
+         fiLevFargKod cbLagant cbLagerkoder tgNettbutikk BrwArtBas 
       WITH FRAME DEFAULT-FRAME IN WINDOW C-Win.
   {&OPEN-BROWSERS-IN-QUERY-DEFAULT-FRAME}
   ENABLE btnSplitBarX 
       WITH FRAME frSplitBarX IN WINDOW C-Win.
   {&OPEN-BROWSERS-IN-QUERY-frSplitBarX}
+END PROCEDURE.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE FrigiModellRecord C-Win 
+PROCEDURE FrigiModellRecord :
+/*------------------------------------------------------------------------------
+ Purpose:
+ Notes:
+------------------------------------------------------------------------------*/
+  DO:
+    IF oBrwArtBas:BROWSE-HANDLE:NUM-SELECTED-ROWS >= 1 THEN
+    DO:    
+      oBrwArtBas:processRowsNoMessage("artbas_frigimodell.p", STRING(iKampanjeId)).
+      oBrwArtBas:openQuery().
+      JBoxSession:Instance:ViewMessage("Markerte rader er frikoblet fra modell.").
+    END.  
+    ELSE 
+    DO:
+      JBoxSession:Instance:ViewMessage("Marker en eller flere rader som skal slås sammen til modell.").
+      RETURN.
+    END.
+  END.
+
 END PROCEDURE.
 
 /* _UIB-CODE-BLOCK-END */
@@ -975,9 +1049,6 @@ DO WITH FRAME {&FRAME-NAME}:
   
   oBrwArtBas = NEW JBoxBrowse(brwArtBas:HANDLE).
   otbArtBas = NEW JBoxToolbar(tbArtBas:HANDLE).
-  otbArtBas:addToolGroup("SendTilKampanje;Send til kampanje").  
-  otbArtBas:disabledTools = "SendTilKampanje".
-  oBrwArtBas:TOOLBAR-OBJECT = otbArtBas.
  
   /* Legger på eventuelle nye lagerkoder som ikke er satt opp i combo boksen. */
   IF JBoxServerApi:Instance:CallServerProc("artbas_Lagerkoder.p",cbLagerKoder:LIST-ITEM-PAIRS) THEN 
@@ -988,6 +1059,7 @@ DO WITH FRAME {&FRAME-NAME}:
   hLagerkoderColumn = oBrwArtBas:getColumnHandle("Lagerkoder").
   hArtBas_TilbudsPrisColumn = oBrwArtBas:getColumnHandle("ArtBas_TilbudsPris").
   hArtBas_KampRab%Column = oBrwArtBas:getColumnHandle("ArtBas_KampRab%").
+  hArtBas_KampPrisColumn = oBrwArtBas:getColumnHandle("ArtBas_KampPris").  
 
   oContainer:setNoResizeY("tbFilter").
   oContainer:setSplitBarX(btnSplitBarX:HANDLE IN FRAME frSplitBarX).
@@ -1009,9 +1081,10 @@ DO WITH FRAME {&FRAME-NAME}:
   cbLagAnt:SCREEN-VALUE = ENTRY(4,cbLagAnt:LIST-ITEM-PAIRS).
 
   opopupModell = NEW JBoxPopupMenu().
-  opopupModell:AddToolGroup('AvsluttKampanje;Avslutt kampanje'  
+  opopupModell:AddToolGroup('AvsluttKampanje;Avslutt kampanje,SettModell;Slå sammen til modell,FrigiModell;Frigi fra modell'  
                            ).
   oBrwArtBas:POPUP-MENU-OBJECT = opopupModell.
+  oBrwArtBas:TOOLBAR-OBJECT = otbArtBas.
 
   /* Oppslag fra eksternt program.  */
   /* FILTER:LevKod=XX,LevFargKod=XX */
@@ -1078,6 +1151,7 @@ RUN SUPER.
     ASSIGN 
       hArtBas_TilbudsPrisColumn:BGCOLOR = 13
       hArtBas_KampRab%Column:BGCOLOR = 13
+      hArtBas_KampPrisColumn:BGCOLOR = 13
       .
   END.
       
@@ -1120,6 +1194,38 @@ PROCEDURE SendTilKampanjeRecord :
       RETURN.
     END.
   END.
+  ELSE DO:
+    JBoxSession:Instance:ViewMessage("Funksjonen er bar tilgjengelig når listen er startet fra en kampanje! ").
+  END.
+END PROCEDURE.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE SendTilKasseRecord C-Win 
+PROCEDURE SendTilKasseRecord :
+/*------------------------------------------------------------------------------
+ Purpose:
+ Notes:
+------------------------------------------------------------------------------*/
+  IF oBrwArtBas:BROWSE-HANDLE:NUM-SELECTED-ROWS >= 1 THEN
+  DO:    
+    IF NOT JBoxSession:Instance:ViewQuestionOkCancel("Send artikler for valgt(e) post(er) til Nettbutikk?") THEN 
+      RETURN.
+    IF NOT oBrwArtBas:processRowsNoMessage("artlag_SendTilKasse.p", "") THEN
+      JBoxSession:Instance:ViewMessage("Feil pga " + JBoxServerAPI:Instance:getCallMessage()).
+    ELSE 
+      JBoxSession:Instance:ViewMessage("Valgte varer er sendt til kasse og nettbutikk").
+  END.
+  ELSE 
+  DO: 
+    IF NOT JBoxSession:Instance:ViewQuestionOkCancel("Send artikler for alle valgte poster til Nettbutikk?") THEN 
+      RETURN.
+    ELSE 
+      JBoxSession:Instance:ViewMessage("Valgt vare er sendt til kasse og nettbutikk").
+  END.
+
+
 END PROCEDURE.
 
 /* _UIB-CODE-BLOCK-END */
@@ -1264,6 +1370,54 @@ PROCEDURE settModellFilter :
     END.
   END.
   
+END PROCEDURE.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE SettModellRecord C-Win 
+PROCEDURE SettModellRecord :
+/*------------------------------------------------------------------------------
+ Purpose:
+ Notes:
+------------------------------------------------------------------------------*/
+  DO:
+    IF oBrwArtBas:BROWSE-HANDLE:NUM-SELECTED-ROWS > 1 THEN
+    DO:    
+      oBrwArtBas:processRowsNoMessage("artbas_setmodell.p", STRING(iKampanjeId)).
+/*      oBrwArtBas:refreshSelectedRows().*/
+      oBrwArtBas:openQuery().  
+      JBoxSession:Instance:ViewMessage("Markerte rader er slått sammen til en modell.").
+    END.  
+    ELSE 
+    DO:
+      JBoxSession:Instance:ViewMessage("Marker to eller flere rader som skal slås sammen til modell.").
+      RETURN.
+    END.
+  END.
+
+END PROCEDURE.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE SettPubliserRecord C-Win 
+PROCEDURE SettPubliserRecord :
+IF oBrwArtBas:BROWSE-HANDLE:NUM-SELECTED-ROWS >= 1 THEN
+  DO:    
+    IF NOT JBoxSession:Instance:ViewQuestionOkCancel("Publiser artikler for valgt(e) post(er) (Toggler Ja/Nei)?") THEN 
+      RETURN.
+    IF NOT oBrwArtBas:processRowsNoMessage("artlag_Publiser.p", "") THEN
+      JBoxSession:Instance:ViewMessage("Feil pga " + JBoxServerAPI:Instance:getCallMessage()).
+    oBrwArtBas:refreshSelectedRows().  
+  END.
+  ELSE 
+  DO:  
+    IF NOT JBoxSession:Instance:ViewQuestionOkCancel("Publiser artikler for alle valgte poster (Toggler Ja/Nei)?") THEN 
+      RETURN.
+    oBrwArtBas:processSet("artlag_Publiser.p","").
+    oBrwArtBas:OpenQuery().
+  END.
 END PROCEDURE.
 
 /* _UIB-CODE-BLOCK-END */

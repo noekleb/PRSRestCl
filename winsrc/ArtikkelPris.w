@@ -54,6 +54,9 @@ DEF VAR oContainer  AS JBoxContainer NO-UNDO.
 DEFINE VARIABLE opopupArtPris AS JBoxPopupMenu NO-UNDO.
 DEFINE VARIABLE cTekst AS CHARACTER NO-UNDO.
 DEFINE VARIABLE cIkkeVisProfiler AS CHARACTER NO-UNDO.
+DEFINE VARIABLE hArtpris_TilbidColumn AS HANDLE NO-UNDO.
+DEFINE VARIABLE hArtPris_TilbPrisColumn AS HANDLE NO-UNDO.
+DEFINE VARIABLE hArtPris_KampRab%Column AS HANDLE NO-UNDO.
 
 /*** Start instance property definitions for JBoxBrowse object oBrwArtPris ***/
 DEF VAR oBrwArtPris AS JBoxBrowse NO-UNDO.
@@ -63,6 +66,9 @@ DEF TEMP-TABLE ArtPris
     FIELD artpris_ProInnkjopsPris AS CHARACTER
     FIELD artpris_prorab1% AS DECIMAL
     FIELD artpris_propris AS DECIMAL
+    FIELD artpris_Tilbid AS LOGICAL
+    FIELD artpris_TilbPris AS CHARACTER
+    FIELD ArtPris_KampRab% AS CHARACTER
     FIELD Dummy AS CHARACTER
     FIELD ArtikkelNr AS DECIMAL
     FIELD RowIdent1 AS CHARACTER 
@@ -81,6 +87,9 @@ FUNCTION getBuffersAndFieldsBrwArtPris RETURNS CHARACTER():
      + ';+artpris_ProInnkjopsPris|CHARACTER||artpris_ProInnkjopsPris(ROWID)|InnkjopsPris'
      + ';+artpris_prorab1%|DECIMAL||artpris_ProRab%(ROWID)|Rabatt'
      + ';+artpris_propris|DECIMAL||artpris_ProPris(ROWID)|Pris'
+     + ';+artpris_Tilbid|LOGICAL||artpris_Tilbid(ROWID)|Tilbud'
+     + ';+artpris_TilbPris|CHARACTER||artpris_TilbPris(ROWID)|TilbPris'
+     + ';+ArtPris_KampRab%|CHARACTER||ArtPris_KampRab%|Rab%'
      + ';+Dummy|CHARACTER||jb_void(N/A)|.'
      .
 END FUNCTION.
@@ -93,6 +102,9 @@ FUNCTION getCalcFieldProcBrwArtPris RETURNS CHARACTER():
    + ',server/artpris_brwcalc.p' /* artpris_ProInnkjopsPris(ROWID) */
    + ',server/artpris_brwcalc.p' /* artpris_ProRab%(ROWID) */
    + ',server/artpris_brwcalc.p' /* artpris_ProPris(ROWID) */
+   + ',server/artpris_brwcalc.p' /* artpris_Tilbid(ROWID) */
+   + ',server/artpris_brwcalc.p' /* artpris_TilbPris(ROWID) */
+   + ',server/artpris_brwcalc.p' /* ArtPris_KampRab% */
      .
 END FUNCTION.
 
@@ -117,7 +129,8 @@ END FUNCTION.
 /* Definitions for BROWSE BrwArtPris                                    */
 &Scoped-define FIELDS-IN-QUERY-BrwArtPris ArtPris.ProfilNr ~
 ArtPris.artpris_KortNavn ArtPris.artpris_ProInnkjopsPris ~
-ArtPris.artpris_prorab1% ArtPris.artpris_propris ArtPris.Dummy ~
+ArtPris.artpris_prorab1% ArtPris.artpris_propris ArtPris.artpris_Tilbid ~
+ArtPris.artpris_TilbPris ArtPris.ArtPris_KampRab% ArtPris.Dummy ~
 ArtPris.ArtikkelNr 
 &Scoped-define ENABLED-FIELDS-IN-QUERY-BrwArtPris ArtPris.ProfilNr ~
 ArtPris.ArtikkelNr 
@@ -158,7 +171,7 @@ DEFINE QUERY BrwArtPris FOR
 DEFINE BROWSE BrwArtPris
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _DISPLAY-FIELDS BrwArtPris C-Win _STRUCTURED
   QUERY BrwArtPris NO-LOCK DISPLAY
-      ArtPris.ProfilNr COLUMN-LABEL "Profil" FORMAT ">9":U WIDTH 5
+      ArtPris.ProfilNr COLUMN-LABEL "Profil" FORMAT ">>>9":U WIDTH 5
       ArtPris.artpris_KortNavn COLUMN-LABEL "Profil navn" FORMAT "X(8)":U
             WIDTH 15
       ArtPris.artpris_ProInnkjopsPris COLUMN-LABEL "InnkjopsPris" FORMAT "X(8)":U
@@ -167,6 +180,10 @@ DEFINE BROWSE BrwArtPris
             WIDTH 10
       ArtPris.artpris_propris COLUMN-LABEL "Pris" FORMAT "->>,>>9.99":U
             WIDTH 14
+      ArtPris.artpris_Tilbid COLUMN-LABEL "Tilbud" FORMAT "*/":U
+            WIDTH 4
+      ArtPris.artpris_TilbPris COLUMN-LABEL "TilbPris" FORMAT "X(10)":U
+      ArtPris.ArtPris_KampRab% COLUMN-LABEL "Rab%" FORMAT "X(8)":U
       ArtPris.Dummy COLUMN-LABEL "." FORMAT "X(8)":U
       ArtPris.ArtikkelNr COLUMN-LABEL "Artikkelnummer" FORMAT "zzzzzzzzzzzz9":U
             WIDTH 14.4
@@ -210,15 +227,15 @@ IF SESSION:DISPLAY-TYPE = "GUI":U THEN
          MAX-WIDTH          = 114.2
          VIRTUAL-HEIGHT     = 23.52
          VIRTUAL-WIDTH      = 114.2
-         RESIZE             = YES
-         SCROLL-BARS        = NO
-         STATUS-AREA        = NO
+         RESIZE             = yes
+         SCROLL-BARS        = no
+         STATUS-AREA        = no
          BGCOLOR            = ?
          FGCOLOR            = ?
-         KEEP-FRAME-Z-ORDER = YES
-         THREE-D            = YES
-         MESSAGE-AREA       = NO
-         SENSITIVE          = YES.
+         KEEP-FRAME-Z-ORDER = yes
+         THREE-D            = yes
+         MESSAGE-AREA       = no
+         SENSITIVE          = yes.
 ELSE {&WINDOW-NAME} = CURRENT-WINDOW.
 /* END WINDOW DEFINITION                                                */
 &ANALYZE-RESUME
@@ -256,7 +273,7 @@ ASSIGN
        ArtPris.ArtikkelNr:VISIBLE IN BROWSE BrwArtPris = FALSE.
 
 IF SESSION:DISPLAY-TYPE = "GUI":U AND VALID-HANDLE(C-Win)
-THEN C-Win:HIDDEN = YES.
+THEN C-Win:HIDDEN = yes.
 
 /* _RUN-TIME-ATTRIBUTES-END */
 &ANALYZE-RESUME
@@ -269,7 +286,7 @@ THEN C-Win:HIDDEN = YES.
      _TblList          = "SkoTex.ArtPris"
      _Options          = "NO-LOCK INDEXED-REPOSITION"
      _FldNameList[1]   > ArtPris.ProfilNr
-"ArtPris.ProfilNr" "Profil" ">9" "INTEGER" ? ? ? ? ? ? yes "Prisprofil" no no "5" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"ArtPris.ProfilNr" "Profil" ">>>9" "INTEGER" ? ? ? ? ? ? yes "Prisprofil" no no "5" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[2]   > "_<CALC>"
 "ArtPris.artpris_KortNavn" "Profil navn" "X(8)" "CHARACTER" ? ? ? ? ? ? no "" no no "15" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[3]   > "_<CALC>"
@@ -279,8 +296,14 @@ THEN C-Win:HIDDEN = YES.
      _FldNameList[5]   > "_<CALC>"
 "ArtPris.artpris_propris" "Pris" "->>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "14" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[6]   > "_<CALC>"
+"ArtPris.artpris_Tilbid" "Tilbud" "*~~/" "LOGICAL" ? ? ? ? ? ? no "" no no "4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[7]   > "_<CALC>"
+"ArtPris.artpris_TilbPris" "TilbPris" "X(10)" "CHARACTER" ? ? ? ? ? ? no "" no no "10" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[8]   > "_<CALC>"
+"ArtPris.ArtPris_KampRab%" "Rab%" "X(8)" "CHARACTER" ? ? ? ? ? ? no "" no no "8" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[9]   > "_<CALC>"
 "ArtPris.Dummy" "." "X(8)" "CHARACTER" ? ? ? ? ? ? no "" no no "8" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[7]   > ArtPris.ArtikkelNr
+     _FldNameList[10]   > ArtPris.ArtikkelNr
 "ArtPris.ArtikkelNr" "Artikkelnummer" "zzzzzzzzzzzz9" "DECIMAL" ? ? ? ? ? ? yes "" no no "14.4" no no no "U" "" "" "" "" "" "" 0 no 0 no no
      _Query            is NOT OPENED
 */  /* BROWSE BrwArtPris */
@@ -451,7 +474,11 @@ PROCEDURE EndrePrisRecord :
     ELSE DO:
         IF NOT oBrwArtPris:processRowsNoMessage("modell_prisoppdatering.p",cTekst) THEN
             JBoxSession:Instance:ViewMessage("Feil pga " + JBoxServerAPI:Instance:getCallMessage()).
-        ELSE DO:  
+        ELSE DO:
+          IF ENTRY(5,cTekst,'|') = 'yes' THEN 
+            oBrwArtPris:parent-Browse-Object:openQuery().
+          ELSE   
+            oBrwArtPris:parent-Browse-Object:refreshRow().
           oBrwArtPris:openQuery().
         END.  
     END.    
@@ -484,6 +511,10 @@ DO WITH FRAME {&FRAME-NAME}:
   oBrwArtPris = NEW JBoxBrowse(brwArtPris:HANDLE).
 /*  oBrwArtPris:baseQuery = "WHERE LOOKUP(STRING(ArtPris.ProfilNr),'" + cIkkeVisProfiler + "') = 0".*/
 
+  hArtPris_TilbidColumn   = oBrwArtPris:getColumnHandle("ArtPris_Tilbid").
+  hArtPris_TilbPrisColumn = oBrwArtPris:getColumnHandle("ArtPris_TilbPris").
+  hArtPris_KampRab%Column = oBrwArtPris:getColumnHandle("ArtPris_KampRab%").
+
   opopupArtPris = NEW JBoxPopupMenu().
   opopupArtPris:AddToolGroup('EndrePris;Endre normalpris,KopierPris;KopierPris'  
                              ).
@@ -505,9 +536,8 @@ END PROCEDURE.
 /* _UIB-CODE-BLOCK-END */
 &ANALYZE-RESUME
 
-
-&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE KopierPrisRecord C-Win
-PROCEDURE KopierPrisRecord:
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE KopierPrisRecord C-Win 
+PROCEDURE KopierPrisRecord :
 /*------------------------------------------------------------------------------
  Purpose:
  Notes:
@@ -565,11 +595,9 @@ PROCEDURE KopierPrisRecord:
 
 
 END PROCEDURE.
-  
+
 /* _UIB-CODE-BLOCK-END */
 &ANALYZE-RESUME
-
-
 
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE MoveToTop C-Win 
 PROCEDURE MoveToTop :
@@ -584,6 +612,24 @@ IF DYNAMIC-FUNCTION("getAttribute",THIS-PROCEDURE,"advGuiWin") = "YES" THEN
 THIS-PROCEDURE:CURRENT-WINDOW:WINDOW-STATE = 3.
 THIS-PROCEDURE:CURRENT-WINDOW:MOVE-TO-TOP().
 DYNAMIC-FUNCTION("DoLockWindow",?).
+
+END PROCEDURE.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE RowDisplayBrowse C-Win 
+PROCEDURE RowDisplayBrowse :
+RUN SUPER.
+
+  IF ArtPris.ArtPris_Tilbid = TRUE THEN 
+  DO:
+    ASSIGN 
+      hArtPris_TilbidColumn:BGCOLOR   = 13
+      hArtPris_TilbPrisColumn:BGCOLOR = 13
+      hArtPris_KampRab%Column:BGCOLOR = 13
+      .
+  END.
 
 END PROCEDURE.
 
