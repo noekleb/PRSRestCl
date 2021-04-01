@@ -1024,6 +1024,7 @@ DEFINE VARIABLE cTekst AS CHARACTER NO-UNDO.
   VISBILAG: 
   DO:
     cTekst = STRING(oBrwBokforingsVisning:PARENT-BROWSE-OBJECT:BUFFER-HANDLE::BokforingsId) + '|' + JBoxSession:Instance:UserId.
+    
     CREATE ttBokforingsbilag. /* En record å sende med. */
     /* Kjører her generering av rapport, men uten utskrift. Genererer bare opp temp tabellen som viser bokf.bilaget i browser. */
     JBoxServerAPI:Instance:CallServerProc("Bokforingsbilag_getBlob.p",

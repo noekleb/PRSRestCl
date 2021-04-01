@@ -301,17 +301,17 @@ DEFINE RECTANGLE tbBokforingsBilag
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL  GROUP-BOX  ROUNDED 
      SIZE 162 BY 1.29.
 
-DEFINE VARIABLE tgDiff AS LOGICAL INITIAL no 
+DEFINE VARIABLE tgDiff AS LOGICAL INITIAL NO 
      LABEL "Bare med diff" 
      VIEW-AS TOGGLE-BOX
      SIZE 18 BY .81 TOOLTIP "Vise bare oppgjør med diff." NO-UNDO.
 
-DEFINE VARIABLE tgVisAlle AS LOGICAL INITIAL no 
+DEFINE VARIABLE tgVisAlle AS LOGICAL INITIAL NO 
      LABEL "Vis alle (Også godkjente og sendt regnskap)" 
      VIEW-AS TOGGLE-BOX
      SIZE 47 BY .81 TOOLTIP "Viser også bokføringsbilag som er sendt regnskap." NO-UNDO.
 
-DEFINE VARIABLE tgVisTomme AS LOGICAL INITIAL no 
+DEFINE VARIABLE tgVisTomme AS LOGICAL INITIAL NO 
      LABEL "Vis tomme" 
      VIEW-AS TOGGLE-BOX
      SIZE 15 BY .81 TOOLTIP "Vis også oppgjør med 0 i omsetning" NO-UNDO.
@@ -434,15 +434,15 @@ IF SESSION:DISPLAY-TYPE = "GUI":U THEN
          MAX-WIDTH          = 179.8
          VIRTUAL-HEIGHT     = 24.1
          VIRTUAL-WIDTH      = 179.8
-         RESIZE             = yes
-         SCROLL-BARS        = no
-         STATUS-AREA        = no
+         RESIZE             = YES
+         SCROLL-BARS        = NO
+         STATUS-AREA        = NO
          BGCOLOR            = ?
          FGCOLOR            = ?
-         KEEP-FRAME-Z-ORDER = yes
-         THREE-D            = yes
-         MESSAGE-AREA       = no
-         SENSITIVE          = yes.
+         KEEP-FRAME-Z-ORDER = YES
+         THREE-D            = YES
+         MESSAGE-AREA       = NO
+         SENSITIVE          = YES.
 ELSE {&WINDOW-NAME} = CURRENT-WINDOW.
 /* END WINDOW DEFINITION                                                */
 &ANALYZE-RESUME
@@ -495,7 +495,7 @@ ASSIGN
        btnSplitBarX:MOVABLE IN FRAME frSplitBarX          = TRUE.
 
 IF SESSION:DISPLAY-TYPE = "GUI":U AND VALID-HANDLE(C-Win)
-THEN C-Win:HIDDEN = yes.
+THEN C-Win:HIDDEN = YES.
 
 /* _RUN-TIME-ATTRIBUTES-END */
 &ANALYZE-RESUME
@@ -908,9 +908,14 @@ DO WITH FRAME {&FRAME-NAME}:
     cbButikk:DELIMITER = "|"
     .
   
+/*  cbButikk:LIST-ITEM-PAIRS = '<Alle>|0|' + DYNAMIC-FUNCTION("getFieldList",                                                                                                */
+/*                                                            "Butiker;Butik|ButNamn;Butik",                                                                                 */
+/*                                                            "WHERE Butiker.HarButikkSystem = 'TRUE' AND Butiker.Butik < 800 AND (Butiker.ApningsDato <= " + STRING(TODAY) +*/
+/*                                                            ") AND (Butiker.NedlagtDato = '?' OR Butiker.NedlagtDato >= '" + STRING(TODAY) + "') "                         */
+/*                                                            ).                                                                                                             */
   cbButikk:LIST-ITEM-PAIRS = '<Alle>|0|' + DYNAMIC-FUNCTION("getFieldList",
                                                             "Butiker;Butik|ButNamn;Butik",
-                                                            "WHERE Butiker.HarButikkSystem = 'TRUE' AND Butiker.Butik < 800 AND (Butiker.ApningsDato <= " + STRING(TODAY) + 
+                                                            "WHERE Butiker.HarButikkSystem = 'TRUE' AND (Butiker.ApningsDato <= " + STRING(TODAY) + 
                                                             ") AND (Butiker.NedlagtDato = '?' OR Butiker.NedlagtDato >= '" + STRING(TODAY) + "') "
                                                             ).    
   ASSIGN 

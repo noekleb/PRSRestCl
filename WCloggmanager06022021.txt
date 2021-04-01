@@ -1,3 +1,0 @@
-[21/02/06@11:14:40.455+0100] P-017072 T-013916 1 4GL -- Logging level set to = 2
-[21/02/06@11:14:40.455+0100] P-017072 T-013916 1 4GL -- No entry types are activated
-[21/02/06@11:14:40.455+0100] P-017072 T-013916 1 4GL -- Logging level set to = 4
