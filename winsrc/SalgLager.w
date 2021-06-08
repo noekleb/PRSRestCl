@@ -59,6 +59,7 @@ DEFINE VARIABLE cModus AS CHARACTER NO-UNDO.
 DEFINE VARIABLE iKampanjeId AS INTEGER NO-UNDO.
 DEFINE VARIABLE opopupLager AS JBoxPopupMenu NO-UNDO.
 DEFINE VARIABLE cFilterTekst AS CHARACTER NO-UNDO.
+DEFINE VARIABLE cProfilLst AS CHARACTER NO-UNDO.
 
 DEFINE VARIABLE cVgLst      AS CHARACTER NO-UNDO.
 DEFINE VARIABLE cVgRowIdLst AS CHARACTER NO-UNDO.
@@ -78,6 +79,8 @@ DEF TEMP-TABLE Lager
     FIELD VerdiSolgt AS DECIMAL
     FIELD Lagant AS DECIMAL
     FIELD VerdiLager AS DECIMAL
+    FIELD Lager_AntProfil AS DECIMAL
+    FIELD Lager_VerdiProfil AS DECIMAL
     FIELD Varegruppe AS CHARACTER
     FIELD Hovedgruppe AS CHARACTER
     FIELD Produsent AS CHARACTER
@@ -108,6 +111,8 @@ FUNCTION getBuffersAndFieldsBrwLager RETURNS CHARACTER():
      + ';+VerdiSolgt|DECIMAL||jb_void(N/A)|Verdi solgt'
      + ';+Lagant|DECIMAL||jb_void(N/A)|Lager'
      + ';+VerdiLager|DECIMAL||jb_void(N/A)|Verdi lager'
+     + ';+Lager_AntProfil|DECIMAL||jb_void(N/A)|Antall i profil'
+     + ';+Lager_VerdiProfil|DECIMAL||jb_void(N/A)|Verdi i profil'
      + ';+Varegruppe|CHARACTER||jb_void(N/A)|Varegruppe'
      + ';+Hovedgruppe|CHARACTER||jb_void(N/A)|Hovedgruppe'
      + ';+Produsent|CHARACTER||jb_void(N/A)|Produsent'
@@ -141,12 +146,14 @@ DEF VAR otbLager AS JBoxToolbar NO-UNDO.
 /* Definitions for BROWSE BrwLager                                      */
 &Scoped-define FIELDS-IN-QUERY-BrwLager Lager.Varetekst Lager.LevKod ~
 Lager.LevFargKod Lager.Sasong Lager.Pris Lager.Solgt% Lager.Solgt ~
-Lager.VerdiSolgt Lager.Lagant Lager.VerdiLager Lager.Varegruppe ~
-Lager.Hovedgruppe Lager.Produsent Lager.Varemerke Lager.VVarekost ~
-Lager.Butik Lager.ArtikkelNr 
+Lager.VerdiSolgt Lager.Lagant Lager.VerdiLager Lager.Lager_AntProfil ~
+Lager.Lager_VerdiProfil Lager.Varegruppe Lager.Hovedgruppe Lager.Produsent ~
+Lager.Varemerke Lager.VVarekost Lager.Butik Lager.ArtikkelNr 
 &Scoped-define ENABLED-FIELDS-IN-QUERY-BrwLager Lager.Varetekst Lager.Butik 
-&Scoped-define QUERY-STRING-BrwLager FOR EACH Lager NO-LOCK INDEXED-REPOSITION
-&Scoped-define OPEN-QUERY-BrwLager OPEN QUERY BrwLager FOR EACH Lager NO-LOCK INDEXED-REPOSITION.
+&Scoped-define ENABLED-TABLES-IN-QUERY-BrwLager Lager
+&Scoped-define FIRST-ENABLED-TABLE-IN-QUERY-BrwLager Lager
+&Scoped-define QUERY-STRING-BrwLager FOR EACH Lager NO-LOCK, INDEXED-REPOSITION
+&Scoped-define OPEN-QUERY-BrwLager OPEN QUERY BrwLager FOR EACH Lager NO-LOCK, INDEXED-REPOSITION.
 &Scoped-define TABLES-IN-QUERY-BrwLager Lager
 &Scoped-define FIRST-TABLE-IN-QUERY-BrwLager Lager
 
@@ -297,6 +304,8 @@ DEFINE BROWSE BrwLager
       Lager.VerdiSolgt COLUMN-LABEL "Verdi solgt" FORMAT "->>,>>>,>>9.99":U
       Lager.Lagant COLUMN-LABEL "Lager" FORMAT "->>,>>9.99":U WIDTH 14.4
       Lager.VerdiLager COLUMN-LABEL "Verdi lager" FORMAT "->>,>>>,>>9.99":U
+      Lager.Lager_AntProfil COLUMN-LABEL "Antall i profil" FORMAT "->>>,>>9":U
+      Lager.Lager_VerdiProfil COLUMN-LABEL "Verdi i profil" FORMAT "->>,>>>,>>9":U
       Lager.Varegruppe COLUMN-LABEL "Varegruppe" FORMAT "X(30)":U
       Lager.Hovedgruppe COLUMN-LABEL "Hovedgruppe" FORMAT "X(30)":U
       Lager.Produsent COLUMN-LABEL "Produsent" FORMAT "X(30)":U
@@ -447,18 +456,22 @@ THEN C-Win:HIDDEN = YES.
      _FldNameList[10]   > "_<CALC>"
 "Lager.VerdiLager" "Verdi lager" "->>,>>>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "14.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[11]   > "_<CALC>"
-"Lager.Varegruppe" "Varegruppe" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"Lager.Lager_AntProfil" "Antall i profil" "->>>,>>9" "DECIMAL" ? ? ? ? ? ? no "" no no "11.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[12]   > "_<CALC>"
-"Lager.Hovedgruppe" "Hovedgruppe" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"Lager.Lager_VerdiProfil" "Verdi i profil" "->>,>>>,>>9" "DECIMAL" ? ? ? ? ? ? no "" no no "10.8" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[13]   > "_<CALC>"
-"Lager.Produsent" "Produsent" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"Lager.Varegruppe" "Varegruppe" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[14]   > "_<CALC>"
-"Lager.Varemerke" "Varemerke" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"Lager.Hovedgruppe" "Hovedgruppe" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[15]   > "_<CALC>"
-"Lager.VVarekost" "Vektet varekost" "->,>>>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "15" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"Lager.Produsent" "Produsent" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[16]   > "_<CALC>"
-"Lager.Butik" "ButNr" ">>>>>9" "INTEGER" ? ? ? ? ? ? yes "Butikknummer" no no "7.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"Lager.Varemerke" "Varemerke" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[17]   > "_<CALC>"
+"Lager.VVarekost" "Vektet varekost" "->,>>>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "15" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[18]   > Lager.Butik
+"Lager.Butik" "ButNr" ">>>>>9" "INTEGER" ? ? ? ? ? ? yes "Butikknummer" no no "7.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[19]   > Lager.ArtikkelNr
 "Lager.ArtikkelNr" "Artikkelnummer" "zzzzzzzzzzzz9" "DECIMAL" ? ? ? ? ? ? no "" no no "54.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _Query            is NOT OPENED
 */  /* BROWSE BrwLager */
@@ -517,7 +530,7 @@ DO:
       RUN MoveToTop IN hByggerRapport.
       RUN vistekst IN hByggerRapport.
       SESSION:SET-WAIT-STATE("GENERAL").  
-      IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",cVgLst + '¤' + cVmLst,hLager) THEN
+      IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",cVgLst + '¤' + cVmLst + '¤' + cProfilLst,hLager) THEN
         hLager = JBoxServerAPI:Instance:getCallReturnTable().
       SESSION:SET-WAIT-STATE("").
       RUN avsluttDialog IN hByggerRapport.
@@ -793,31 +806,29 @@ PROCEDURE InitializeObject :
 
 DO WITH FRAME {&FRAME-NAME}:
   ASSIGN 
-    iButNr = INT(ENTRY(1,icParam,'|'))
-    cModus = ENTRY(2,icParam,'|') /*10=Fra meny, 20=Fra kampanjeregister */
+    iButNr = INT(ENTRY(1,icParam))
+    cModus = ENTRY(2,icParam) /*10=Fra meny, 20=Fra kampanjeregister NB: Overstyres ved oppstart fra kampanje. */
     .
-
-  IF NUM-ENTRIES(icParam,'|') >= 3 THEN 
-    iKampanjeId = INT(ENTRY(3,icParam,'|')).
+  IF NUM-ENTRIES(icParam) >= 3 THEN
+    ASSIGN  
+      cProfilLst = ENTRY(3,ICParam)
+      cProfilLst = REPLACE(cProfilLst,'¤',',')
+      .
+  IF NUM-ENTRIES(icParam) >= 4 THEN 
+    iKampanjeId = INT(ENTRY(4,icParam)).
 
   oBrwLager = NEW JBoxBrowse(brwLager:HANDLE).
   oBrwLager:useLocalData = YES. /* Flagger at browser går rundt en temp-tabell, ikke en database tabell. */
   otbLager = NEW JBoxToolbar(tbLager:HANDLE).
   oBrwLager:TOOLBAR-OBJECT = otbLager.
-  otbLager:addToolGroup("ValgtVare;Legg markerte varer til kampanje...").
+  otbLager:addToolGroup("ValgtVare;Legg varer til kampanje...").
 
   oContainer:setNoResizeY("RECT-1").
 
-  IF CAN-DO('20',cModus) THEN 
-    ASSIGN 
-      cbLagant:SCREEN-VALUE = '1'
-      cbLagant              = 1
-      .
-  ELSE 
-    ASSIGN 
-      cbLagant:SCREEN-VALUE = '1'
-      cbLagant              = 1
-      .
+  ASSIGN 
+    cbLagant:SCREEN-VALUE = '1'
+    cbLagant              = 1
+    .
 
   oBrwLager:setSearchField(searchLager:HANDLE,"LevKod").
 
@@ -831,7 +842,6 @@ DO WITH FRAME {&FRAME-NAME}:
   
   /* Innholder OpenQuery */
   RUN setFilter.
-  
 END.
 
 &IF "{&WINDOW-SYSTEM}" NE "TTY" &THEN  
@@ -868,8 +878,8 @@ END PROCEDURE.
 
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE OpenQuery C-Win 
 PROCEDURE OpenQuery :
-  hLager = BUFFER Lager:HANDLE.
-  
+hLager = BUFFER Lager:HANDLE.
+
   RUN SUPER.
 
 END PROCEDURE.
@@ -910,15 +920,14 @@ END PROCEDURE.
 
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE RefreshRecord C-Win 
 PROCEDURE RefreshRecord :
-  
-  RUN ByggerRapport.w PERSISTENT SET hByggerRapport.
+RUN ByggerRapport.w PERSISTENT SET hByggerRapport.
   RUN MoveToTop IN hByggerRapport.
   RUN vistekst IN hByggerRapport.
 
   hLager = BUFFER Lager:HANDLE.
 
   SESSION:SET-WAIT-STATE("GENERAL").  
-  IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",'',hLager) THEN
+  IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",'¤¤' + cProfilLst,hLager) THEN
     hLager = JBoxServerAPI:Instance:getCallReturnTable().
   SESSION:SET-WAIT-STATE("").
 
@@ -927,6 +936,7 @@ PROCEDURE RefreshRecord :
     DELETE OBJECT hByggerRapport.
 
 /*  RUN SUPER.*/
+
   oBrwLager:OpenQuery().
 
 END PROCEDURE.
@@ -938,6 +948,43 @@ END PROCEDURE.
 PROCEDURE rowsToBatchRecord :
 RUN SUPER.
 
+
+END PROCEDURE.
+
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE SelectAllRowsRecord C-Win 
+PROCEDURE SelectAllRowsRecord :
+/*------------------------------------------------------------------------------
+ Purpose:
+ Notes:
+------------------------------------------------------------------------------*/
+/*DEF VAR hRecordSelectWidget AS HANDLE NO-UNDO.                                                  */
+/*DEF VAR hBrowse             AS HANDLE NO-UNDO.                                                  */
+/*                                                                                                */
+/*IF AVAIL ttObject THEN DO:                                                                      */
+/*  IF ttObject.hObject:TYPE NE "browse" THEN DO:                                                 */
+/*    hBrowse = DYNAMIC-FUNCTION("getLinkedObject",ttObject.hObject,"browse","from").             */
+/*    IF NOT VALID-HANDLE(hBrowse) OR hBrowse:TYPE NE "browse" THEN DO:                           */
+/*      MESSAGE "Missing association (link) from " ttObject.cObjectType " to browse" SKIP         */
+/*              "Programmers mistake"                                                             */
+/*              VIEW-AS ALERT-BOX.                                                                */
+/*      RETURN.                                                                                   */
+/*    END.                                                                                        */
+/*  END.                                                                                          */
+/*  ELSE hBrowse = ttObject.hObject.                                                              */
+/*END.                                                                                            */
+/*ELSE RETURN.                                                                                    */
+/*                                                                                                */
+/*hBrowse:SELECT-ALL().                                                                           */
+/*hRecordSelectWidget = WIDGET-HANDLE(getAttribute(hBrowse:WINDOW,"RecordSelectWidget")) NO-ERROR.*/
+/*                                                                                                */
+/*IF VALID-HANDLE(hRecordSelectWidget) THEN                                                       */
+/*  IF hBrowse:NUM-SELECTED-ROWS > 0 THEN                                                         */
+/*    hRecordSelectWidget:SCREEN-VALUE = STRING(hBrowse:NUM-SELECTED-ROWS,"zzzzz9").              */
+/*  ELSE                                                                                          */
+/*    hRecordSelectWidget:SCREEN-VALUE = "".                                                      */
 
 END PROCEDURE.
 
@@ -964,7 +1011,7 @@ PROCEDURE setFilter :
       RUN MoveToTop IN hByggerRapport.
       RUN vistekst IN hByggerRapport.
       SESSION:SET-WAIT-STATE("GENERAL").  
-      IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",cVgLst + '¤' + cVmLst,hLager) THEN
+      IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",cVgLst + '¤' + cVmLst + '¤' + cProfilLst,hLager) THEN
         hLager = JBoxServerAPI:Instance:getCallReturnTable().
       SESSION:SET-WAIT-STATE("").
       RUN avsluttDialog IN hByggerRapport.
@@ -1023,6 +1070,7 @@ PROCEDURE ValgtVareRecord :
 DEFINE VARIABLE pcTekst AS CHARACTER NO-UNDO.
 
   IF oBrwLager:BROWSE-HANDLE:NUM-SELECTED-ROWS >= 1 THEN
+  MARKERTEPOSTER:
   DO:    
     IF NOT CAN-DO('20',cModus) THEN 
     DO:    
@@ -1038,10 +1086,18 @@ DEFINE VARIABLE pcTekst AS CHARACTER NO-UNDO.
       
     IF NOT CAN-DO('20',cModus) THEN 
       iKampanjeId = 0.      
-  END.
+  END. /* MARKERTEPOSTER */
   ELSE DO:
-    JBoxSession:Instance:ViewMessage("Marker en eller flere rader først! ").
-    RETURN.
+    IF NOT JBoxSession:Instance:ViewQuestionOkCancel("Skal alle varer i utvalget sendes til kampanje?") THEN 
+        RETURN.    
+    ELSE DO:
+      /* Ved å gjøre dette, får vi bare postene i view-porten. */
+      oBrwLager:BROWSE-HANDLE:SELECT-ALL().
+      oBrwLager:processRowsNoMessage("kampanjelinje_til_kampanje.p", STRING(iKampanjeId)).
+      /* Ved å gjøre dette får vi med alle postene i spørringen. Ikke begrenset av filteret. */
+/*      oBrwLager:processSet("kampanjelinje_til_kampanje.p", STRING(iKampanjeId)).*/
+      PUBLISH "OpenQueryKampanjeLinje".      
+    END.
   END.
 END PROCEDURE.
 

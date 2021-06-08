@@ -92,6 +92,10 @@ DEFINE VARIABLE cIdList    AS CHARACTER NO-UNDO.
 DEFINE VARIABLE iLoop     AS INTEGER   NO-UNDO.
 DEFINE VARIABLE bNew AS LOG NO-UNDO.
 DEFINE VARIABLE bEndreAktivTilbud AS LOG NO-UNDO.  
+DEFINE VARIABLE rModellListeHandle AS HANDLE NO-UNDO.
+DEFINE VARIABLE rLagerSalgHandle AS HANDLE NO-UNDO.
+DEFINE VARIABLE rKampanjeSalg AS HANDLE NO-UNDO.
+DEFINE VARIABLE cProfilLst AS CHARACTER NO-UNDO.
 
 DEFINE VARIABLE rclStandardFunksjoner           AS cls.StdFunk.clStandardFunksjoner NO-UNDO.
 
@@ -386,15 +390,15 @@ undo_tbKampanjeHode LagerSalg_tbKampanjeLinje delete_tbKampanjeHode ~
 refresh_tbKampanjeHode filter_tbKampanjeHode excel_tbKampanjeHode ~
 LeggTilPrisprofil_tbKampanjeHode LeggTilVare_tbKampanjeLinje ~
 EndreAktTilb_tbKampanjeHode KampanjeSalg_tbKampanjeLinje AvslagType ~
-Kronerabatt fiKamp% KampanjePris MistePris AngreAvbryt_tbKampanjeHode Notat ~
+KampanjePris Kronerabatt fiKamp% MistePris AngreAvbryt_tbKampanjeHode Notat ~
 Beskrivelse IgnorerNOS HentFraLager_tbKampanjeLinje ~
 TilPrisko_tbKampanjeHode HentFraKampanje_tbKampanjeLinje ~
 AntallPaTilbud_tbKampanjeHode StartDato SluttDato slEkstraPrisProfiler ~
 AktiveresTid_time GyldigTilTid_time Kampanjehode_Endret 
-&Scoped-Define DISPLAYED-OBJECTS ProfilNr AvslagType Kronerabatt fiKamp% ~
-KampanjePris MistePris Notat Beskrivelse IgnorerNOS StartDato SluttDato ~
-slEkstraPrisProfiler AktiveresTid_time GyldigTilTid_time fiTekst-2 ~
-Kampanjehode_Endret fiTekst 
+&Scoped-Define DISPLAYED-OBJECTS ProfilNr AvslagType KampanjePris ~
+Kronerabatt fiKamp% MistePris Notat Beskrivelse IgnorerNOS StartDato ~
+SluttDato slEkstraPrisProfiler AktiveresTid_time GyldigTilTid_time ~
+fiTekst-2 Kampanjehode_Endret fiTekst 
 
 /* Custom List Definitions                                              */
 /* List-1,List-2,List-3,List-4,List-5,List-6                            */
@@ -790,9 +794,9 @@ DEFINE FRAME DEFAULT-FRAME
      KampanjeSalg_tbKampanjeLinje AT ROW 12.91 COL 89.4 WIDGET-ID 106
      ProfilNr AT ROW 2.91 COL 98.4 COLON-ALIGNED
      AvslagType AT ROW 3.95 COL 98.4 COLON-ALIGNED WIDGET-ID 124
+     KampanjePris AT ROW 5 COL 98.4 COLON-ALIGNED
      Kronerabatt AT ROW 5 COL 98.4 COLON-ALIGNED
      fiKamp% AT ROW 5 COL 98.4 COLON-ALIGNED
-     KampanjePris AT ROW 5 COL 98.4 COLON-ALIGNED
      MistePris AT ROW 6.05 COL 98.4 COLON-ALIGNED
      AngreAvbryt_tbKampanjeHode AT ROW 1.29 COL 102.4 WIDGET-ID 80
      Notat AT ROW 8.29 COL 101 NO-LABEL WIDGET-ID 66
@@ -1402,7 +1406,6 @@ END PROCEDURE.
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE DeleteRecord C-Win 
 PROCEDURE DeleteRecord :
 DO WITH FRAME {&FRAME-NAME}:
-  
     IF otbKampanjeHode:isCurrent THEN 
     DO:
       IF AVAILABLE KampanjeHode THEN 
@@ -1414,7 +1417,7 @@ DO WITH FRAME {&FRAME-NAME}:
         END.
       END.
     END.  
-    IF otbKampanjeLinje:isCurrent THEN 
+    ELSE IF otbKampanjeLinje:isCurrent THEN 
     DO:
       IF AVAILABLE KampanjeHode THEN 
       DO:
@@ -1429,7 +1432,9 @@ DO WITH FRAME {&FRAME-NAME}:
           RETURN.
         END.
       END.
-    END.  
+    END. 
+    ELSE 
+      RETURN. 
   END.
   
   RUN SUPER.
@@ -1689,7 +1694,7 @@ PROCEDURE enable_UI :
                These statements here are based on the "Other 
                Settings" section of the widget Property Sheets.
 ------------------------------------------------------------------------------*/
-  DISPLAY ProfilNr AvslagType Kronerabatt fiKamp% KampanjePris MistePris Notat 
+  DISPLAY ProfilNr AvslagType KampanjePris Kronerabatt fiKamp% MistePris Notat 
           Beskrivelse IgnorerNOS StartDato SluttDato slEkstraPrisProfiler 
           AktiveresTid_time GyldigTilTid_time fiTekst-2 Kampanjehode_Endret 
           fiTekst 
@@ -1705,7 +1710,7 @@ PROCEDURE enable_UI :
          filter_tbKampanjeHode excel_tbKampanjeHode 
          LeggTilPrisprofil_tbKampanjeHode LeggTilVare_tbKampanjeLinje 
          EndreAktTilb_tbKampanjeHode KampanjeSalg_tbKampanjeLinje AvslagType 
-         Kronerabatt fiKamp% KampanjePris MistePris AngreAvbryt_tbKampanjeHode 
+         KampanjePris Kronerabatt fiKamp% MistePris AngreAvbryt_tbKampanjeHode 
          Notat Beskrivelse IgnorerNOS HentFraLager_tbKampanjeLinje 
          TilPrisko_tbKampanjeHode HentFraKampanje_tbKampanjeLinje 
          AntallPaTilbud_tbKampanjeHode StartDato SluttDato slEkstraPrisProfiler 
@@ -2248,17 +2253,32 @@ DO WITH FRAME {&FRAME-NAME}:
           JBoxSession:Instance:ViewMessage("Kampanjen er akivert og kan ikke endres. ").
           RETURN.
         END.
-        CURRENT-WINDOW:SENSITIVE = FALSE.
-        ASSIGN 
-          cVareFelt    = ''
-          cVareVerdier = ''
-          .
-        RUN KampanjeSalg.w (INPUT "16|20|" + STRING(KampanjeHode.KampanjeId)).
-        CURRENT-WINDOW:SENSITIVE = TRUE.
-        IF cVareFelt = '' OR cVarefelt = ? THEN
-          RETURN. 
-        ELSE 
-          oBrwKampanjeLinje:openQuery().
+        IF VALID-HANDLE(rKampanjeSalg) THEN 
+        DO:
+          RUN MoveToTop IN rKampanjeSalg.
+        END.
+        ELSE DO:
+          rKampanjeSalg = jboxmainmenu:Instance:StartChildWindow('KampanjeSalg.w', 
+                                      'Solg% aktiv kampanje',
+                                      NO).
+          IF VALID-HANDLE(rKampanjeSalg) THEN 
+          DO:
+            IF VALID-HANDLE(rKampanjeSalg) THEN
+              RUN setKampanjeId IN rKampanjeSalg (KampanjeHode.KampanjeId).
+          END.
+        END.
+
+/*        CURRENT-WINDOW:SENSITIVE = FALSE.                                     */
+/*        ASSIGN                                                                */
+/*          cVareFelt    = ''                                                   */
+/*          cVareVerdier = ''                                                   */
+/*          .                                                                   */
+/*        RUN KampanjeSalg.w (INPUT "16|20|" + STRING(KampanjeHode.KampanjeId)).*/
+/*        CURRENT-WINDOW:SENSITIVE = TRUE.                                      */
+/*        IF cVareFelt = '' OR cVarefelt = ? THEN                               */
+/*          RETURN.                                                             */
+/*        ELSE                                                                  */
+/*          oBrwKampanjeLinje:openQuery().                                      */
         RETURN.
       END. /* RAD */
     END.  
@@ -2281,19 +2301,21 @@ DO WITH FRAME {&FRAME-NAME}:
           JBoxSession:Instance:ViewMessage("Kampanjen er akivert og kan ikke endres. ").
           RETURN.
         END.
-        CURRENT-WINDOW:SENSITIVE = FALSE.
-        ASSIGN 
-          cVareFelt    = ''
-          cVareVerdier = ''
-          .
-        RUN SalgLager.w (INPUT "16|20|" + STRING(KampanjeHode.KampanjeId)).
-        APPLY "WINDOW-RESIZED" TO {&WINDOW-NAME}.
-        SESSION:SET-WAIT-STATE("").
-        CURRENT-WINDOW:SENSITIVE = TRUE.
-        IF cVareFelt = '' OR cVarefelt = ? THEN
-          RETURN. 
-        ELSE 
-          oBrwKampanjeLinje:openQuery().
+        
+        IF VALID-HANDLE(rLagerSalgHandle) THEN 
+        DO:
+          RUN MoveToTop IN rLagerSalgHandle.
+        END.
+        ELSE DO:
+          cProfilLst = ProfilNr:SCREEN-VALUE + (IF slEkstraPrisProfiler:LIST-ITEMS <> ? THEN ',' + slEkstraPrisProfiler:LIST-ITEMS ELSE '').
+          rLagerSalgHandle = jboxmainmenu:Instance:StartChildWindow('SalgLager.w', 
+                                      'Solg% lager',
+                                      '16,20,' + REPLACE(cProfilLst,',','¤') + ',' + STRING(KampanjeHode.KampanjeId),
+                                      ?,
+                                      NO).
+          IF VALID-HANDLE(rLagerSalgHandle) THEN 
+            RUN MoveToTop IN rLagerSalgHandle.
+        END.
         RETURN.
       END. /* RAD */
     END.  
@@ -2370,7 +2392,6 @@ END PROCEDURE.
 
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE LeggTilVareRecord C-Win 
 PROCEDURE LeggTilVareRecord :
-DEFINE VARIABLE rSokHandle AS HANDLE NO-UNDO.
 DO WITH FRAME {&FRAME-NAME}:
     IF otbKampanjeLinje:isCurrent THEN 
     DO:
@@ -2383,28 +2404,21 @@ DO WITH FRAME {&FRAME-NAME}:
           RETURN.
         END.
         
-        rSokHandle = oContainer:StartChildWindow('LagerListeModButStr.w', 
-                                    'Modelliste',
-                                    YES).
-        IF VALID-HANDLE(rSokHandle) THEN 
+        IF VALID-HANDLE(rModellListeHandle) THEN 
         DO:
-          IF VALID-HANDLE(rSokHandle) THEN
-            RUN setKampanjeId IN rSokHandle (KampanjeHode.KampanjeId).
+          RUN MoveToTop IN rModellListeHandle.
         END.
-
-/*        PUBLISH 'settModellFilter' (cFilterTekst).*/
-
-/*        CURRENT-WINDOW:SENSITIVE = FALSE.                                       */
-/*        ASSIGN                                                                  */
-/*          cVareFelt    = ''                                                     */
-/*          cVareVerdier = ''                                                     */
-/*          .                                                                     */
-/*        RUN LagerListeButArtStr.w ('16|45||' + STRING(KampanjeHode.KampanjeId)).*/
-/*        CURRENT-WINDOW:SENSITIVE = TRUE.                                        */
-/*        IF cVareFelt = '' OR cVarefelt = ? THEN*/
-/*          RETURN.                              */
-/*        ELSE                                   */
-/*          oBrwKampanjeLinje:openQuery().*/
+        ELSE DO:
+          cProfilLst = ProfilNr:SCREEN-VALUE + (IF slEkstraPrisProfiler:LIST-ITEMS <> ? THEN ',' + slEkstraPrisProfiler:LIST-ITEMS ELSE '').
+          rModellListeHandle = jboxmainmenu:Instance:StartChildWindow('LagerListeModButStr.w', 
+                                      'Modelliste',
+                                       NO).
+          IF VALID-HANDLE(rModellListeHandle) THEN 
+          DO:
+            IF VALID-HANDLE(rModellListeHandle) THEN
+              RUN setKampanjeId IN rModellListeHandle (INPUT KampanjeHode.KampanjeId).
+          END.
+        END.
         RETURN.
       END. /* RAD */
     END.  

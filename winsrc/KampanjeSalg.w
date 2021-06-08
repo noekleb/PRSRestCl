@@ -41,7 +41,7 @@ CREATE WIDGET-POOL.
 /* &SCOPED-DEFINE AdvGuiWin */ 
 
 /* Parameters Definitions ---                                           */
-DEFINE INPUT PARAMETER icParam AS CHARACTER NO-UNDO.
+/*DEFINE INPUT PARAMETER icParam AS CHARACTER NO-UNDO.*/
 
 /* Local Variable Definitions ---                                       */
 
@@ -745,18 +745,20 @@ PROCEDURE InitializeObject :
 
 DO WITH FRAME {&FRAME-NAME}:
   ASSIGN 
-    iButNr = INT(ENTRY(1,icParam,'|'))
-    cModus = ENTRY(2,icParam,'|') /*10=Fra meny, 20=Fra kampanjeregister */
+/*    iButNr = INT(ENTRY(1,icParam,'|'))                                     */
+/*    cModus = ENTRY(2,icParam,'|') /*10=Fra meny, 20=Fra kampanjeregister */*/
+    iButNr = 16
+    cModus = '10'
     .
-  IF NUM-ENTRIES(icParam,'|') >= 3 THEN 
-    iKampanjeId = INT(ENTRY(3,icParam,'|')).
+/*  IF NUM-ENTRIES(icParam,'|') >= 3 THEN     */
+/*    iKampanjeId = INT(ENTRY(3,icParam,'|')).*/
 
   oBrwArtPris = NEW JBoxBrowse(brwArtPris:HANDLE).
   oBrwArtPris:useLocalData = YES.
 
   otbLager = NEW JBoxToolbar(tbLager:HANDLE).
   oBrwArtPris:TOOLBAR-OBJECT = otbLager.
-  otbLager:addToolGroup("ValgtVare;Legg markerte varer til kampanje...").
+  otbLager:addToolGroup("ValgtVare;Legg varer til kampanje...").
 
   oContainer:setNoResizeY("RECT-1").
   
@@ -948,6 +950,29 @@ END PROCEDURE.
 /* _UIB-CODE-BLOCK-END */
 &ANALYZE-RESUME
 
+
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE setKampanjeId C-Win
+PROCEDURE setKampanjeId:
+/*------------------------------------------------------------------------------
+ Purpose:
+ Notes:
+------------------------------------------------------------------------------*/
+DEFINE INPUT PARAMETER piKampanjeId AS INTEGER NO-UNDO.
+  
+  ASSIGN 
+    iKampanjeId = piKampanjeId
+    cModus      = '20'
+    .
+  otbLager:disabledTools = "".
+  RUN MoveToTop.
+
+END PROCEDURE.
+  
+/* _UIB-CODE-BLOCK-END */
+&ANALYZE-RESUME
+
+
+
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _PROCEDURE ValgtVareRecord C-Win 
 PROCEDURE ValgtVareRecord :
 /*------------------------------------------------------------------------------
@@ -975,8 +1000,16 @@ DEFINE VARIABLE pcTekst AS CHARACTER NO-UNDO.
       iKampanjeId = 0.
   END.  
   ELSE DO:
-    JBoxSession:Instance:ViewMessage("Marker en eller flere rader først! ").
-    RETURN.
+    IF NOT JBoxSession:Instance:ViewQuestionOkCancel("Skal alle varer i utvalget sendes til kampanje?") THEN 
+        RETURN.    
+    ELSE DO:
+      /* Ved å gjøre dette, får vi bare postene i view-porten. */
+      oBrwArtPris:BROWSE-HANDLE:SELECT-ALL().
+      oBrwArtPris:processRowsNoMessage("kampanjelinje_til_kampanje.p", STRING(iKampanjeId)).
+      /* Ved å gjøre dette får vi med alle postene i spørringen. Ikke begrenset av filteret. */
+/*      oBrwLager:processSet("kampanjelinje_til_kampanje.p", STRING(iKampanjeId)).*/
+      PUBLISH "OpenQueryKampanjeLinje".      
+    END.
   END.
 
 END PROCEDURE.

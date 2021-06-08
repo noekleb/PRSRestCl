@@ -41,6 +41,7 @@ CREATE WIDGET-POOL.
 &SCOPED-DEFINE AdvGuiWin 
 
 /* Parameters Definitions ---                                           */
+DEFINE INPUT PARAMETER icParam AS CHARACTER NO-UNDO.
 
 /* Local Variable Definitions ---                                       */
 
@@ -325,12 +326,12 @@ DEFINE RECTANGLE tbFilter
      EDGE-PIXELS 2 GRAPHIC-EDGE  NO-FILL   
      SIZE 141 BY 2.
 
-DEFINE VARIABLE TGKampanje AS LOGICAL INITIAL no 
+DEFINE VARIABLE TGKampanje AS LOGICAL INITIAL NO 
      LABEL "Kampanje" 
      VIEW-AS TOGGLE-BOX
      SIZE 13.4 BY .81 NO-UNDO.
 
-DEFINE VARIABLE tgNettbutikk AS LOGICAL INITIAL no 
+DEFINE VARIABLE tgNettbutikk AS LOGICAL INITIAL NO 
      LABEL "Nett" 
      VIEW-AS TOGGLE-BOX
      SIZE 13 BY .81 TOOLTIP "Vis bare artikler som er aktivert for nettbutikk" NO-UNDO.
@@ -478,15 +479,15 @@ IF SESSION:DISPLAY-TYPE = "GUI":U THEN
          MAX-WIDTH          = 217.2
          VIRTUAL-HEIGHT     = 24.67
          VIRTUAL-WIDTH      = 217.2
-         RESIZE             = yes
-         SCROLL-BARS        = no
-         STATUS-AREA        = no
+         RESIZE             = YES
+         SCROLL-BARS        = NO
+         STATUS-AREA        = NO
          BGCOLOR            = ?
          FGCOLOR            = ?
-         KEEP-FRAME-Z-ORDER = yes
-         THREE-D            = yes
-         MESSAGE-AREA       = no
-         SENSITIVE          = yes.
+         KEEP-FRAME-Z-ORDER = YES
+         THREE-D            = YES
+         MESSAGE-AREA       = NO
+         SENSITIVE          = YES.
 ELSE {&WINDOW-NAME} = CURRENT-WINDOW.
 /* END WINDOW DEFINITION                                                */
 &ANALYZE-RESUME
@@ -539,7 +540,7 @@ ASSIGN
        btnSplitBarX:MOVABLE IN FRAME frSplitBarX          = TRUE.
 
 IF SESSION:DISPLAY-TYPE = "GUI":U AND VALID-HANDLE(C-Win)
-THEN C-Win:HIDDEN = yes.
+THEN C-Win:HIDDEN = YES.
 
 /* _RUN-TIME-ATTRIBUTES-END */
 &ANALYZE-RESUME
@@ -1187,15 +1188,20 @@ PROCEDURE SendTilKampanjeRecord :
     DO:    
       oBrwArtBas:processRowsNoMessage("kampanjelinje_til_kampanje.p", STRING(iKampanjeId)).
       PUBLISH "OpenQueryKampanjeLinje".
-    END.  
-    ELSE 
-    DO:
-      JBoxSession:Instance:ViewMessage("Marker en eller flere rader først! ").
-      RETURN.
     END.
+    ELSE DO:
+      IF NOT JBoxSession:Instance:ViewQuestionOkCancel("Skal alle varer i utvalget sendes til kampanje?") THEN 
+        RETURN.    
+      ELSE DO:
+        /* Ved å gjøre dette, får vi bare postene i view-porten. */
+        oBrwArtBas:BROWSE-HANDLE:SELECT-ALL().
+        oBrwArtBas:processRowsNoMessage("kampanjelinje_til_kampanje.p", STRING(iKampanjeId)).
+        PUBLISH "OpenQueryKampanjeLinje".
+      END.      
+    END.  
   END.
   ELSE DO:
-    JBoxSession:Instance:ViewMessage("Funksjonen er bar tilgjengelig når listen er startet fra en kampanje! ").
+    JBoxSession:Instance:ViewMessage("Funksjonen er bare tilgjengelig når listen er startet fra en kampanje! ").
   END.
 END PROCEDURE.
 
