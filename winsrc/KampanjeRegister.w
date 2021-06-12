@@ -2310,7 +2310,7 @@ DO WITH FRAME {&FRAME-NAME}:
           cProfilLst = ProfilNr:SCREEN-VALUE + (IF slEkstraPrisProfiler:LIST-ITEMS <> ? THEN ',' + slEkstraPrisProfiler:LIST-ITEMS ELSE '').
           rLagerSalgHandle = jboxmainmenu:Instance:StartChildWindow('SalgLager.w', 
                                       'Solg% lager',
-                                      '16,20,' + REPLACE(cProfilLst,',','¤') + ',' + STRING(KampanjeHode.KampanjeId),
+                                      '16|20|' + REPLACE(cProfilLst,',','¤') + '|' + STRING(KampanjeHode.KampanjeId),
                                       ?,
                                       NO).
           IF VALID-HANDLE(rLagerSalgHandle) THEN 

@@ -86,6 +86,8 @@ DEF TEMP-TABLE Lager
     FIELD Produsent AS CHARACTER
     FIELD Varemerke AS CHARACTER
     FIELD VVarekost AS DECIMAL
+    FIELD VmId AS INTEGER
+    FIELD HovedKAtNr AS INTEGER
     FIELD Butik AS INTEGER
     FIELD ArtikkelNr AS DECIMAL
     FIELD RowIdent1 AS CHARACTER 
@@ -118,6 +120,8 @@ FUNCTION getBuffersAndFieldsBrwLager RETURNS CHARACTER():
      + ';+Produsent|CHARACTER||jb_void(N/A)|Produsent'
      + ';+Varemerke|CHARACTER||jb_void(N/A)|Varemerke'
      + ';+VVarekost|DECIMAL||jb_void(N/A)|Vektet varekost'
+     + ';+VmId|INTEGER||jb_void(N/A)|Varemerke Id'
+     + ';+HovedKAtNr|INTEGER||jb_void(N/A)|HovedKatNr'
      .
 END FUNCTION.
 FUNCTION getQueryJoinBrwLager RETURNS CHARACTER():
@@ -148,7 +152,8 @@ DEF VAR otbLager AS JBoxToolbar NO-UNDO.
 Lager.LevFargKod Lager.Sasong Lager.Pris Lager.Solgt% Lager.Solgt ~
 Lager.VerdiSolgt Lager.Lagant Lager.VerdiLager Lager.Lager_AntProfil ~
 Lager.Lager_VerdiProfil Lager.Varegruppe Lager.Hovedgruppe Lager.Produsent ~
-Lager.Varemerke Lager.VVarekost Lager.Butik Lager.ArtikkelNr 
+Lager.Varemerke Lager.VVarekost Lager.VmId Lager.HovedKAtNr Lager.Butik ~
+Lager.ArtikkelNr 
 &Scoped-define ENABLED-FIELDS-IN-QUERY-BrwLager Lager.Varetekst Lager.Butik 
 &Scoped-define ENABLED-TABLES-IN-QUERY-BrwLager Lager
 &Scoped-define FIRST-ENABLED-TABLE-IN-QUERY-BrwLager Lager
@@ -166,7 +171,7 @@ prev_tbLager next_tbLager last_tbLager refresh_tbLager filter_tbLager ~
 excel_tbLager btnUtvalgHovedKategori fiSolgt%Fra fiSolgt%Til fiVgLst ~
 cbSolgt% btnBlank btnUtvalgVaremerke cbLagant fiVmIdLst BrwLager 
 &Scoped-Define DISPLAYED-OBJECTS fiSolgt%Fra fiSolgt%Til fiVgLst cbSolgt% ~
-cbLagant fiVmIdLst 
+cbLagant fiVmIdLst FI-LagerInfo 
 
 /* Custom List Definitions                                              */
 /* List-1,List-2,List-3,List-4,List-5,List-6                            */
@@ -184,7 +189,7 @@ DEFINE VAR C-Win AS WIDGET-HANDLE NO-UNDO.
 /* Definitions of the field level widgets                               */
 DEFINE BUTTON btnBlank 
      LABEL "<Blank filter>" 
-     SIZE 15 BY 1.14 TOOLTIP "Renser filter og åpner spørringen igjen.".
+     SIZE 15 BY 1 TOOLTIP "Renser filter og åpner spørringen igjen.".
 
 DEFINE BUTTON btnUtvalgHovedKategori 
      LABEL "Hovedkategori" 
@@ -251,6 +256,11 @@ DEFINE VARIABLE cbSolgt% AS INTEGER FORMAT "9":U INITIAL 0
      DROP-DOWN-LIST
      SIZE 20 BY 1 NO-UNDO.
 
+DEFINE VARIABLE FI-LagerInfo AS CHARACTER FORMAT "X(256)":U 
+      VIEW-AS TEXT 
+     SIZE 43.6 BY 1 TOOLTIP "Viser hvilke lagerantalls kolonne lagerfilter går mot."
+     FONT 6 NO-UNDO.
+
 DEFINE VARIABLE fiSolgt%Fra AS DECIMAL FORMAT "->>,>>9.9":U INITIAL 0 
      LABEL "Fra/til Solgt%" 
      VIEW-AS FILL-IN 
@@ -306,11 +316,14 @@ DEFINE BROWSE BrwLager
       Lager.VerdiLager COLUMN-LABEL "Verdi lager" FORMAT "->>,>>>,>>9.99":U
       Lager.Lager_AntProfil COLUMN-LABEL "Antall i profil" FORMAT "->>>,>>9":U
       Lager.Lager_VerdiProfil COLUMN-LABEL "Verdi i profil" FORMAT "->>,>>>,>>9":U
+            WIDTH 10.8
       Lager.Varegruppe COLUMN-LABEL "Varegruppe" FORMAT "X(30)":U
       Lager.Hovedgruppe COLUMN-LABEL "Hovedgruppe" FORMAT "X(30)":U
       Lager.Produsent COLUMN-LABEL "Produsent" FORMAT "X(30)":U
       Lager.Varemerke COLUMN-LABEL "Varemerke" FORMAT "X(30)":U
       Lager.VVarekost COLUMN-LABEL "Vektet varekost" FORMAT "->,>>>,>>9.99":U
+      Lager.VmId COLUMN-LABEL "Varemerke Id" FORMAT ">>>>>9":U
+      Lager.HovedKAtNr COLUMN-LABEL "HovedKatNr" FORMAT ">>>>>9":U
       Lager.Butik COLUMN-LABEL "ButNr" FORMAT ">>>>>9":U
       Lager.ArtikkelNr COLUMN-LABEL "Artikkelnummer" FORMAT "zzzzzzzzzzzz9":U
             WIDTH 54.2
@@ -337,11 +350,12 @@ DEFINE FRAME DEFAULT-FRAME
      fiSolgt%Til AT ROW 3.29 COL 72.4 COLON-ALIGNED NO-LABEL
      fiVgLst AT ROW 3.29 COL 103.6 COLON-ALIGNED
      cbSolgt% AT ROW 3.29 COL 165.4 COLON-ALIGNED WIDGET-ID 38
-     btnBlank AT ROW 4.24 COL 188.2 WIDGET-ID 50
+     btnBlank AT ROW 3.29 COL 188.2 WIDGET-ID 50
      btnUtvalgVaremerke AT ROW 4.33 COL 130.2 WIDGET-ID 80
      cbLagant AT ROW 4.33 COL 165.4 COLON-ALIGNED WIDGET-ID 36
      fiVmIdLst AT ROW 4.38 COL 103.6 COLON-ALIGNED
      BrwLager AT ROW 5.86 COL 2 WIDGET-ID 200
+     FI-LagerInfo AT ROW 4.33 COL 186.4 COLON-ALIGNED NO-LABEL
      "Filter" VIEW-AS TEXT
           SIZE 8 BY .62 AT ROW 2.71 COL 44 WIDGET-ID 48
           FONT 6
@@ -418,6 +432,11 @@ ASSIGN
        FRAME DEFAULT-FRAME:HEIGHT           = 22.24
        FRAME DEFAULT-FRAME:WIDTH            = 233.
 
+/* SETTINGS FOR FILL-IN FI-LagerInfo IN FRAME DEFAULT-FRAME
+   NO-ENABLE                                                            */
+ASSIGN 
+       FI-LagerInfo:READ-ONLY IN FRAME DEFAULT-FRAME        = TRUE.
+
 ASSIGN 
        tbLager:PRIVATE-DATA IN FRAME DEFAULT-FRAME     = 
                 "first;First,prev;Prev,next;Next,last;Last,refresh;Refresh,filter;Filter,excel;Eksporter til E&xcelmaxborder".
@@ -469,9 +488,13 @@ THEN C-Win:HIDDEN = YES.
 "Lager.Varemerke" "Varemerke" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[17]   > "_<CALC>"
 "Lager.VVarekost" "Vektet varekost" "->,>>>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "15" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[18]   > Lager.Butik
+     _FldNameList[18]   > "_<CALC>"
+"Lager.VmId" "Varemerke Id" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "" no no "12.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[19]   > "_<CALC>"
+"Lager.HovedKAtNr" "HovedKatNr" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "" no no "11.8" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[20]   > Lager.Butik
 "Lager.Butik" "ButNr" ">>>>>9" "INTEGER" ? ? ? ? ? ? yes "Butikknummer" no no "7.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[19]   > Lager.ArtikkelNr
+     _FldNameList[21]   > Lager.ArtikkelNr
 "Lager.ArtikkelNr" "Artikkelnummer" "zzzzzzzzzzzz9" "DECIMAL" ? ? ? ? ? ? no "" no no "54.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _Query            is NOT OPENED
 */  /* BROWSE BrwLager */
@@ -568,7 +591,7 @@ DO:
     fiVgLst:SCREEN-VALUE = 'Ant.valgt: ' + STRING(NUM-ENTRIES(cVgLst,'|'))
     .
   IF bOk THEN 
-    RUN setFilter.
+    RUN RefreshRecord.
 END.
 
 /* _UIB-CODE-BLOCK-END */
@@ -593,7 +616,7 @@ DO:
     fiVmIdLst:SCREEN-VALUE = 'Ant.valgt: ' + STRING(NUM-ENTRIES(cVmLst,'|'))
     .
   IF bOk THEN 
-    RUN setFilter.
+    RUN RefreshRecord.
 END.
 
 /* _UIB-CODE-BLOCK-END */
@@ -778,6 +801,7 @@ PROCEDURE enable_UI :
                Settings" section of the widget Property Sheets.
 ------------------------------------------------------------------------------*/
   DISPLAY fiSolgt%Fra fiSolgt%Til fiVgLst cbSolgt% cbLagant fiVmIdLst 
+          FI-LagerInfo 
       WITH FRAME DEFAULT-FRAME IN WINDOW C-Win.
   ENABLE tbLager RECT-1 searchLager first_tbLager prev_tbLager next_tbLager 
          last_tbLager refresh_tbLager filter_tbLager excel_tbLager 
@@ -806,16 +830,20 @@ PROCEDURE InitializeObject :
 
 DO WITH FRAME {&FRAME-NAME}:
   ASSIGN 
-    iButNr = INT(ENTRY(1,icParam))
-    cModus = ENTRY(2,icParam) /*10=Fra meny, 20=Fra kampanjeregister NB: Overstyres ved oppstart fra kampanje. */
+    iButNr     = INT(ENTRY(1,icParam,'|'))
+    cModus     = ENTRY(2,icParam,'|') /*10=Fra meny, 20=Fra kampanjeregister NB: Overstyres ved oppstart fra kampanje. */
+    cProfilLst = ENTRY(3,icParam,'|')
     .
-  IF NUM-ENTRIES(icParam) >= 3 THEN
-    ASSIGN  
-      cProfilLst = ENTRY(3,ICParam)
-      cProfilLst = REPLACE(cProfilLst,'¤',',')
-      .
-  IF NUM-ENTRIES(icParam) >= 4 THEN 
-    iKampanjeId = INT(ENTRY(4,icParam)).
+  IF cModus = '20' THEN 
+  DO:
+    IF NUM-ENTRIES(icParam) >= 3 THEN
+      ASSIGN  
+        cProfilLst = ENTRY(3,ICParam,'|')
+        cProfilLst = REPLACE(cProfilLst,'¤',',')
+        .
+    IF NUM-ENTRIES(icParam,'|') >= 4 THEN 
+      iKampanjeId = INT(ENTRY(4,icParam,'|')).
+  END.
 
   oBrwLager = NEW JBoxBrowse(brwLager:HANDLE).
   oBrwLager:useLocalData = YES. /* Flagger at browser går rundt en temp-tabell, ikke en database tabell. */
@@ -837,6 +865,7 @@ DO WITH FRAME {&FRAME-NAME}:
                            ).
   oBrwLager:POPUP-MENU-OBJECT = opopupLager.
 
+  FI-LagerInfo:SCREEN-VALUE = IF cModus = '10' THEN 'Filter på nettbutikk' ELSE 'Filter på profil'.
   /* Bygger tempTabell */
   RUN RefreshRecord.
   
@@ -927,7 +956,7 @@ RUN ByggerRapport.w PERSISTENT SET hByggerRapport.
   hLager = BUFFER Lager:HANDLE.
 
   SESSION:SET-WAIT-STATE("GENERAL").  
-  IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",'¤¤' + cProfilLst,hLager) THEN
+  IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",cVgLst + '¤' + cVmLst + '¤' + cProfilLst,hLager) THEN
     hLager = JBoxServerAPI:Instance:getCallReturnTable().
   SESSION:SET-WAIT-STATE("").
 
@@ -936,8 +965,8 @@ RUN ByggerRapport.w PERSISTENT SET hByggerRapport.
     DELETE OBJECT hByggerRapport.
 
 /*  RUN SUPER.*/
-
-  oBrwLager:OpenQuery().
+/*  oBrwLager:OpenQuery().*/
+  RUN setFilter.
 
 END PROCEDURE.
 
@@ -1006,17 +1035,18 @@ PROCEDURE setFilter :
     DO:
       oBrwLager:setCalcFieldParam('Lager_Vg', cVgLst).
       oBrwLager:setCalcFieldParam('Lager_VmId', cVmLst).
-      hLager = BUFFER Lager:HANDLE.
-      RUN ByggerRapport.w PERSISTENT SET hByggerRapport.
-      RUN MoveToTop IN hByggerRapport.
-      RUN vistekst IN hByggerRapport.
-      SESSION:SET-WAIT-STATE("GENERAL").  
-      IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",cVgLst + '¤' + cVmLst + '¤' + cProfilLst,hLager) THEN
-        hLager = JBoxServerAPI:Instance:getCallReturnTable().
-      SESSION:SET-WAIT-STATE("").
-      RUN avsluttDialog IN hByggerRapport.
-      IF VALID-HANDLE(hByggerRapport) THEN 
-        DELETE OBJECT hByggerRapport.
+      
+/*      hLager = BUFFER Lager:HANDLE.*/
+/*      RUN ByggerRapport.w PERSISTENT SET hByggerRapport.                                                           */
+/*      RUN MoveToTop IN hByggerRapport.                                                                             */
+/*      RUN vistekst IN hByggerRapport.                                                                              */
+/*      SESSION:SET-WAIT-STATE("GENERAL").                                                                           */
+/*      IF JBoxServerAPI:Instance:CallServerProc("lager_salg.p",cVgLst + '¤' + cVmLst + '¤' + cProfilLst,hLager) THEN*/
+/*        hLager = JBoxServerAPI:Instance:getCallReturnTable().                                                      */
+/*      SESSION:SET-WAIT-STATE("").                                                                                  */
+/*      RUN avsluttDialog IN hByggerRapport.                                                                         */
+/*      IF VALID-HANDLE(hByggerRapport) THEN                                                                         */
+/*        DELETE OBJECT hByggerRapport.                                                                              */
     END.    
     
     pcWhere    = (IF cbLagant:SCREEN-VALUE <> '0' THEN '0|' ELSE '|') +
@@ -1033,7 +1063,8 @@ PROCEDURE setFilter :
                   ELSE IF cbSolgt%:SCREEN-VALUE = '4' THEN '='
                   ELSE '')
       .
-    pcFelt = (IF cbLagant:SCREEN-VALUE <> '0' THEN 'Lagant,' ELSE ',') + 
+    /* TN 12/6-21 Når programmet er startet fra kampanje, skal Lager filteret gå mot Lager_AntProfil feltet. */  
+    pcFelt = (IF cbLagant:SCREEN-VALUE <> '0' THEN (IF cModus = '20' THEN 'Lager_AntProfil,' ELSE 'Lagant,') ELSE ',') + 
              (IF cbSolgt%:SCREEN-VALUE <> '0' THEN 'Solgt%' ELSE '')
              .
 

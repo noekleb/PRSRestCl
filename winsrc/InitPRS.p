@@ -289,7 +289,7 @@ DO:
   oMenuXML:AddNode("cMenuLabel","Solg% lager").
   oMenuXML:AddNode("cLaunch","SalgLager.w").
   oMenuXML:AddNode("cImage","icon\png\document_chart.png").
-  oMenuXML:AddNode("cParameter","16|10").
+  oMenuXML:AddNode("cParameter","16|10|16").
 
   oMenuXML:AddBlockNode("sub-menu","menu-item").
   oMenuXML:AddNode("cMenuLabel","Solgt% aktiv kampanje").
