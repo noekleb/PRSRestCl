@@ -161,10 +161,8 @@ OvBuffer.ovbuffer_DatoTidRegistrert OvBuffer.RegistrertAv OvBuffer.BuntNr ~
 OvBuffer.ButikkNrFra OvBuffer.ArtikkelNr OvBuffer.ovbuffer_BuntStatus 
 &Scoped-define ENABLED-FIELDS-IN-QUERY-BrwOvBuffer OvBuffer.LinjeNr ~
 OvBuffer.BuntNr 
-&Scoped-define ENABLED-TABLES-IN-QUERY-BrwOvBuffer OvBuffer
-&Scoped-define FIRST-ENABLED-TABLE-IN-QUERY-BrwOvBuffer OvBuffer
-&Scoped-define QUERY-STRING-BrwOvBuffer FOR EACH OvBuffer NO-LOCK, INDEXED-REPOSITION
-&Scoped-define OPEN-QUERY-BrwOvBuffer OPEN QUERY BrwOvBuffer FOR EACH OvBuffer NO-LOCK, INDEXED-REPOSITION.
+&Scoped-define QUERY-STRING-BrwOvBuffer FOR EACH OvBuffer NO-LOCK INDEXED-REPOSITION
+&Scoped-define OPEN-QUERY-BrwOvBuffer OPEN QUERY BrwOvBuffer FOR EACH OvBuffer NO-LOCK INDEXED-REPOSITION.
 &Scoped-define TABLES-IN-QUERY-BrwOvBuffer OvBuffer
 &Scoped-define FIRST-TABLE-IN-QUERY-BrwOvBuffer OvBuffer
 
@@ -439,7 +437,7 @@ THEN C-Win:HIDDEN = YES.
 /* Query rebuild information for BROWSE BrwOvBuffer
      _TblList          = "SkoTex.OvBuffer"
      _Options          = "NO-LOCK INDEXED-REPOSITION"
-     _FldNameList[1]   > OvBuffer.LinjeNr
+     _FldNameList[1]   > "_<CALC>"
 "OvBuffer.LinjeNr" "LinjeNr" ">>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? yes "Linjenummer" no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[2]   > "_<CALC>"
 "OvBuffer.ovbuffer_Beskr" "Varetekst" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
@@ -447,29 +445,29 @@ THEN C-Win:HIDDEN = YES.
 "OvBuffer.ovbuffer_LevKod" "Lev.art.nr" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[4]   > "_<CALC>"
 "OvBuffer.ovbuffer_LevFargKod" "Fargekode" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[5]   > OvBuffer.Storl
+     _FldNameList[5]   > "_<CALC>"
 "OvBuffer.Storl" "Størrelse" "x(10)" "CHARACTER" ? ? ? ? ? ? no "Størrelse som skal overføres" no no "10" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[6]   > "_<CALC>"
 "OvBuffer.ovbuffer_Kode" "Strekkode" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[7]   > OvBuffer.Antall
+     _FldNameList[7]   > "_<CALC>"
 "OvBuffer.Antall" "Antall" "->>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "Antall par som skal overøres" no no "10.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[8]   > OvBuffer.ButikkNrTil
+     _FldNameList[8]   > "_<CALC>"
 "OvBuffer.ButikkNrTil" "Til butikk" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Butikk det overføres til" no no "8.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[9]   > "_<CALC>"
 "OvBuffer.ovbuffer_TilButNavn" "Navn" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[10]   > "_<CALC>"
 "OvBuffer.ovbuffer_DatoTidEndret" "Endret" "X(17)" "CHARACTER" ? ? ? ? ? ? no "" no no "17" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[11]   > OvBuffer.BrukerID
+     _FldNameList[11]   > "_<CALC>"
 "OvBuffer.BrukerID" "Bruker" "X(10)" "CHARACTER" ? ? ? ? ? ? no "Bruker som registrerte/endret posten" no no "10" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[12]   > "_<CALC>"
 "OvBuffer.ovbuffer_DatoTidRegistrert" "Registrert" "X(17)" "CHARACTER" ? ? ? ? ? ? no "" no no "17" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[13]   > OvBuffer.RegistrertAv
+     _FldNameList[13]   > "_<CALC>"
 "OvBuffer.RegistrertAv" "Reg.Av" "X(10)" "CHARACTER" ? ? ? ? ? ? no "Brukerid på den som registrerte posten" no no "97.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[14]   > OvBuffer.BuntNr
+     _FldNameList[14]   > "_<CALC>"
 "OvBuffer.BuntNr" "BuntNr" ">>>>>>>>>9" "INTEGER" ? ? ? ? ? ? yes "Buntnummer." no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[15]   > OvBuffer.ButikkNrFra
+     _FldNameList[15]   > "_<CALC>"
 "OvBuffer.ButikkNrFra" "Fra butikknummer" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Butikk det overføres fra" no no "16.8" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[16]   > OvBuffer.ArtikkelNr
+     _FldNameList[16]   > "_<CALC>"
 "OvBuffer.ArtikkelNr" "Artikkelnummer" "zzzzzzzzzzzz9" "DECIMAL" ? ? ? ? ? ? no "" no no "14.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[17]   > "_<CALC>"
 "OvBuffer.ovbuffer_BuntStatus" "BuntStatus" "X(6)" "CHARACTER" ? ? ? ? ? ? no "" no no "10.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
@@ -835,16 +833,11 @@ DEF VAR oBrwFillInAntall AS JBoxBrowseFillIn NO-UNDO.
       IF JBoxServerAPI:Instance:Find("OvBunt","WHERE BuntNr = '" + STRING(iBuntNr) + "'") THEN
       DO:
         cbFraBut:LIST-ITEM-PAIRS = JBoxServerAPI:Instance:FieldValue("OvBunt.FrabutNr") + ',' + JBoxServerAPI:Instance:FieldValue("OvBunt.FrabutNr").
+        cbFraBut:SENSITIVE = FALSE.
         cbTilBut = INT(JBoxServerAPI:Instance:FieldValue("OvBunt.TilbutNr")).
         cbFraBut = INT(JBoxServerAPI:Instance:FieldValue("OvBunt.FrabutNr")).
         cbTilBut:SENSITIVE = FALSE.
-        cbFraBut:SENSITIVE = FALSE.
         Merknad:SENSITIVE = FALSE.
-        
-        ASSIGN         
-          cbFraBut:SCREEN-VALUE = STRING(cbFraBut)
-          cbTilBut:SCREEN-VALUE = STRING(cbTilBut)
-          .
       END.
     END. /* RESERVASJON */
 
@@ -859,10 +852,12 @@ DEF VAR oBrwFillInAntall AS JBoxBrowseFillIn NO-UNDO.
           ASSIGN 
             cbTilBut:LIST-ITEMS = cOvButLst
             NO-ERROR.
-      IF JBoxServerAPI:Instance:Find("FIRST OvBuffer","WHERE BuntNr = '" + STRING(iBuntNr) + "'") THEN
+      IF JBoxServerAPI:Instance:Find("FIRST OvBunt","WHERE BuntNr = '" + STRING(iBuntNr) + "'") THEN
       DO:
-        cbTilBut = INT(JBoxServerAPI:Instance:FieldValue("OvBuffer.ButikkNrTil")).
-        cbTilBut:SENSITIVE = FALSE.
+        cbTilBut = INT(JBoxServerAPI:Instance:FieldValue("OvBunt.TilbutNr")).
+        IF INT(cbTilBut) > 0 THEN 
+          cbTilBut:SENSITIVE = FALSE.
+        cbFraBut = INT(JBoxServerAPI:Instance:FieldValue("OvBunt.FrabutNr")).
         ASSIGN         
           cbFraBut:SCREEN-VALUE = STRING(cbFraBut)
           cbTilBut:SCREEN-VALUE = STRING(cbTilBut)

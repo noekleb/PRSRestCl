@@ -2412,6 +2412,8 @@ DO WITH FRAME {&FRAME-NAME}:
           cProfilLst = ProfilNr:SCREEN-VALUE + (IF slEkstraPrisProfiler:LIST-ITEMS <> ? THEN ',' + slEkstraPrisProfiler:LIST-ITEMS ELSE '').
           rModellListeHandle = jboxmainmenu:Instance:StartChildWindow('LagerListeModButStr.w', 
                                       'Modelliste',
+                                      '',
+                                      ?,
                                        NO).
           IF VALID-HANDLE(rModellListeHandle) THEN 
           DO:
@@ -2648,16 +2650,12 @@ PROCEDURE OppslagModellRecord :
   DO WITH FRAME {&FRAME-NAME}:
     IF AVAILABLE KampanjeLinje THEN 
     DO:
-      
-      /* FILTER:LevKod=XX,LevFargKod=XX */
-      ASSIGN 
-        cFilterTekst = 'FILTER:LevKod=&LevKod,LevFargKod=&LevFargKod'
-        cFilterTekst = REPLACE(cFilterTekst,'&LevKod',KampanjeLinje.KampanjeLinje_LevKod)
-        cFilterTekst = REPLACE(cFilterTekst,'&LevFargKod',KampanjeLinje.KampanjeLinje_LevFargKod)
-        .
       DO ON ERROR UNDO, LEAVE:  
-        oContainer:StartTabWindow('LagerListeModButStr.w', 'Modelliste', FALSE, YES).
-        PUBLISH 'settModellFilter' (cFilterTekst).
+        rModellListeHandle = jboxmainmenu:Instance:StartChildWindow('LagerListeModButStr.w', 
+                                    'Modelliste',
+                                    KampanjeLinje.KampanjeLinje_LevKod,
+                                    ?,
+                                     NO).
       END.
     END.
   END.

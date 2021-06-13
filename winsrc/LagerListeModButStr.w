@@ -196,10 +196,8 @@ ArtBas.HovedKatNr ArtBas.anv-id ArtBas.RegistrertDato ArtBas.EDato ~
 ArtBas.ArtBas_KampPris 
 &Scoped-define ENABLED-FIELDS-IN-QUERY-BrwArtBas ArtBas.LevKod ArtBas.Beskr ~
 ArtBas.ArtikkelNr ArtBas.Vg 
-&Scoped-define ENABLED-TABLES-IN-QUERY-BrwArtBas ArtBas
-&Scoped-define FIRST-ENABLED-TABLE-IN-QUERY-BrwArtBas ArtBas
-&Scoped-define QUERY-STRING-BrwArtBas FOR EACH ArtBas NO-LOCK, INDEXED-REPOSITION
-&Scoped-define OPEN-QUERY-BrwArtBas OPEN QUERY BrwArtBas FOR EACH ArtBas NO-LOCK, INDEXED-REPOSITION.
+&Scoped-define QUERY-STRING-BrwArtBas FOR EACH ArtBas NO-LOCK INDEXED-REPOSITION
+&Scoped-define OPEN-QUERY-BrwArtBas OPEN QUERY BrwArtBas FOR EACH ArtBas NO-LOCK INDEXED-REPOSITION.
 &Scoped-define TABLES-IN-QUERY-BrwArtBas ArtBas
 &Scoped-define FIRST-TABLE-IN-QUERY-BrwArtBas ArtBas
 
@@ -422,23 +420,23 @@ DEFINE FRAME DEFAULT-FRAME
      cbLagerkoder AT ROW 3.81 COL 120.8 COLON-ALIGNED NO-LABEL WIDGET-ID 40
      tgNettbutikk AT ROW 4 COL 88.6 WIDGET-ID 46
      BrwArtBas AT ROW 6.24 COL 2.8 WIDGET-ID 200
-     "Varetekst" VIEW-AS TEXT
-          SIZE 18 BY .62 AT ROW 3.19 COL 4.2 WIDGET-ID 30
+     "Lager" VIEW-AS TEXT
+          SIZE 18 BY .62 AT ROW 3.19 COL 102.6 WIDGET-ID 48
           FONT 6
      "Lev.artikkelnr" VIEW-AS TEXT
           SIZE 18 BY .62 AT ROW 3.19 COL 38 WIDGET-ID 32
           FONT 6
-     "Lager" VIEW-AS TEXT
-          SIZE 18 BY .62 AT ROW 3.19 COL 102.6 WIDGET-ID 48
-          FONT 6
-     "Lagerkoder" VIEW-AS TEXT
-          SIZE 18 BY .62 AT ROW 3.19 COL 123.4 WIDGET-ID 38
+     "Varetekst" VIEW-AS TEXT
+          SIZE 18 BY .62 AT ROW 3.19 COL 4.2 WIDGET-ID 30
           FONT 6
      "Filter" VIEW-AS TEXT
           SIZE 8 BY .62 AT ROW 2.48 COL 4.2 WIDGET-ID 28
           FONT 6
      "lev.fargekode" VIEW-AS TEXT
           SIZE 18 BY .62 AT ROW 3.19 COL 56.6 WIDGET-ID 34
+          FONT 6
+     "Lagerkoder" VIEW-AS TEXT
+          SIZE 18 BY .62 AT ROW 3.19 COL 123.4 WIDGET-ID 38
           FONT 6
      tbArtBas AT ROW 1.24 COL 2 WIDGET-ID 4
      tbFilter AT ROW 3.05 COL 3 WIDGET-ID 26
@@ -552,15 +550,15 @@ THEN C-Win:HIDDEN = YES.
 /* Query rebuild information for BROWSE BrwArtBas
      _TblList          = "SkoTex.ArtBas"
      _Options          = "NO-LOCK INDEXED-REPOSITION"
-     _FldNameList[1]   > ArtBas.LevKod
+     _FldNameList[1]   > "_<CALC>"
 "ArtBas.LevKod" "LevArtNr" "x(20)" "CHARACTER" ? ? ? ? ? ? yes "Leverandørens artikkelnummer" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[2]   > ArtBas.LevFargKod
+     _FldNameList[2]   > "_<CALC>"
 "ArtBas.LevFargKod" "LevFargKod" "X(15)" "CHARACTER" ? ? ? ? ? ? no "Leverandørens fargekode" no no "15" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[3]   > ArtBas.Beskr
+     _FldNameList[3]   > "_<CALC>"
 "ArtBas.Beskr" "Beskrivelse" "x(50)" "CHARACTER" ? ? ? ? ? ? yes "Kort beskrivelse av artikkelen" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[4]   > ArtBas.SaSong
+     _FldNameList[4]   > "_<CALC>"
 "ArtBas.SaSong" "Sesong" "zzzzz9" "INTEGER" ? ? ? ? ? ? no "Sesong" no no "7.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[5]   > ArtBas.Lagerkoder
+     _FldNameList[5]   > "_<CALC>"
 "ArtBas.Lagerkoder" "Lagerkoder" "x(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[6]   > "_<CALC>"
 "ArtBas.ArtBas_Pris" "Pris" "->>>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "11.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
@@ -568,7 +566,7 @@ THEN C-Win:HIDDEN = YES.
 "ArtBas.ArtBas_TilbudsPris" "TilbudsPris" "->>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[8]   > "_<CALC>"
 "ArtBas.ArtBas_KampRab%" "KampRab%" "->>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "" no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[9]   > ArtBas.WebButikkArtikkel
+     _FldNameList[9]   > "_<CALC>"
 "ArtBas.WebButikkArtikkel" "Nett" "*~~/" "LOGICAL" ? ? ? ? ? ? no "Artikkelen skal distribueres til nett butikk" no no "4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[10]   > "_<CALC>"
 "ArtBas.ArtBas_HarLager" "Har lager" "9" "INTEGER" ? ? ? ? ? ? no "" no no "7" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
@@ -582,31 +580,31 @@ THEN C-Win:HIDDEN = YES.
 "ArtBas.ArtBas_Brukskode" "BrukskodeNavn" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[15]   > "_<CALC>"
 "ArtBas.ArtBas_Produsent" "ProdusentNavn" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[16]   > ArtBas.HovedModellFarge
+     _FldNameList[16]   > "_<CALC>"
 "ArtBas.HovedModellFarge" "HMF" "*~~/" "LOGICAL" ? ? ? ? ? ? no "Artikkelen er hovedartikkel i en model/farge." no no "4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[17]   > ArtBas.ArtikkelNr
+     _FldNameList[17]   > "_<CALC>"
 "ArtBas.ArtikkelNr" "Artikkelnummer" "zzzzzzzzzzzz9" "DECIMAL" ? ? ? ? ? ? yes "" no no "14.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[18]   > ArtBas.ModellFarge
+     _FldNameList[18]   > "_<CALC>"
 "ArtBas.ModellFarge" "ModellFarge" ">>>>>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "Kobler sammen flere artikler som utgjør en modell." no no "15.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[19]   > ArtBas.Vg
+     _FldNameList[19]   > "_<CALC>"
 "ArtBas.Vg" "Varegruppe" "zzzzz9" "INTEGER" ? ? ? ? ? ? yes "'varegruppenummer" no no "11" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[20]   > ArtBas.Hg
+     _FldNameList[20]   > "_<CALC>"
 "ArtBas.Hg" "Hovedgruppe" ">>>>9" "INTEGER" ? ? ? ? ? ? no "" no no "13" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[21]   > ArtBas.VMId
+     _FldNameList[21]   > "_<CALC>"
 "ArtBas.VMId" "VareMerke" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Varemerke ('Brand')." no no "10.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[22]   > ArtBas.LevNr
+     _FldNameList[22]   > "_<CALC>"
 "ArtBas.LevNr" "Leverandørnummer" "zzzzz9" "INTEGER" ? ? ? ? ? ? no "Leverandørnummer" no no "18.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[23]   > ArtBas.lager
+     _FldNameList[23]   > "_<CALC>"
 "ArtBas.lager" "Lagerstyrt" "*~~/" "LOGICAL" ? ? ? ? ? ? no "Artikkelen har lagerstyring." no no "6" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[24]   > ArtBas.ProdNr
+     _FldNameList[24]   > "_<CALC>"
 "ArtBas.ProdNr" "Produsent" "zzzzzz9" "INTEGER" ? ? ? ? ? ? no "Produsent" no no "9.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[25]   > ArtBas.HovedKatNr
+     _FldNameList[25]   > "_<CALC>"
 "ArtBas.HovedKatNr" "Hovedkategori" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Kobling av artikkel til hovedkategori" no no "7.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[26]   > ArtBas.anv-id
+     _FldNameList[26]   > "_<CALC>"
 "ArtBas.anv-id" "Brukskode" ">>>>9" "INTEGER" ? ? ? ? ? ? no "" no no "6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[27]   > ArtBas.RegistrertDato
+     _FldNameList[27]   > "_<CALC>"
 "ArtBas.RegistrertDato" "RDato" "99/99/9999" "DATE" ? ? ? ? ? ? no "Dato da posten ble registrert i registeret" no no "11.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[28]   > ArtBas.EDato
+     _FldNameList[28]   > "_<CALC>"
 "ArtBas.EDato" "Endret" "99/99/9999" "DATE" ? ? ? ? ? ? no "Endret dato" no no "11.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[29]   > "_<CALC>"
 "ArtBas.ArtBas_KampPris" "KampPrris" "->>>,>>9.99" "DECIMAL" ? ? ? ? ? ? no "Pris som var gjeldende når kampanjen ble aktivert." no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
@@ -1048,6 +1046,8 @@ PROCEDURE InitializeObject :
 DO WITH FRAME {&FRAME-NAME}:
   SUBSCRIBE 'settModellFilter' ANYWHERE.
   
+  cLevKod = ENTRY(1,icParam,'|').
+  
   oBrwArtBas = NEW JBoxBrowse(brwArtBas:HANDLE).
   otbArtBas = NEW JBoxToolbar(tbArtBas:HANDLE).
  
@@ -1079,14 +1079,22 @@ DO WITH FRAME {&FRAME-NAME}:
 
   oBrwArtBas:setSearchField(searchArtBas:HANDLE,"LevKod").
 
-  cbLagAnt:SCREEN-VALUE = ENTRY(4,cbLagAnt:LIST-ITEM-PAIRS).
 
   opopupModell = NEW JBoxPopupMenu().
   opopupModell:AddToolGroup('AvsluttKampanje;Avslutt kampanje,SettModell;Slå sammen til modell,FrigiModell;Frigi fra modell'  
                            ).
   oBrwArtBas:POPUP-MENU-OBJECT = opopupModell.
   oBrwArtBas:TOOLBAR-OBJECT = otbArtBas.
-
+  
+  /* Programmet er startet fra et annet program og bare en modell skal vises. */
+  IF cLevKod <> '' THEN
+  DO: 
+    oBrwArtBas:baseQuery = "WHERE LevKod = '" + cLevKod + "'".
+    cbLagAnt:SCREEN-VALUE = ENTRY(2,cbLagAnt:LIST-ITEM-PAIRS).
+  END.
+  ELSE 
+    cbLagAnt:SCREEN-VALUE = ENTRY(4,cbLagAnt:LIST-ITEM-PAIRS).
+  
   /* Oppslag fra eksternt program.  */
   /* FILTER:LevKod=XX,LevFargKod=XX */
 /*  PUBLISH 'getFilterTekst' (OUTPUT pcTekst). */

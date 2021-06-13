@@ -59,25 +59,27 @@ DEFINE VARIABLE iLinjeNr AS INTEGER NO-UNDO.
 DEFINE VARIABLE iBuntNr AS INTEGER NO-UNDO.
 DEF VAR opopupOvBuffer AS JBoxPopupMenu NO-UNDO.
 DEFINE VARIABLE cFilterTekst AS CHARACTER NO-UNDO.
+DEFINE VARIABLE rModellListeHandle AS HANDLE NO-UNDO.
 
 /*** Start instance property definitions for JBoxBrowse object oBrwOvBunt ***/
 DEFINE VARIABLE oBrwOvBunt AS JBoxBrowse NO-UNDO.
 DEF TEMP-TABLE OvBunt
     FIELD BuntNr AS INTEGER
     FIELD FraButNr AS INTEGER
-    FIELD Merknad AS CHARACTER
+    FIELD TilbutNr AS INTEGER
     FIELD opphav AS INTEGER
+    FIELD Merknad AS CHARACTER
     FIELD ovbunt_OpphavTekst AS CHARACTER
     FIELD ovbunt_Opprettet AS CHARACTER
     FIELD RegistrertAv AS CHARACTER
     FIELD BatchNr AS INTEGER
+    FIELD BuntStatus AS INTEGER
     FIELD ovbunt_DatoTidOppdatert AS CHARACTER
     FIELD OppdatertAv AS CHARACTER
     FIELD ovbunt_FakturaNr AS DECIMAL
     FIELD Faktura_Id AS DECIMAL
     FIELD ovbunt_DatotidFakturert AS CHARACTER
     FIELD PlListeId AS DECIMAL
-    FIELD BuntStatus AS INTEGER
     FIELD EDato AS DATE
     FIELD ETid AS INTEGER
     FIELD BrukerID AS CHARACTER
@@ -88,7 +90,6 @@ DEF TEMP-TABLE OvBunt
     FIELD RegistrertDato AS DATE
     FIELD RegistrertTid AS INTEGER
     FIELD ovbunt_Dummy AS CHARACTER
-    FIELD TilbutNr AS INTEGER
     FIELD RowIdent1 AS CHARACTER 
     FIELD RowCount AS INTEGER
     FIELD jbCountDistinct AS INTEGER FORMAT '>>>,>>>,>>9' INIT 1
@@ -103,14 +104,15 @@ FUNCTION getBuffersAndFieldsBrwOvBunt RETURNS CHARACTER():
     'OvBunt'
      + ';BuntNr'
      + ';FraButNr'
-     + ';Merknad'
+     + ';TilbutNr'
      + ';opphav'
+     + ';Merknad'
      + ';RegistrertAv'
      + ';BatchNr'
+     + ';BuntStatus'
      + ';OppdatertAv'
      + ';Faktura_Id'
      + ';PlListeId'
-     + ';BuntStatus'
      + ';EDato'
      + ';ETid'
      + ';BrukerID'
@@ -120,7 +122,6 @@ FUNCTION getBuffersAndFieldsBrwOvBunt RETURNS CHARACTER():
      + ';TidOppdatert'
      + ';RegistrertDato'
      + ';RegistrertTid'
-     + ';TilbutNr'
      + ';+ovbunt_OpphavTekst|CHARACTER||ovbunt_OpphavTekst|Fra modul'
      + ';+ovbunt_Opprettet|CHARACTER||ovbunt_Opprettet|Registrert'
      + ';+ovbunt_DatoTidOppdatert|CHARACTER||ovbunt_DatoTidOppdatert|Oppdatert'
@@ -245,14 +246,14 @@ OvBuffer.ButikkNrFra
 
 /* Definitions for BROWSE BrwOvBunt                                     */
 &Scoped-define FIELDS-IN-QUERY-BrwOvBunt OvBunt.BuntNr OvBunt.FraButNr ~
-OvBunt.Merknad OvBunt.opphav OvBunt.ovbunt_OpphavTekst ~
+OvBunt.TilbutNr OvBunt.opphav OvBunt.Merknad OvBunt.ovbunt_OpphavTekst ~
 OvBunt.ovbunt_Opprettet OvBunt.RegistrertAv OvBunt.BatchNr ~
-OvBunt.ovbunt_DatoTidOppdatert OvBunt.OppdatertAv OvBunt.ovbunt_FakturaNr ~
-OvBunt.Faktura_Id OvBunt.ovbunt_DatotidFakturert OvBunt.PlListeId ~
-OvBunt.BuntStatus OvBunt.EDato OvBunt.ETid OvBunt.BrukerID ~
+OvBunt.BuntStatus OvBunt.ovbunt_DatoTidOppdatert OvBunt.OppdatertAv ~
+OvBunt.ovbunt_FakturaNr OvBunt.Faktura_Id OvBunt.ovbunt_DatotidFakturert ~
+OvBunt.PlListeId OvBunt.EDato OvBunt.ETid OvBunt.BrukerID ~
 OvBunt.FakturertDato OvBunt.FakturertTid OvBunt.DatoOppdatert ~
 OvBunt.TidOppdatert OvBunt.RegistrertDato OvBunt.RegistrertTid ~
-OvBunt.ovbunt_Dummy OvBunt.TilbutNr 
+OvBunt.ovbunt_Dummy 
 &Scoped-define ENABLED-FIELDS-IN-QUERY-BrwOvBunt OvBunt.BuntNr 
 &Scoped-define ENABLED-TABLES-IN-QUERY-BrwOvBunt OvBunt
 &Scoped-define FIRST-ENABLED-TABLE-IN-QUERY-BrwOvBunt OvBunt
@@ -399,7 +400,7 @@ DEFINE QUERY BrwOvBunt FOR
 DEFINE BROWSE BrwOvBuffer
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _DISPLAY-FIELDS BrwOvBuffer C-Win _STRUCTURED
   QUERY BrwOvBuffer NO-LOCK DISPLAY
-      OvBuffer.BuntNr COLUMN-LABEL "BuntNr" FORMAT "->,>>>,>>9":U
+      OvBuffer.BuntNr COLUMN-LABEL "BuntNr" FORMAT "->>>>>>>>>9":U
       OvBuffer.LinjeNr COLUMN-LABEL "LinjeNr" FORMAT ">>>>>>>>>9":U
       OvBuffer.ArtikkelNr COLUMN-LABEL "Artikkelnummer" FORMAT "zzzzzzzzzzzz9":U
             WIDTH 14.4
@@ -426,15 +427,17 @@ DEFINE BROWSE BrwOvBuffer
 DEFINE BROWSE BrwOvBunt
 &ANALYZE-SUSPEND _UIB-CODE-BLOCK _DISPLAY-FIELDS BrwOvBunt C-Win _STRUCTURED
   QUERY BrwOvBunt NO-LOCK DISPLAY
-      OvBunt.BuntNr COLUMN-LABEL "BuntNr" FORMAT "->,>>>,>>9":U
-      OvBunt.FraButNr FORMAT ">>>>>9":U
-      OvBunt.Merknad COLUMN-LABEL "Merknad" FORMAT "X(30)":U
+      OvBunt.BuntNr COLUMN-LABEL "BuntNr" FORMAT "->>>>>>>>>9":U
+      OvBunt.FraButNr COLUMN-LABEL "Fra butikk" FORMAT ">>>>>9":U
+      OvBunt.TilbutNr COLUMN-LABEL "Til butikk" FORMAT ">>>>>9":U
       OvBunt.opphav COLUMN-LABEL "Opphav" FORMAT ">9":U
+      OvBunt.Merknad COLUMN-LABEL "Merknad" FORMAT "X(100)":U WIDTH 30
       OvBunt.ovbunt_OpphavTekst COLUMN-LABEL "Fra modul" FORMAT "X(20)":U
       OvBunt.ovbunt_Opprettet COLUMN-LABEL "Registrert" FORMAT "X(18)":U
       OvBunt.RegistrertAv COLUMN-LABEL "Reg.Av" FORMAT "X(10)":U
       OvBunt.BatchNr COLUMN-LABEL "Batch" FORMAT "zzzzzzzz9":U
             WIDTH 9.2
+      OvBunt.BuntStatus COLUMN-LABEL "Status" FORMAT "->>>>>>9":U
       OvBunt.ovbunt_DatoTidOppdatert COLUMN-LABEL "Oppdatert" FORMAT "X(18)":U
       OvBunt.OppdatertAv COLUMN-LABEL "Oppdatert av" FORMAT "X(15)":U
       OvBunt.ovbunt_FakturaNr COLUMN-LABEL "Fakturanr" FORMAT ">>>>>>>>>>>>9":U
@@ -442,7 +445,6 @@ DEFINE BROWSE BrwOvBunt
       OvBunt.Faktura_Id COLUMN-LABEL "FId" FORMAT ">>>>>>>>>>>>9":U
       OvBunt.ovbunt_DatotidFakturert COLUMN-LABEL "Fakturert" FORMAT "X(18)":U
       OvBunt.PlListeId COLUMN-LABEL "Pl.lst.id" FORMAT ">>>>>>>9":U
-      OvBunt.BuntStatus COLUMN-LABEL "Status" FORMAT "->,>>>,>>9":U
       OvBunt.EDato COLUMN-LABEL "Endret" FORMAT "99/99/9999":U
       OvBunt.ETid COLUMN-LABEL "ETid" FORMAT "->,>>>,>>9":U
       OvBunt.BrukerID COLUMN-LABEL "Bruker" FORMAT "X(10)":U
@@ -453,7 +455,6 @@ DEFINE BROWSE BrwOvBunt
       OvBunt.RegistrertDato COLUMN-LABEL "RDato" FORMAT "99/99/9999":U
       OvBunt.RegistrertTid COLUMN-LABEL "Registreringstidspunkt" FORMAT "->,>>>,>>9":U
       OvBunt.ovbunt_Dummy COLUMN-LABEL "." FORMAT "X(1)":U
-      OvBunt.TilbutNr FORMAT ">>>>>9":U
   ENABLE
       OvBunt.BuntNr HELP "Buntnummer."
 /* _UIB-CODE-BLOCK-END */
@@ -599,7 +600,7 @@ THEN C-Win:HIDDEN = YES.
      _TblList          = "SkoTex.OvBuffer"
      _Options          = "NO-LOCK INDEXED-REPOSITION"
      _FldNameList[1]   > "_<CALC>"
-"OvBuffer.BuntNr" "BuntNr" "->,>>>,>>9" "INTEGER" ? ? ? ? ? ? yes "Buntnummer." no no "10.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"OvBuffer.BuntNr" "BuntNr" "->>>>>>>>>9" "INTEGER" ? ? ? ? ? ? yes "Buntnummer." no no "12.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[2]   > "_<CALC>"
 "OvBuffer.LinjeNr" "LinjeNr" ">>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "Linjenummer" no no "12" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[3]   > "_<CALC>"
@@ -629,7 +630,7 @@ THEN C-Win:HIDDEN = YES.
      _FldNameList[15]   > "_<CALC>"
 "OvBuffer.RegistrertAv" "Reg.Av" "X(10)" "CHARACTER" ? ? ? ? ? ? no "Brukerid på den som registrerte posten" no no "10" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[16]   > "_<CALC>"
-"OvBuffer.ButikkNrFra" "Fra butikknummer" ">>>>>9" "integer" ? ? ? ? ? ? no "Butikk det overføres fra" no no "16.8" no no no "U" "" "" "" "" "" "" 0 no 0 no no
+"OvBuffer.ButikkNrFra" "Fra butikknummer" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Butikk det overføres fra" no no "16.8" no no no "U" "" "" "" "" "" "" 0 no 0 no no
      _Query            is NOT OPENED
 */  /* BROWSE BrwOvBuffer */
 &ANALYZE-RESUME
@@ -639,57 +640,57 @@ THEN C-Win:HIDDEN = YES.
      _TblList          = "SkoTex.OvBunt"
      _Options          = "NO-LOCK INDEXED-REPOSITION"
      _FldNameList[1]   > OvBunt.BuntNr
-"OvBunt.BuntNr" "BuntNr" "->,>>>,>>9" "INTEGER" ? ? ? ? ? ? yes "Buntnummer." no no "10.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"OvBunt.BuntNr" "BuntNr" "->>>>>>>>>9" "INTEGER" ? ? ? ? ? ? yes "Buntnummer." no no "12.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[2]   > OvBunt.FraButNr
-"OvBunt.FraButNr" "Fra butikk" ">>>>>9" "integer" ? ? ? ? ? ? no "Butikk det overføres varer fra." no no "9.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[3]   > OvBunt.Merknad
-"OvBunt.Merknad" "Merknad" "X(30)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+"OvBunt.FraButNr" "Fra butikk" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Butikk det overføres varer fra." no no "9.4" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[3]   > OvBunt.TilbutNr
+"OvBunt.TilbutNr" "Til butikk" ">>>>>9" "INTEGER" ? ? ? ? ? ? no "Butikk det overføres varer til" no no "8.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[4]   > OvBunt.opphav
 "OvBunt.opphav" "Opphav" ">9" "INTEGER" ? ? ? ? ? ? no "" no no "7.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[5]   > "_<CALC>"
-"OvBunt.ovbunt_OpphavTekst" "Fra modul" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[5]   > OvBunt.Merknad
+"OvBunt.Merknad" "Merknad" "X(100)" "CHARACTER" ? ? ? ? ? ? no "" no no "30" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[6]   > "_<CALC>"
+"OvBunt.ovbunt_OpphavTekst" "Fra modul" "X(20)" "CHARACTER" ? ? ? ? ? ? no "" no no "20" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[7]   > "_<CALC>"
 "OvBunt.ovbunt_Opprettet" "Registrert" "X(18)" "CHARACTER" ? ? ? ? ? ? no "" no no "18" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[7]   > OvBunt.RegistrertAv
+     _FldNameList[8]   > OvBunt.RegistrertAv
 "OvBunt.RegistrertAv" "Reg.Av" "X(10)" "CHARACTER" ? ? ? ? ? ? no "Brukerid på den som registrerte posten" no no "10" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[8]   > OvBunt.BatchNr
+     _FldNameList[9]   > OvBunt.BatchNr
 "OvBunt.BatchNr" "Batch" "zzzzzzzz9" "INTEGER" ? ? ? ? ? ? no "Batch nummer som holder sammen transaksjoner" no no "9.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[9]   > "_<CALC>"
-"OvBunt.ovbunt_DatoTidOppdatert" "Oppdatert" "X(18)" "CHARACTER" ? ? ? ? ? ? no "" no no "18" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[10]   > OvBunt.OppdatertAv
-"OvBunt.OppdatertAv" "Oppdatert av" "X(15)" "CHARACTER" ? ? ? ? ? ? no "Brukerid på den som oppdaterte bunten" no no "15" no no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[10]   > OvBunt.BuntStatus
+"OvBunt.BuntStatus" "Status" "->>>>>>9" "INTEGER" ? ? ? ? ? ? no "" no no "9" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[11]   > "_<CALC>"
-"OvBunt.ovbunt_FakturaNr" "Fakturanr" ">>>>>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "" no no "10.8" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[12]   > OvBunt.Faktura_Id
-"OvBunt.Faktura_Id" "FId" ">>>>>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "Internt faktura id. Tildeles autmatisk av systemet." no no "15.6" no no no "U" "" "" "" "" "" "" 0 no 0 no no
+"OvBunt.ovbunt_DatoTidOppdatert" "Oppdatert" "X(18)" "CHARACTER" ? ? ? ? ? ? no "" no no "18" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[12]   > OvBunt.OppdatertAv
+"OvBunt.OppdatertAv" "Oppdatert av" "X(15)" "CHARACTER" ? ? ? ? ? ? no "Brukerid på den som oppdaterte bunten" no no "15" no no no "U" "" "" "" "" "" "" 0 no 0 no no
      _FldNameList[13]   > "_<CALC>"
+"OvBunt.ovbunt_FakturaNr" "Fakturanr" ">>>>>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "" no no "10.8" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[14]   > OvBunt.Faktura_Id
+"OvBunt.Faktura_Id" "FId" ">>>>>>>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "Internt faktura id. Tildeles autmatisk av systemet." no no "15.6" no no no "U" "" "" "" "" "" "" 0 no 0 no no
+     _FldNameList[15]   > "_<CALC>"
 "OvBunt.ovbunt_DatotidFakturert" "Fakturert" "X(18)" "CHARACTER" ? ? ? ? ? ? no "" no no "18" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[14]   > OvBunt.PlListeId
+     _FldNameList[16]   > OvBunt.PlListeId
 "OvBunt.PlListeId" "Pl.lst.id" ">>>>>>>9" "DECIMAL" ? ? ? ? ? ? no "Plukkliste id." no no "9.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[15]   > OvBunt.BuntStatus
-"OvBunt.BuntStatus" "Status" "->,>>>,>>9" "INTEGER" ? ? ? ? ? ? no "" no no "10.2" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[16]   > OvBunt.EDato
+     _FldNameList[17]   > OvBunt.EDato
 "OvBunt.EDato" "Endret" "99/99/9999" "DATE" ? ? ? ? ? ? no "Endret dato" no no "11.6" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[17]   > OvBunt.ETid
+     _FldNameList[18]   > OvBunt.ETid
 "OvBunt.ETid" "ETid" "->,>>>,>>9" "INTEGER" ? ? ? ? ? ? no "Endret tidspunkt" no no "10.2" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[18]   > OvBunt.BrukerID
+     _FldNameList[19]   > OvBunt.BrukerID
 "OvBunt.BrukerID" "Bruker" "X(10)" "CHARACTER" ? ? ? ? ? ? no "Bruker som registrerte/endret posten" no no "10" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[19]   > OvBunt.FakturertDato
+     _FldNameList[20]   > OvBunt.FakturertDato
 "OvBunt.FakturertDato" "Fakturert" "99/99/99" "DATE" ? ? ? ? ? ? no "Fakturert dato" no no "9.2" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[20]   > OvBunt.FakturertTid
+     _FldNameList[21]   > OvBunt.FakturertTid
 "OvBunt.FakturertTid" "Kl" "->,>>>,>>9" "INTEGER" ? ? ? ? ? ? no "Fakturert tidspunkt" no no "10.2" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[21]   > OvBunt.DatoOppdatert
+     _FldNameList[22]   > OvBunt.DatoOppdatert
 "OvBunt.DatoOppdatert" "Oppdatert" "99/99/99" "DATE" ? ? ? ? ? ? no "Dato da bunten ble oppdatert mot overføringsordre" no no "9.4" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[22]   > OvBunt.TidOppdatert
+     _FldNameList[23]   > OvBunt.TidOppdatert
 "OvBunt.TidOppdatert" "Tidspunkt oppdatert" "->,>>>,>>9" "INTEGER" ? ? ? ? ? ? no "" no no "19" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[23]   > OvBunt.RegistrertDato
+     _FldNameList[24]   > OvBunt.RegistrertDato
 "OvBunt.RegistrertDato" "RDato" "99/99/9999" "DATE" ? ? ? ? ? ? no "Dato da posten ble registrert i registeret" no no "11.6" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[24]   > OvBunt.RegistrertTid
+     _FldNameList[25]   > OvBunt.RegistrertTid
 "OvBunt.RegistrertTid" "Registreringstidspunkt" "->,>>>,>>9" "INTEGER" ? ? ? ? ? ? no "Tidspunkt for registrering av posten" no no "20.8" no no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[25]   > "_<CALC>"
+     _FldNameList[26]   > "_<CALC>"
 "OvBunt.ovbunt_Dummy" "." "X(1)" "CHARACTER" ? ? ? ? ? ? no "" no no "1" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
-     _FldNameList[26]   > OvBunt.TilbutNr
-"OvBunt.TilbutNr" "Til butikk" ">>>>>9" "integer" ? ? ? ? ? ? no "Butikk det overføres varer til" no no "8.6" yes no no "U" "" "" "" "" "" "" 0 no 0 no no
      _Query            is NOT OPENED
 */  /* BROWSE BrwOvBunt */
 &ANALYZE-RESUME
@@ -824,8 +825,9 @@ DO WITH FRAME {&FRAME-NAME}:
         JBoxSession:Instance:ViewMessage("Det er markert flere rader. Bare en overføring kan slettes ad gangen.").
         RETURN.
       END.
-/*      IF NOT oBrwOvBunt:processRowsNoMessage("ovbunt_slett.p", "") THEN                         */
-/*        JBoxSession:Instance:ViewMessage("Feil pga " + JBoxServerAPI:Instance:getCallMessage()).*/
+
+      /* Benytt denne metoden for å sende med parametre når det skal gjøre sletting av post. */
+      JBoxServerAPI:Instance:serverTransInputParam = JBoxSession:Instance:UserId.
     END. 
   END.
   /* Slette rad. */
@@ -1080,25 +1082,32 @@ DO WITH FRAME {&FRAME-NAME}:
       RETURN.
     END.
   END.
+ 
+  /* Benytt denne metoden når det skal gjøre Create og det skal sendes inital values til den nye posten. */
+  oBrwOvbunt:bufferExtraFields = "Brukerid,FraButNr,TilButNr,Merknad,BuntStatus,Opphav".
+  oBrwOvbunt:bufferExtraValues = JBoxSession:Instance:UserId + "|" + DYNAMIC-FUNCTION("getAttribute",SESSION,"butnr") + "|0|OVERFØRING" + '|10|5'.
 
   RUN SUPER.
+  
   DO WITH FRAME {&FRAME-NAME}:
 
     /* Ny overføringsordre. */
     IF otbOvBunt:isCurrent THEN 
     DO:
-      IF NOT JBoxServerApi:Instance:Update("OvBunt",
-                                      Ovbunt.RowIdent1,
-                                      "Brukerid,FraButNr,TilButNr,Merknad,BuntStatus,Opphav", /* NB: Brukerid skal stå først. */
-                                      JBoxSession:Instance:UserId + "|" + DYNAMIC-FUNCTION("getAttribute",SESSION,"butnr") + "|0|OVERFØRING" + '|10|5' ,
-                                      FALSE,
-                                      "ovBunt_post_update.p",
-                                      TRUE) THEN
-      DO:
-        JBoxSession:Instance:ViewMessage("Feil opprettelse av pakkseddel pga. " + JBoxServerAPI:Instance:getCallMessage()).
-        RETURN.
-      END.
-      ELSE oBrwOvbunt:refreshRow().
+/*  /* Input til Update */                                                                                                                                          */
+/*  JBoxServerAPI:Instance:serverTransInputParam = JBoxSession:Instance:UserId + "|" + DYNAMIC-FUNCTION("getAttribute",SESSION,"butnr") + "|0|OVERFØRING" + '|10|5'.*/
+/*      IF NOT JBoxServerApi:Instance:Update("OvBunt",                                                                                                    */
+/*                                      Ovbunt.RowIdent1,                                                                                                 */
+/*                                      "Brukerid,FraButNr,TilButNr,Merknad,BuntStatus,Opphav", /* NB: Brukerid skal stå først. */                        */
+/*                                      JBoxSession:Instance:UserId + "|" + DYNAMIC-FUNCTION("getAttribute",SESSION,"butnr") + "|0|OVERFØRING" + '|10|5' ,*/
+/*                                      FALSE,                                                                                                            */
+/*                                      "ovBunt_post_update.p",                                                                                           */
+/*                                      TRUE) THEN                                                                                                        */
+/*      DO:                                                                                                                                               */
+/*        JBoxSession:Instance:ViewMessage("Feil opprettelse av pakkseddel pga. " + JBoxServerAPI:Instance:getCallMessage()).                             */
+/*        RETURN.                                                                                                                                         */
+/*      END.                                                                                                                                              */
+/*      ELSE oBrwOvbunt:refreshRow().                                                                                                                     */
     END.
     /* Ny rad. */
     ELSE IF otbOvBuffer:isCurrent THEN 
@@ -1158,16 +1167,13 @@ PROCEDURE OppslagModellRecord :
   DO WITH FRAME {&FRAME-NAME}:
     IF AVAILABLE OvBuffer THEN 
     DO:
-      
-      /* FILTER:LevKod=XX,LevFargKod=XX */
-      ASSIGN 
-        cFilterTekst = 'FILTER:LevKod=&LevKod,LevFargKod=&LevFargKod'
-        cFilterTekst = REPLACE(cFilterTekst,'&LevKod',OvBuffer.ovbuffer_LevKod)
-        cFilterTekst = REPLACE(cFilterTekst,'&LevFargKod',Ovbuffer.ovbuffer_LevFargKod)
-        .
       DO ON ERROR UNDO, LEAVE:  
-        oContainer:StartTabWindow('LagerListeModButStr.w', 'Modelliste', FALSE, YES).
-        PUBLISH 'settModellFilter' (cFilterTekst).
+        rModellListeHandle = jboxmainmenu:Instance:StartChildWindow('LagerListeModButStr.w', 
+                                    'Modelliste',
+                                    OvBuffer.ovbuffer_LevKod,
+                                    ?,
+                                     NO).
+        
       END.
     END.
   END.
